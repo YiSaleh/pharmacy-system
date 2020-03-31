@@ -222,43 +222,43 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="home/create/addresses" class="nav-link">
+                <a href="/home/create/addresses" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Address</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/areas" class="nav-link">
+                <a href="/home/create/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Area</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/doctors" class="nav-link">
+                <a href="/home/create/doctors" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Doctor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/medicines" class="nav-link">
+                <a href="/home/create/medicines" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Medicine</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/orders" class="nav-link">
+                <a href="/home/create/orders" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/users" class="nav-link">
+                <a href="/home/create/users" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/create/revenue" class="nav-link">
+                <a href="/home/create/revenue" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Revenue</p>
                 </a>
@@ -275,37 +275,37 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="home/addresses" class="nav-link">
+                <a href="/home/addresses" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Addresses</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/areas" class="nav-link">
+                <a href="/home/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Areas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/doctors" class="nav-link">
+                <a href="/home/doctors" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Doctors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/medicines" class="nav-link">
+                <a href="/home/medicines" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Medicines</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/orders" class="nav-link">
+                <a href="/home/orders" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="home/users" class="nav-link">
+                <a href="/home/users" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
