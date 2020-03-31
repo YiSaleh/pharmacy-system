@@ -224,31 +224,37 @@
               <li class="nav-item">
                 <a href="home/create/addresses" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Addresses</p>
+                  <p>Create Address</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="home/create/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Areas</p>
+                  <p>Create Area</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="home/create/doctors" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Doctors</p>
+                  <p>Create Doctor</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="home/create/medicines" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Medicines</p>
+                  <p>Create Medicine</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="home/create/orders" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Orders</p>
+                  <p>Create Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="home/create/users" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create User</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -269,15 +275,39 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="home/addresses" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>Addresses</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="home/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
+                  <p>Areas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="home/doctors" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Doctors</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="home/medicines" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Medicines</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="home/orders" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="home/users" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Users</p>
                 </a>
               </li>
               <!-- <li class="nav-item">
