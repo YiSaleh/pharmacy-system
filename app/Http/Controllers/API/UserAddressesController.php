@@ -55,21 +55,28 @@ class UserAddressesController extends Controller
         //     'state' => 'CA'
         // ]);
 
-        public function update(Request $request)
+        public function update(Request $request,$user_id)
 		{
-			$validatedData = $request->validate([
-				'user_id'=> [
-					'required',
-					// this to force the unique contraint to stop if the same object is being updated
-					Rule::unique('userAddress')->ignore($request->userAddress),
-			],
+			
+			$userAddress = UserAddresses::firstWhere('user_id',$user_id);
+			// $userAddress->user_id = $request->user_id;
+			$userAddress->street_name = $request->street_name;
+            $userAddress->building_no= $request->building_no;
+            $userAddress->floor_no= $request->floor_no;
+            $userAddress->flat_no= $request->flat_no;
+            $userAddress->is_main= $request->is_main; 
+
+
+            $validatedData = $request->validate([
+				'street_name'=> [
+					'required'
+					// // ,this to force the unique contraint to stop if the same object is being updated
+					// Rule::unique('useraddresses')->ignore($request->$userAddress)
+                ],'floor_no'=>'required'
        
     ]);
-			$user_id = $request->userAdress;
-			$userAddress = UserAddresses::firstWhere($user_id);
-			$userAddress->user_id = $request->user_id;
-			$userAddress->street_name = $request->street_name;
-			$userAddress-> street_number= $request->street_number;
+			
+
 			$userAddress->save();
 		 
             return response()->json([
