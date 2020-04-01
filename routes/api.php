@@ -19,7 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/user-address/create', 'API\UserAddressController@create');
+
+Route::post('/user-address/create', 'API\UserAddressesController@create');
+
+Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
+
+Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
 
 // Route::get('/x', function (Request $request) {
 //     return response()->json([

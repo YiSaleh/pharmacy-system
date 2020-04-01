@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserAddress extends Model
+class UserAddresses extends Model
 {
     public $table = 'useraddresses';
     public $timestamps = false;
