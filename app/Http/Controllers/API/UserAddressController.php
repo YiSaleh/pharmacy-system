@@ -15,14 +15,18 @@ class UserAddressController extends Controller
 
             //  dd($request->input('street_number'));
              $userAddress = new UserAddress();
-             $userAddress->street_name=$request->input('street_number');
+             $userAddress->user_id = $request->input('user_id');
+             $userAddress->street_name = $request->input('street_name');
+             $userAddress->building_no = $request->input('building_no');
+             $userAddress->floor_no = $request->input('floor_no');
+             $userAddress->flat_no = $request->input('flat_no');
+             $userAddress->is_main = $request->input('is_main');
             //  $userAddress->description=$request->description;
             //  $userAddress->user_id=$request->user_id;
              $userAddress->save();
       
-            //  return PostResource::collection(
-            //     userAddress::all()
-            //  );
+             return  userAddress::all();
+             
          }
 
 
