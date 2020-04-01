@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class useraddress extends Model
+class UserAddress extends Model
 {
     
     public function User()
