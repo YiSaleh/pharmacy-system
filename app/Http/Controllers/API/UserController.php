@@ -14,19 +14,25 @@ class UserController extends Controller
     {
         
         $user_valid=request()->validate([
-            'name'=>'required|min:3',
+            'name'=>'required|min:3|string',
             'gender' => [
                 'required',
-                Rule::in(['male', 'female']),
+                Rule::in(['Male', 'Female']),
             ],
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:users',
             'password'=>'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
-            'phone'=>'required|size:11|numeric',
-            'national_id'=>'required|numeric|size:14',
+            'phone'=>'required|min:11|max:11|numeric',
+            'national_id'=>'required|numeric|min:14|max:14|unique:users',
             'password_confirmation'=>'required|same:password',
             'date_of_birth'=>'required|date',
-            // 'profile_image'=>'required|image',  
+            'profile_image'=>'required|image',  
 
+        ],[
+            'name.min'=>'your name should be at least 3 characters',
+            'gender.in'=>'your gender must be like (Male) or (Female)',
+            'email.unique'=>'this email is already exists',
+            'password.regex'=>'your password must be at least 8 characters and include at least one upper character, one lower character ,one number and one special character ',
+            'phone'=>'your phone number must be 11 number',
         ]);
 
         // $image_path=$user_valid->file('profile_image')->path;
