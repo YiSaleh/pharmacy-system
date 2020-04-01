@@ -27,10 +27,4 @@ Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
 
 Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
 
-// Route::get('/x', function (Request $request) {
-//     return response()->json([
-//         'name' => 'Abigail',
-//         'state' => 'CA'
-//     ]);
-// });
 Route::post('/users','API\UserController@store');

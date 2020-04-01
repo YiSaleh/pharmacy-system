@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\UserAddresses;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserAddressesController extends Controller
 {
@@ -39,21 +41,20 @@ class UserAddressesController extends Controller
               }
     
          public function view($user_id)
+
     {
+        // $model = App\Flight::findOrFail(1);
+
+        // $model = App\Flight::where('legs', '>', 100)->firstOrFail();
     	// $request  = request();
-    	// $user_id = $request->user_id;    
-    	$userAddress  = UserAddresses::firstWhere('user_id',$user_id);
+        // $user_id = $request->user_id;  
+    	$userAddress  = UserAddresses::firstWhere('user_id',$user_id)->findtOrFail();
     	return  response()->json([
             'userAddress'=>$userAddress
         ]);
     
     }
 
-        // error_log('Some message here.');
-        // return response()->json([
-        //     'name' => 'Abigail',
-        //     'state' => 'CA'
-        // ]);
 
         public function update(Request $request,$user_id)
 		{
@@ -84,7 +85,19 @@ class UserAddressesController extends Controller
           'userAddresses' => $userAddress,
           
       ]);
-		}
+        }
+        
+
+        public function delete(Request $request,$user_id ){
+
+
+
+                
+
+
+
+
+        }
 
 }
         
