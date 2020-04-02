@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Notification\UserVerified;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Validation\ValidationException;
 
 
@@ -61,5 +62,22 @@ class UserController extends Controller
          
          return response()->json(['User Info'=>$user,'Access Token'=>$user->createToken($request->device_name)->plainTextToken]);
     
+    }
+    public function update(UpdateUserRequest $request )
+    {
+        $user= $request->user();
+        if ($request->file('profile_image')->isValid()) {
+            $user->avatar= $request->profile_image->store('uploads','public');
+        }         
+        $user->name = $request->name;
+        $user->gender = $request->gender;
+        $user->password =Hash::make($request->password);
+        $user->date_of_birth = $request->date_of_birth;
+        $user->phone = $request->phone;
+        $user->national_id = $request->national_id;
+
+        $user->save();
+        return response()->json(['status'=>'your data has been updated','User Info'=>$user]);
+
     }
 }
