@@ -2,13 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
-
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-// use App\Http\Controllers\API\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,3 +43,11 @@ Route::post('/login', function (Request $request) {
      
      return response()->json(['User Info'=>$user,'Access Token'=>$user->createToken($request->device_name)->plainTextToken]);
 });
+
+Route::post('/user-address/create', 'API\UserAddressesController@create');
+
+Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
+
+Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
+
+Route::post('/users','API\UserController@store');

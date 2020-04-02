@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,9 @@ Auth::routes(['register' => false ,'verify' => true ]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/create/{field}', 'HomeController@create')->name('home.create');
 Route::get('/home/{field}', 'HomeController@show')->name('home.show');
+
+//user addresses
+// Route::post('/user-address/create', 'UserAddressController@create')->name('userAddress.create');
+
+
+
