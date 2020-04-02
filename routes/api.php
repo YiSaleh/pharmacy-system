@@ -2,9 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+ use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/users','API\UserController@store')->middleware('auth:sanctum');
-
-
-Route::post('/login', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required'
-         
-    ]);
-
-    $user = User::where('email', $request->email)->first();
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-     
-     
-     return response()->json(['User Info'=>$user,'Access Token'=>$user->createToken($request->device_name)->plainTextToken]);
-});
+//register
+Route::post('/users','API\UserController@store');
+//login
+Route::post('/login','API\UserController@login');
 
 Route::post('/user-address/create', 'API\UserAddressesController@create');
 
@@ -50,4 +30,4 @@ Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
 
 Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
 
-Route::post('/users','API\UserController@store');
+
