@@ -25,6 +25,9 @@ Route::post('/user-address/create', 'API\UserAddressesController@create');
 
 Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
 
+Route::delete('/user-address/delete/{user_id}', 'API\UserAddressesController@delete');
+
 Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
 
 Route::post('/users','API\UserController@store');
+
