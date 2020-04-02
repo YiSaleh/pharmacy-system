@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,28 +25,32 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'=>'required|min:3|string',
-            'gender' => [
-                'required',
-                Rule::in(['Male', 'Female']),
-            ],
-            'email' => 'required|email:rfc,dns|unique:users',
-            'password'=>'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
-            'phone'=>'required|regex:/^(?=.*?[0-9]).{11}$/i|numeric',
-            'national_id'=>'required|regex:/^(?=.*?[0-9]).{14}$/i|numeric|unique:users',
-            'password_confirmation'=>'required|same:password',
-            'date_of_birth'=>'required|date',
-            'profile_image'=>'required|image',  
+        $user= $this->user();
+        
+         return [
+        
+                'name'=>'min:3|string',
+                'email'=>'unique:users',
+                'gender' => [
+                     
+                    Rule::in(['Male', 'Female']),
+                ],
+                'password'=>'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
+                'phone'=>'regex:/^(?=.*?[0-9]).{11}$/i|numeric',
+                'national_id'=>['regex:/^(?=.*?[0-9]).{14}$/i','numeric',
+                                Rule::unique('users')->ignore($user->id)],
+                'password_confirmation'=>'same:password',
+                'date_of_birth'=>'date',
+                'profile_image'=>'image',  
+            
         ];
     }
-
     public function messages()
     {
         return [
                 'name.min'=>'your name should be at least 3 characters',
                 'gender.in'=>'your gender must be like (Male) or (Female)',
-                'email.unique'=>'this email is already exists',
+                'email.unique'=>'you can not change your email',
                 'password.regex'=>'your password must be at least 8 characters and include at least one character ,one number and one special character ',
                 'phone.regex'=>'your phone number must be 11 number',
         ];
