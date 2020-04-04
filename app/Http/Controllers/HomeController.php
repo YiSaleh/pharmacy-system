@@ -91,8 +91,5 @@ class HomeController extends Controller
             return view('users.index');
             
         }
-         
-
-
      }
 }
