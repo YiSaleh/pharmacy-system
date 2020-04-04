@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 
-class EditColumn extends Migration
+class AddSoftDelete extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,11 @@ class EditColumn extends Migration
   
     public function up()
     {
-        // Schema::create('useraddresses', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('street_name');
-        //     $table->integer('building_no');
-        //     $table->integer('floor_no');
-        //     $table->integer('flat_no');
-        //     $table->boolean('is_main');	
-            
-        // });
+
+        Schema::table('useraddresses', function (Blueprint $table) {
+            $table->softDeletes();  
+            //
+        });
     }
 
     /**
@@ -34,5 +30,9 @@ class EditColumn extends Migration
     public function down()
     {
         Schema::dropIfExists('useraddresses');
+        Schema::table('useraddresses', function (Blueprint $table) {
+
+            $table->dropSoftDeletes(); 
+        });
     }
 }

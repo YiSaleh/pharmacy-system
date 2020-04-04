@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class UserAddressesController extends Controller
 {
     
@@ -90,11 +91,29 @@ class UserAddressesController extends Controller
 
         public function delete(Request $request,$user_id ){
 
+           $userAddress = UserAddresses::where('user_id',$user_id)->delete();
+           
 
 
+
+           if ($userAddress > 0) {
+            return response()->json([
+                'msg' => 'deleted succssfully!',
+                'number of deleted addresses' => $userAddress,
+                ]);
                 
-
-
+        }else {
+            return response()->json([
+                'msg' => 'nothing to delete',
+                
+                ]);
+                
+                };
+// 1           if ($userAddress->trashed()) {
+        // $userAddress = UserAddresses::withTrashed()->where('user_id',$user_id)->get();
+        // $userAddress = UserAddresses::onlyTrashed()->get();
+        // $response = $this->successfulMessage(200, 'Successfully', true, $userAddress->count(), $userAddress);
+       
 
 
         }
