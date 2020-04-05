@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-// use App\UserAddress;
 use App\UserAddresses;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -49,7 +48,7 @@ class UserAddressesController extends Controller
         // $model = App\Flight::where('legs', '>', 100)->firstOrFail();
     	// $request  = request();
         // $user_id = $request->user_id;  
-    	$userAddress  = UserAddresses::firstWhere('user_id',$user_id)->findtOrFail();
+    	$userAddress  = UserAddresses::firstWhere('user_id',$user_id);
     	return  response()->json([
             'userAddress'=>$userAddress
         ]);

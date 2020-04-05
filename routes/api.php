@@ -25,7 +25,7 @@ Route::post('/user/create','API\UserController@store');
 Route::post('/user/login','API\UserController@login');
 //update
 // when you test in postman you should set verb of request=post and add an attribute called 
-// _method and it's value=put because postman doesn't support put requestMethod 
+// _methoduserAddress and it's value=put because postman doesn't support put requestMethod 
 
 
 Route::put('/user/update','API\UserController@update')->middleware('auth:sanctum');
@@ -39,3 +39,16 @@ Route::get('/user-address/view/{user_id}', 'API\UserAddressesController@view');
 Route::delete('/user-address/delete/{user_id}', 'API\UserAddressesController@delete');
 
 Route::patch('/user-address/update/{user_id}', 'API\UserAddressesController@update');
+
+
+//--------------order urls-----------------
+
+Route::get('/orders/view/{id}', 'API\OrderController@view');
+
+Route::post('/orders/create', 'API\OrderController@create');
+
+Route::put('/orders/update/{id}', 'API\OrderController@update');
+
+//--------------user order urls-----------------
+
+Route::get('/user-orders/view/{user_id}', 'API\UserOrderController@viewAllOrders');
