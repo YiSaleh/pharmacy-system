@@ -15,15 +15,15 @@ class EditColumn extends Migration
   
     public function up()
     {
-        Schema::create('useraddresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('street_name');
-            $table->integer('building_no');
-            $table->integer('floor_no');
-            $table->integer('flat_no');
-            $table->boolean('is_main');	
+        // Schema::create('useraddresses', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('street_name');
+        //     $table->integer('building_no');
+        //     $table->integer('floor_no');
+        //     $table->integer('flat_no');
+        //     $table->boolean('is_main');	
             
-        });
+        // });
     }
 
     /**
@@ -33,6 +33,6 @@ class EditColumn extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('useraddresses');
+        // Schema::dropIfExists('useraddresses');
     }
 }
