@@ -51,4 +51,8 @@ Route::put('/orders/update/{id}', 'API\OrderController@update');
 
 //--------------user order urls-----------------
 
-Route::get('/user-orders/view/{user_id}', 'API\UserOrderController@viewAllOrders');
+Route::get('/user-orders/view/{user_id}', 'API\UserOrderController@viewUserOrders');
+
+Route::get('/user-orders/view/{user_id}/{order_id}', array('as'=>'user_id/order_id','uses'=>'API\UserOrderController@viewOrder'));
+
+// Route::get('people.php/{username}/{age}', array('as' => 'people/username/age', 'uses' => 'ExtraController@xfunction'));
