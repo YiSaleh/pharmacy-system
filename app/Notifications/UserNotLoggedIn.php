@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class User_not_logged_in extends Notification implements ShouldQueue
+class UserNotLoggedIn extends Notification implements ShouldQueue
 {
     use Queueable;
 
