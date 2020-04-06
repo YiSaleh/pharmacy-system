@@ -65,7 +65,7 @@
                 </tr>
                 </tfoot>
               </table>
-              { $addresses->links() }
+              {!! $useraddresses->links() !!}
             </div>
             <!-- /.card-body -->
           </div>
