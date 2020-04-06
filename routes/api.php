@@ -20,15 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //register
-Route::post('/user/create','API\UserController@store');
+Route::post('/users/register','API\UserController@store');
 //login
-Route::post('/user/login','API\UserController@login');
+Route::post('/users/login','API\UserController@login');
 //update
 // when you test in postman you should set verb of request=post and add an attribute called 
 // _methoduserAddress and it's value=put because postman doesn't support put requestMethod 
 
 
-Route::put('/user/update','API\UserController@update')->middleware('auth:sanctum');
+Route::put('/users/update','API\UserController@update')->middleware('auth:sanctum','verified');
 
 //------------user addresses urls------------
 
