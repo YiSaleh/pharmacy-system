@@ -14,13 +14,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\UserAddress');
     }
-    public function doctor()
-    {
-        return $this->belongsTo('App\Doctor');
-    }
+    
     public function medicine()
     {
         return $this->belongsToMany('App\Medicine');
     }
-    
+
 }

@@ -10,22 +10,22 @@ class AddressController extends Controller
     public function index()
     {
         $addresses= UserAddresses::orderBy('id','asc')->paginate(5);
-        return view('user-addresses.index',[
-            'addresses'=>$addresses,
+        return view('addresses.index',[
+            'useraddresses'=>$addresses,
             ]);
     }
 
     public function show()
     {
         $address=UserAddresses::find(request()->useraddress);
-        return view('user-addresses.show',[
-            'address'=> $address,
+        return view('addresses.show',[
+            'useraddress'=> $address,
         ]);
     }
 
     public function destroy()
     {
         UserAddresses::where('id',request()->useraddress)->delete();
-        return redirect()->route('user_addreses.index');
+        return redirect()->route('addreses.index');
     }
 }

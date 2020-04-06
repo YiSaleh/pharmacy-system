@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);    }
+        $this->middleware(['auth','verified']);   
+    }
 
     /**
      * Show the application dashboard.
@@ -21,47 +22,47 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
-    }
+        {
+            return view('home');
+        }
 
 
-    public function create(){
+    // public function create(){
          
-        $field_create=request()->field; 
+    //     $field_create=request()->field; 
         
-        if($field_create=='addresses'){
-            return view('addresses.create');
+    //     if($field_create=='addresses'){
+    //         return view('addresses.create');
             
-        }
-        if($field_create=='areas'){
-            return view('areas.create');
+    //     }
+    //     if($field_create=='areas'){
+    //         return view('areas.create');
             
-        }
-        if($field_create=='doctors'){
-            return view('doctors.create');
+    //     }
+    //     if($field_create=='doctors'){
+    //         return view('doctors.create');
             
-        }
-        if($field_create=='medicines'){
-            return view('medicines.create');
+    //     }
+    //     if($field_create=='medicines'){
+    //         return view('medicines.create');
             
-        }
-        if($field_create=='orders'){
-            return view('orders.create');
+    //     }
+    //     if($field_create=='orders'){
+    //         return view('orders.create');
             
-        }
-        if($field_create=='users'){
-            return view('users.create');
+    //     }
+    //     if($field_create=='users'){
+    //         return view('users.create');
             
-        }
-        if($field_create=='revenue'){
+    //     }
+    //     if($field_create=='revenue'){
             
-             return view('revenue.index');
+    //          return view('revenue.index');
             
-        }
+    //     }
 
 
-     }
+    //  }
 
      public function show(){
          
