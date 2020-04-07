@@ -46,5 +46,16 @@ Route::delete('useraddresses/{useraddress}','AddressController@destroy')->name('
 
 
 
+//show all users orders
+Route::get('/order','OrderController@index')->name('orders.index');
+
+//create an order 
+Route::get('/order/create', 'OrderController@create')->name('orders.create');
+
+//to delete a user by id
+Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
+
+//view a selected user by id 
+Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
 

@@ -9,13 +9,13 @@
                 <div class="card-header">
                     <h3 class="card-title">
                     <i class="fas fa-text-width"></i>
-                    Description Horizontal
+                   Order Details
                     </h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <dl class="row">
-                    <dt class="col-sm-4">Description lists</dt>
+                    <dt class="col-sm-4">Order Details</dt>
                     <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
                     <dt class="col-sm-4">Euismod</dt>
                     <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
