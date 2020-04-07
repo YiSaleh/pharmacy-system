@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\User;
-use App\Notifications\User_not_logged_in;
+use App\Notifications\UserNotLoggedIn;
 use Illuminate\Support\Facades\DB;
-class SendEmail extends Command
+class SendNotLoggedInEmail extends Command
 {
     /**
      * The name and signature of the console command.
@@ -47,7 +47,7 @@ class SendEmail extends Command
          $users=User::whereIn('id',$tokenable_ids)->get();
         foreach ($users as $user) {
             $this->info('Now users are notifing ');
-            $user->notify(new User_not_logged_in());
+            $user->notify(new UserNotLoggedIn());
 
         }
         $this->info('Done! ');

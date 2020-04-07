@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notification\UserVerified;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 
 
@@ -36,7 +37,8 @@ class UserController extends Controller
         $user->national_id = $user_valid->national_id;
 
         $user->save();
-
+        $role=Role::find(4);
+        $user->assignRole($role);
         event(new Registered($user));
         return response()->json(['status'=>"success"]);
 
