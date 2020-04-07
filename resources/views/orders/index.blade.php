@@ -7,39 +7,83 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <h3 class="card-title">Dashboard to know status for your orders.</h3>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Orders</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i></button>
+                </div>
             </div>
             <!-- /.card-header -->
+            
+            <div class="container m-5">
+             <a href="{{route('orders.create')}}" class="btn btn-success m-1">Create</a>
+              <table class="table">
+            <!-- <div>
+              <button class="btn btn-success m-3" href="{{route('orders.create')}}">Create Order</button>
+            </div> -->
+
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Prescription</th>
+                  <th>Is_insured</th>
+                  <th>Created_at</th>
+                  <th>Updated_at</th>
+                  <th>Action</th>
+
                 </tr>
                 </thead>
                 <tbody>
+                @foreach ($orders as $order)  
                 <tr>
-                  <td>Misc</td>
-                  <td>NetFront 3.4</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
-                  <td>A</td>
+                  <td>{{$order->id}}</td>
+                  <td>{{$order->status}}</td>
+                  <td>{{$order->prescription}}</td>
+                  <td>{{$order->is_insured}}</td>
+                  <td>{{$order->created_at}}</td>
+                  <td>{{$order->updated_at}}</td>
+                  <td> 
+
+                  <div class="btn-group btn-group-sm">
+                      <a class="btn btn-primary btn-sm" href="{{route('orders.show',['order'=>$order->id])}}">
+                          <i class=> </i>View</a>
+
+                  <div class="btn-group btn-group-sm"> 
+                      <a class="btn btn-warning btn-sm" href="">
+                          <i class=> </i>Edit</a>
+              <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger btn-sm" type="submit"              
+       onclick="return confirm('You are going to delete this item?,ok?');">
+                          <i class=""> </i>Delete</a></form>
+                  </td>
                 </tr>
+              
+                @endforeach
                 </tbody>
                 <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </tfoot>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Prescription</th>
+                  <th>Is_insured</th>
+                  <th>Created_at</th>
+                  <th>Updated_at</th>
+                  <th>Action</th>
+                    
+                </tfoot> 
+             
               </table>
+              {{ $orders->links()}}
             </div>
             <!-- /.card-body -->
           </div>
@@ -47,17 +91,5 @@
       </div>
  </section> 
  
- <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
+ 
  @endsection

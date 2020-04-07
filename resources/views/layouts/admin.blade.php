@@ -115,12 +115,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @role('admin')
               <li class="nav-item">
-                <a href="/home/create/addresses" class="nav-link">
+                <a href="{{route('useraddresses.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Address</p>
                 </a>
               </li>
+              @endrole
               <li class="nav-item">
                 <a href="/home/create/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -144,19 +146,15 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
+               @role('admin')
               </li>
               <li class="nav-item">
-                <a href="/home/create/users" class="nav-link">
+                <a href="{{route('users.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create User</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="/home/create/revenue" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Revenue</p>
-                </a>
-              </li>
+              @endrole
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -168,12 +166,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('useraddresses.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Addresses</p>
                 </a>
               </li>
+              @endrole
               <li class="nav-item">
                 <a href="/home/areas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -193,7 +193,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/home/orders" class="nav-link">
+                <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
@@ -203,6 +203,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
+                @role('admin')
               </li>
               <li class="nav-item">
                 <a href="{{route('useraddresses.index')}}" class="nav-link">
@@ -210,6 +211,7 @@
                   <p>Revenue </p>
                 </a>
               </li>
+              @endrole
               <!-- <li class="nav-item">
                 <a href="pages/tables/jsgrid.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
