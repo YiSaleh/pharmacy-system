@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
+use App\Http\Requests\Storage ;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -26,7 +26,6 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $user= $this->user();
-        
          return [
         
                 'name'=>'min:3|string',
@@ -38,10 +37,10 @@ class UpdateUserRequest extends FormRequest
                 'password'=>'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
                 'phone'=>'regex:/^(?=.*?[0-9]).{11}$/i|numeric',
                 'national_id'=>['regex:/^(?=.*?[0-9]).{14}$/i','numeric',
-                                Rule::unique('users')->ignore($user->id)],
+                                Rule::unique('users')->ignore($user)],
                 'password_confirmation'=>'same:password',
                 'date_of_birth'=>'date',
-                'profile_image'=>'image',  
+                'profile_image'=>'image|mimes:jpeg,bmp,png,jpg',  
             
         ];
     }

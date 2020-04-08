@@ -24,7 +24,8 @@ class StoreUserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
+        // dd(request()->all());
         return [
             'name'=>'required|min:3|string',
             'gender' => [
@@ -37,7 +38,7 @@ class StoreUserRequest extends FormRequest
             'national_id'=>'required|regex:/^(?=.*?[0-9]).{14}$/i|numeric|unique:users',
             'password_confirmation'=>'required|same:password',
             'date_of_birth'=>'required|date',
-            'profile_image'=>'required|image',  
+            'profile_image'=>'required|image|mimes:jpeg,bmp,png,jpg',  
         ];
     }
 

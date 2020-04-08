@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
@@ -33,7 +35,7 @@ class UserController extends Controller
     }
 
     public function store(StoreUserRequest $req)
-    {
+    {   
         $user = new User();
         if ($req->file('profile_image')->isValid()) {
             $user->avatar= $req->profile_image->store('uploads','public');
@@ -53,10 +55,10 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
     
-    public function edit()
+    public function edit($user)
     {
         return view('users.edit',[
-            'user' => User::find(request()->user),
+            'user' => User::find($user),
         ]);
     }
 
@@ -80,7 +82,9 @@ class UserController extends Controller
 
 
     public function destroy()
-    {
+    {    
+        $avatar=User::where('id',request()->user)->value('avatar');
+        File::delete(storage_path().'/app/public/'.$avatar);
         User::where('id',request()->user)->delete();
         return redirect()->route('users.index');
     }

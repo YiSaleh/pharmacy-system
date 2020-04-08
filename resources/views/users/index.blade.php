@@ -45,7 +45,7 @@
                   <td>{{$user->email}}</td>
                   <td>{{$user->phone}}</td>
                   <td>{{$user->gender}}</td>
-                  <td>{{$user->date_of_birth}}</td>
+                  <td>{{Carbon\Carbon::parse($user->date_of_birth)->format('Y-m-d')}}</td>
                   <td>{{$user->created_at->toDateString()}}</td>
                   <td class="project-actions text-center"> 
                       <div class="btn-group btn-group-sm">

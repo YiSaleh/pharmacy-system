@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/home/create/{field}', 'HomeController@create')->name('home.create');
 // Route::get('/home/{field}', 'HomeController@show')->name('home.show');
 
+
+Route::group(['middleware'=>'auth'],function(){
 //user index
 Route::get('/users','UserController@index')->name('users.index');
 //create new user
@@ -38,8 +40,9 @@ Route::delete('users/{user}','UserController@destroy')->name('users.destroy');
 Route::get('/users/{user}/edit','UserController@edit')->name('users.edit');
 // to show one user
 Route::get('/users/{user}','UserController@show')->name('users.show');
+});
 
-
+Route::group(['middleware'=>'auth'],function(){
 //show all users addresses
 Route::get('/useraddresses','AddressController@index')->name('useraddresses.index');
 // create new user address
@@ -54,7 +57,7 @@ Route::delete('useraddresses/{useraddress}','AddressController@destroy')->name('
 Route::get('/useraddresses/{useraddress}/edit','AddressController@edit')->name('useraddresses.edit');
 // view specific address
 Route::get('/useraddresses/{useraddress}','AddressController@show')->name('useraddresses.show');
-
+});
 
 
 //show all areas
@@ -64,8 +67,6 @@ Route::post('/areas','AreaController@store')->name('areas.store');
 Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
-
-
 
 
 //show all users orders
