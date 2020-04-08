@@ -69,8 +69,6 @@ Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 
 
-
-
 //show all users orders
 Route::get('/order','OrderController@index')->name('orders.index');
 
