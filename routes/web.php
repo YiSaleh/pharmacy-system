@@ -64,8 +64,9 @@ Route::get('/useraddresses/{useraddress}','AddressController@show')->name('usera
 Route::get('/areas','AreaController@index')->name('areas.index');
 Route::get('/areas/create','AreaController@create')->name('areas.create');
 Route::post('/areas','AreaController@store')->name('areas.store');
-Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
+Route::put('/areas/{area}','AreaController@update')->name('areas.update');
+Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 
 
@@ -81,4 +82,20 @@ Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
+
+
+
+
+//all pharmacy
+Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');
+//create new pharmacy
+Route::get('/pharmacy/create','PharmacyController@create')->name('pharmacy.create');
+Route::post('/pharmacy','PharmacyController@store')->name('pharmacy.store');
+//edit pharmacy info
+Route::get('/pharmacy/edit/{pharmacy}','PharmacyController@edit')->name('pharmacy.edit');
+Route::put('/pharmacy/{pharmacy}','PharmacyController@update')->name('pharmacy.update');
+//show a specific pharmacy details
+Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.show');
+//delete pharmacy
+Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
 

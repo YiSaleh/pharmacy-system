@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form" method="POST" action="{{route('areas.store'['area'=>$area->id])}}">
+<form role="form" method="POST" action="{{route('areas.update',['area'=>$area->id])}}">
     @csrf
         @method('PUT')
         <div class="form-group">
