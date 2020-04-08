@@ -17,7 +17,7 @@ class AreaController extends Controller
     }
     public function store(){
     	Area::create([
-    		'name'=>$request->name]);
+    		'name'=>request()->name]);
     	return redirect()->route('areas.index');
     }
     public function show(){
@@ -37,8 +37,9 @@ class AreaController extends Controller
     	return view('areas.edit',['area'=>$area]);
     }
     public function update(){
+		$area_id=request()->area;
     	Area::find($area_id)->update([
-            'title'=>$request->name]);
+            'name'=>$request->name]);
     	return redirect()->route('areas.index');
     }
 }

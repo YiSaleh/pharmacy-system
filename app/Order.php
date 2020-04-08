@@ -19,5 +19,8 @@ class Order extends Model
     {
         return $this->belongsToMany('App\Medicine');
     }
-
+    public function pharmacy()
+    {
+       return $this->belongsTo('App\Pharmacy');
+    }
 }
