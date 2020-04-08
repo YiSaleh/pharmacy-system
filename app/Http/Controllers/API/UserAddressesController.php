@@ -32,7 +32,7 @@ class UserAddressesController extends Controller
       
             //  return  userAddress::all()/;
              
-              return response()->json([
+            return response()->json([
             'msg' => 'user saved successfully!',
             'userAddresses' => $userAddress,
             
@@ -91,10 +91,7 @@ class UserAddressesController extends Controller
         public function delete(Request $request,$user_id ){
 
            $userAddress = UserAddresses::where('user_id',$user_id)->delete();
-           
-
-
-
+        
            if ($userAddress > 0) {
             return response()->json([
                 'msg' => 'deleted succssfully!',
@@ -108,7 +105,7 @@ class UserAddressesController extends Controller
                 ]);
                 
                 };
-// 1           if ($userAddress->trashed()) {
+//       if ($userAddress->trashed()) {
         // $userAddress = UserAddresses::withTrashed()->where('user_id',$user_id)->get();
         // $userAddress = UserAddresses::onlyTrashed()->get();
         // $response = $this->successfulMessage(200, 'Successfully', true, $userAddress->count(), $userAddress);
