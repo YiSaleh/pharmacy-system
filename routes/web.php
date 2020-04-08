@@ -60,6 +60,27 @@ Route::get('/useraddresses/{useraddress}','AddressController@show')->name('usera
 });
 
 
+//show all areas
+Route::get('/areas','AreaController@index')->name('areas.index');
+Route::get('/areas/create','AreaController@create')->name('areas.create');
+Route::post('/areas','AreaController@store')->name('areas.store');
+Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
+Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
+Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 
+
+
+
+//show all users orders
+Route::get('/order','OrderController@index')->name('orders.index');
+
+//create an order 
+Route::get('/order/create', 'OrderController@create')->name('orders.create');
+
+//to delete a user by id
+Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
+
+//view a selected user by id 
+Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
 
