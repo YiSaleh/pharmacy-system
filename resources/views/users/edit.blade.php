@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form" method="POST" action="{{route('users.update',['user'=>$user->id])}}">
+<form role="form" method="POST" action="{{route('users.update',['user'=>$user->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
                 <div class="card-body">
@@ -12,30 +12,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-<!-- ################################################################################################################################## -->
-                  <!-- <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" value="{{$user->email}}" name="email">
-                    @error('email')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                  </div> -->
-<!-- ################################################################################################################################## -->
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Enter new password" name="password">
-                    @error('password')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                  </div>
-<!-- ################################################################################################################################## -->
-                  <div class="form-group">
-                    <label for="exampleInputPasswordConfirm">Confirm Password</label>
-                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="exampleInputPasswordConfirm" placeholder="confirm new password">
-                    @error('password_confirmation')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                  </div>
 <!-- ################################################################################################################################## -->
                   <div class="form-group">
                     <label for="exampleInputPhone">Phone </label>
@@ -67,7 +43,7 @@
                           <option {{ ($user->gender=="Female")? "selected" : "" }}>Female</option>
                           <option {{ ($user->gender=="Male")? "selected" : "" }}>Male</option>
                         </select>
-                        @error('gender')
+                        @error('gender') 
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                   </div>
@@ -75,10 +51,10 @@
                   <div class="form-group">
                     <label for="exampleInputFile">Upload Photo</label>
                     <div class="input-group">
-                    <img  class="col-sm-2 pr-2" src="{{ asset('storage/'. $user->avatar)}}" style="width:100px; height:100px; border-radius:10%; margin-bottom:3rem;">
+                       <img  class="col-sm-2 pr-2" src="{{ asset('storage/'. $user->avatar)}}" style="width:100px; height:100px; border-radius:10%; margin-bottom:3rem;">
                       <div class="custom-file ">   
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="profile_image">
-                        <label class="custom-file-label" for="exampleInputFile">{{$user->avatar}}</label>
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="profile_image" value="{{$user->avatar}}">
+                        <label class="custom-file-label" for="exampleInputFile">Choose File </label>
                       </div>
                     </div>
                     @error('profile_image')
@@ -88,7 +64,7 @@
                 </div>
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary"> Create </button>
+                  <button type="submit" class="btn btn-primary"> Update </button>
                 </div>
               </form>
             </div>
