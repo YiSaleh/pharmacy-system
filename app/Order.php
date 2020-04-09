@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+
+    protected $fillable = [
+        'status', 'prescription','is_insured','user_address_id','pharmacy_id',
+    ];
     public function user()
     {
         return $this->belongsToMany('App\User','users_orders');
@@ -13,6 +17,7 @@ class Order extends Model
     public function useraddress()
     {
         return $this->belongsTo('App\User_Address','user_address_id');
+
     }
     
     public function medicine()
@@ -23,6 +28,9 @@ class Order extends Model
     
     public function pharmacy()
     {
-       return $this->belongsTo('App\Pharmacy');
+       return $this->belongsTo('App\Pharmacy','pharmacy_id');
     }
+
+  
+
 }

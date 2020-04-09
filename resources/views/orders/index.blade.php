@@ -40,6 +40,10 @@
                   <th>Is_insured</th>
                   <th>Created_at</th>
                   <th>Updated_at</th>
+                  <th>Pharmacy</th>
+                 @role('admin')
+                  <th>Creator</th>
+                  @endrole
                   <th>Action</th>
 
                 </tr>
@@ -49,7 +53,6 @@
                 <tr>
                   <td>{{$order->id}}</td>
                   <td>{{$order->user->first->name->name ?? 'not exist'}}</td>
-                  dd($order->user->first);
                   <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
                   <td>{{$order->prescription}}</td>
@@ -60,7 +63,10 @@
                   @endif
                   <td>{{$order->created_at}}</td>
                   <td>{{$order->updated_at}}</td>
-
+                  <td>{{$order->pharmacy->name}}</td>
+                  @role('admin')
+                  <td>{{$order->model_has_roles}}</td>
+                  @endrole
                   <td> 
 
                   <div class="btn-group btn-group-sm">
@@ -90,6 +96,10 @@
                   <th>Is_insured</th>
                   <th>Created_at</th>
                   <th>Updated_at</th>
+                  <th>Pharmacy</th>
+                  @role('admin')
+                  <th>Creator</th>
+                  @endrole
                   <th>Action</th>
                     
                 </tfoot> 
