@@ -25,7 +25,7 @@ class OrderController extends Controller
       
 
     }
-
+    
     // public function autocomplete(Request $request)
     // {
     //     $data = Medicine::where("name","LIKE","%{$request->input('query')}%")->get();

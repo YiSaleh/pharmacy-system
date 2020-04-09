@@ -85,13 +85,24 @@ Route::get('/order/{order}','OrderController@show')->name('orders.show');
 // send data directly to database
 Route::post('/order','OrderController@store')->name('order.store');
 
-<<<<<<< HEAD
 //  
 Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('order.autocomplete');
-=======
+
+
+
+
+
+
+
+
+
+
 Route::get('/revenue','RevenueController@show')->name('revenue.show');
 
 Route::get('/revenues','RevenueController@index')->name('revenue.index');
+
+
+
 
 
 //all pharmacy
@@ -107,4 +118,3 @@ Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.sho
 //delete pharmacy
 Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
 
->>>>>>> 7cd124562326011f0894654a9225b0220953ae40

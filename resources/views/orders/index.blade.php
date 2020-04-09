@@ -49,6 +49,7 @@
                 <tr>
                   <td>{{$order->id}}</td>
                   <td>{{$order->user->first->name->name ?? 'not exist'}}</td>
+                  dd($order->user->first);
                   <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
                   <td>{{$order->prescription}}</td>

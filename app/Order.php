@@ -12,7 +12,7 @@ class Order extends Model
     }
     public function useraddress()
     {
-        return $this->belongsTo('App\UserAddresses','user_address_id');
+        return $this->belongsTo('App\User_Address','user_address_id');
     }
     
     public function medicine()
