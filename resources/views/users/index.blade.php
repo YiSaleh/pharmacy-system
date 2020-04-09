@@ -32,6 +32,7 @@
                   <th>Phone</th>
                   <th>gender</th>
                   <th>Date_of_Birth</th>
+                  <th>Profile Image</th>
                   <th>Created_at</th>
                   <th>Action</th>
                 </tr>
@@ -45,19 +46,23 @@
                   <td>{{$user->email}}</td>
                   <td>{{$user->phone}}</td>
                   <td>{{$user->gender}}</td>
-                  <td>{{$user->date_of_birth}}</td>
-                  <td>{{$user->created_at}}</td>
-                  <td class="project-actions text-right"> 
+                  <td>{{Carbon\Carbon::parse($user->date_of_birth)->format('Y-m-d')}}</td>
+                  <td> <img class="img-circle elevation-2 ml-3" src="{{ asset('storage/'. $user->avatar)}}" style="width:80px; height:80px" alt="User Avatar"></td>
+                  <td>{{$user->created_at->toDateString()}}</td>
+                  <td class="project-actions text-center "> 
                       <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm" href="{{route('users.show',['user'=>$user->id])}}">
                           <i class="fas fa-folder"> </i>View 
                       </a>
-                          <!-- <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt"> </i>Edit
-                          </a> -->
-                        <a class="btn btn-danger btn-sm" href="{{route('users.destroy',['user'=>$user->id])}}" onclick="return confirm('Are you sure you want to delete this user?');">
-                              <i class="fas fa-trash"> </i> Delete
-                          </a> 
+                      <a class="btn btn-info btn-sm" href="{{route('users.edit',['user'=>$user->id])}}">
+                          <i class="fas fa-pencil-alt"> </i>Edit
+                      </a>
+                      <form method="POST" action="{{route('users.destroy',['user'=>$user->id])}}">
+                          @csrf 
+                          @method('DELETE')
+                          <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
+                            <i class="fas fa-trash"></i>Delete</button>
+                      </form>
                         <!-- <a href="users.show" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
                         <!-- <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->  
                       </div>
@@ -74,6 +79,7 @@
                   <th>Phone</th>
                   <th>gender</th>
                   <th>Date_of_Birth</th>
+                  <th>Profile Image</th>
                   <th>Created_at</th>
                   <th>Action</th>
                 </tr>
