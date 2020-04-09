@@ -74,8 +74,9 @@
                           <i class=> </i>View</a>
 
                   <div class="btn-group btn-group-sm"> 
-                      <a class="btn btn-warning btn-sm" href="">
+                      <a class="btn btn-warning btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
                           <i class=> </i>Edit</a>
+                          
               <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
               @csrf
               @method('DELETE')

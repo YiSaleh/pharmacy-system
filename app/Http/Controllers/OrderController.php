@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
 
     $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-    dd($orders->pluck('users'));
+    // dd($orders->pluck('user'));
     return view('orders.index',['orders'=>$orders,]);
       
 
@@ -94,15 +94,30 @@ class OrderController extends Controller
            
         ]);
      
-        User_Order::create([
-            'order_id'=>request()->order_id,
-            'user_id' =>request()->user_id,
-           
-        ]);
+        // Order_Medicine::create([
+        //     'order_id'=>request()->order_id,
+        //     'medicine_id' =>request()->medicine_id,
+        //     'quantity'=>request()->quantity
+        // ]);
+
+        // User_Order::create([
+        //     'order_id'=>request()->order_id,
+        //     'user_id'=>request()->user_id,
+        // ]);
         return redirect()->route('order.index');
     }
     
-   
+    public function edit()
+    {  
+       
+        return view('orders.edit',[
+            'orders' => Order::find(request()->orders),
+            'users' => User::get(),
+            'useraddresses'=>User_Address::get(),
+            'pharmacies'=>Pharmacy::get(),
+
+        ]);
+    }
 
 
 
