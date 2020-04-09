@@ -123,10 +123,19 @@
                 </a>
               </li>
               @endrole
+
+              @role('admin')
               <li class="nav-item">
-                <a href="/home/create/areas" class="nav-link">
+                <a href="{{route('areas.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Area</p>
+                </a>
+              </li>
+              @endrole
+               <li class="nav-item">
+                <a href="{{route('pharmacy.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Pharmacy</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -175,9 +184,15 @@
               </li>
               @endrole
               <li class="nav-item">
-                <a href="/home/areas" class="nav-link">
+                <a href="{{route('areas.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Areas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('pharmacy.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pharmacies</p>
                 </a>
               </li>
               <li class="nav-item">
