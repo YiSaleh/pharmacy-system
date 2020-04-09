@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/home/{field}', 'HomeController@show')->name('home.show');
 
 
-Route::group(['middleware'=>'auth'],function(){
-//user index
+Route::middleware(['auth', 'role:admin'])->group(function () {
+//user index 
 Route::get('/users','UserController@index')->name('users.index');
 //create new user
 Route::get('/users/create','UserController@create')->name('users.create');
@@ -42,7 +42,7 @@ Route::get('/users/{user}/edit','UserController@edit')->name('users.edit');
 Route::get('/users/{user}','UserController@show')->name('users.show');
 });
 
-Route::group(['middleware'=>'auth'],function(){
+Route::middleware(['auth', 'role:admin'])->group(function () {
 //show all users addresses
 Route::get('/useraddresses','AddressController@index')->name('useraddresses.index');
 // create new user address
@@ -81,4 +81,8 @@ Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
+
+Route::get('/revenue','RevenueController@show')->name('revenue.show');
+
+Route::get('/revenues','RevenueController@index')->name('revenue.index');
 

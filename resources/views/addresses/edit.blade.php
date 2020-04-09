@@ -51,6 +51,16 @@
                         @endforeach
                       </select>
                   </div>
+<!-- ############################################################################################################################################## -->
+ <!-- input field to insert user name  by chosing from drop downlist-->
+                  <div class="form-group">
+                    <label>Choose Area </label>
+                      <select class="form-control" name="area_id">
+                        @foreach($areas as $area)  
+                          <option value="{{$area->id}}" {{ ($useraddress->area_id === $area->id)? "selected" : "" }}>{{$area->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
                  
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Update</button>

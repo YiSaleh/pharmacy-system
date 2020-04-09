@@ -50,6 +50,16 @@
                         @endforeach
                       </select>
                   </div>
+<!-- ############################################################################################################################################## -->
+ <!-- input field to insert Area name  by chosing from drop downlist-->
+                  <div class="form-group">
+                    <label>Select Area </label>
+                      <select class="form-control" name="area_id">
+                        @foreach($areas as $area)  
+                          <option value="{{$area->id}}">{{$area->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
                  
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Create</button>

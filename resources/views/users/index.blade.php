@@ -32,6 +32,7 @@
                   <th>Phone</th>
                   <th>gender</th>
                   <th>Date_of_Birth</th>
+                  <th>Profile Image</th>
                   <th>Created_at</th>
                   <th>Action</th>
                 </tr>
@@ -46,8 +47,9 @@
                   <td>{{$user->phone}}</td>
                   <td>{{$user->gender}}</td>
                   <td>{{Carbon\Carbon::parse($user->date_of_birth)->format('Y-m-d')}}</td>
+                  <td> <img class="img-circle elevation-2 ml-3" src="{{ asset('storage/'. $user->avatar)}}" style="width:80px; height:80px" alt="User Avatar"></td>
                   <td>{{$user->created_at->toDateString()}}</td>
-                  <td class="project-actions text-center"> 
+                  <td class="project-actions text-center "> 
                       <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm" href="{{route('users.show',['user'=>$user->id])}}">
                           <i class="fas fa-folder"> </i>View 
@@ -77,6 +79,7 @@
                   <th>Phone</th>
                   <th>gender</th>
                   <th>Date_of_Birth</th>
+                  <th>Profile Image</th>
                   <th>Created_at</th>
                   <th>Action</th>
                 </tr>
