@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('home');
-})->name('mainPage');
+})->name('mainPage')->middleware('auth');
 
 Auth::routes(['register' => false ,'verify' => true ]);
 Route::get('/home', 'HomeController@index')->name('home');
