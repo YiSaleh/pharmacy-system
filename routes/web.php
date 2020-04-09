@@ -70,4 +70,8 @@ Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
+// send data directly to database
+Route::post('/order','OrderController@store')->name('order.store');
 
+//  
+Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('order.autocomplete');

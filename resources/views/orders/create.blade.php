@@ -1,55 +1,118 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form">
-    @csrf
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                </div>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+   .box{
+    width:600px;
+    margin:0 auto;
+   }
+  </style>
+ </head>
 
-                <div class="row">
+
+
+<form role="form"  method="POST" action="{{route('order.store')}}">
+    @csrf
+   
+    <!-- drop down list where doctors can select user -->
+    <div class="col-6 m-5">
+                    <label align:center>User Name </label>
+                      <select class="form-control" name="user_id">
+                        @foreach($users as $user)  
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
+                 
+   <!-- enter medicine name price and quantity  -->
+   <body>
+  <br />
+  <div class="card-body">
+  <label for="exampleInput">Select a drug </label>
+      <div class="form-group">
+    <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Enter Drug Name" />
+    <div id="druglist">
+    </div>
+   </div>
+   {{ csrf_field() }}
+  </div>
+
+     <!-- enter medicine quantity  -->
+
+
+  <div class="card-body col-6">  
+                  <div class="form-group">
+                    <label for="exampleInput">Price</label>
+                    <input type="text" class="form-control" id="exampleInput" placeholder="Drug Price " name="drug_price">
+                  </div>
+
+     <!-- enter medicine price  -->
+
+<div class="form-group col-6">
+ <label for="InputBuildingNum">Quantity </label>
+<input type="number" class="form-control" id="InputQuantity" placeholder="Drug Quantity " name="drug_qty">
+</div>
+
+<div class="form-group col-6">
+ <label for="InputBuildingNum">Status </label>
+<input type="number" class="form-control" id="InputQuantity" placeholder="Drug Quantity " name="drug_qty">
+</div>
+
+     <!-- enter order status   -->
+
+     <div class="row">
                     <div class="col-sm-6">
-                      <!-- select -->
                       <div class="form-group">
-                        <label>Select</label>
+                        <label>Select Order Status</label>
                         <select class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
+                          <option>New Order</option>
                         </select>
                       </div>
                     </div>
 
+
+     <!-- Create button -->
+
+                 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Create</button>
                 </div>
               </form>
             </div>
 </form>
 
+
+
+
+<script>
+  $(document).ready(function(){
+
+$('#name').keyup(function(){ 
+       var query = $(this).val();
+       if(query != '')
+       {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+         url:"{{ route('order.autocomplete') }}",
+         method:"POST",
+         data:{query:query, _token:_token},
+         success:function(data){
+          $('#druglist').fadeIn();  
+                   $('#druglist').html(data);
+         }
+        });
+       }
+   });
+
+   $(document).on('click', 'li', function(){  
+       $('#name').val($(this).text());  
+       $('#druglist').fadeOut();  
+   });  
+
+});
+</script>
 @endsection

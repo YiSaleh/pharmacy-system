@@ -33,6 +33,8 @@
                 <thead>
                 <tr>
                   <th>ID</th>
+                  <th>UserName</th>
+                  <th>Address</th>
                   <th>Status</th>
                   <th>Prescription</th>
                   <th>Is_insured</th>
@@ -46,11 +48,18 @@
                 @foreach ($orders as $order)  
                 <tr>
                   <td>{{$order->id}}</td>
+                  <td>{{$order->user->first->name->name ?? 'not exist'}}</td>
+                  <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
                   <td>{{$order->prescription}}</td>
-                  <td>{{$order->is_insured}}</td>
+                  @if($order->is_insured === 1)
+                  <td> <span class="badge badge-success">Insured </span> </td>
+                  @else
+                  <td><span class="badge badge-secondary">Not covered</span></td>
+                  @endif
                   <td>{{$order->created_at}}</td>
                   <td>{{$order->updated_at}}</td>
+
                   <td> 
 
                   <div class="btn-group btn-group-sm">
@@ -73,6 +82,8 @@
                 </tbody>
                 <tfoot>
                   <th>ID</th>
+                  <th>username</th>
+                  <th>Address</th>
                   <th>Status</th>
                   <th>Prescription</th>
                   <th>Is_insured</th>

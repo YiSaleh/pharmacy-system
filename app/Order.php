@@ -8,11 +8,11 @@ class Order extends Model
 {
     public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User','users_orders');
     }
     public function useraddress()
     {
-        return $this->belongsTo('App\UserAddress');
+        return $this->belongsTo('App\UserAddresses','user_address_id');
     }
     
     public function medicine()
@@ -20,4 +20,5 @@ class Order extends Model
         return $this->belongsToMany('App\Medicine');
     }
 
+    
 }
