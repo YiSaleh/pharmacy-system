@@ -9,16 +9,20 @@
                 <div class="card-header">
                     <h3 class="card-title">
                     <i class="fas fa-text-width"></i>
-                   Area Details 
+                   Pharmacy Details 
                     </h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <dl class="row">
-                    <dt class="col-sm-4">Area Name</dt>
-                    <dd class="col-sm-8">{{$area->name}}</dd>
+                    <dt class="col-sm-4">Pharmacy Name</dt>
+                    <dd class="col-sm-8">{{$pharmacy->name}}</dd>
                     <dt class="col-sm-4">Created At</dt>
-                    <dd class="col-sm-8">{{$area->created_at}}</dd>
+                    <dd class="col-sm-8">{{$pharmacy->created_at}}</dd>
+                    <dt class="col-sm-4">Periority</dt>
+                    <dd class="col-sm-8">{{$pharmacy->periority}}</dd>
+                    <dt class="col-sm-4">Area</dt>
+                    <dd class="col-sm-8">{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</dd>
                     </dl>
                 </div>
                 <!-- /.card-body -->

@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pharmacy extends Model
 {
+    use SoftDeletes;
+	protected $fillable = [
+        'name', 'periority' , 'area_id'
+    ];
    public function area()
     {
         return $this->belongsTo('App\Area');

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <form role="form"  method="POST" action="{{route('useraddresses.store')}}">
@@ -47,6 +47,16 @@
                       <select class="form-control" name="user_id">
                         @foreach($users as $user)  
                           <option value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
+<!-- ############################################################################################################################################## -->
+ <!-- input field to insert Area name  by chosing from drop downlist-->
+                  <div class="form-group">
+                    <label>Select Area </label>
+                      <select class="form-control" name="area_id">
+                        @foreach($areas as $area)  
+                          <option value="{{$area->id}}">{{$area->name}}</option>
                         @endforeach
                       </select>
                   </div>

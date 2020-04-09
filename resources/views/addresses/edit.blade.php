@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <form role="form"  method="POST" action="{{route('useraddresses.update',['useraddress'=>$useraddress->id])}}">
@@ -48,6 +48,16 @@
                       <select class="form-control" name="user_id">
                         @foreach($users as $user)  
                           <option value="{{$user->id}}" {{ ($useraddress->user_id === $user->id)? "selected" : "" }}>{{$user->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
+<!-- ############################################################################################################################################## -->
+ <!-- input field to insert user name  by chosing from drop downlist-->
+                  <div class="form-group">
+                    <label>Choose Area </label>
+                      <select class="form-control" name="area_id">
+                        @foreach($areas as $area)  
+                          <option value="{{$area->id}}" {{ ($useraddress->area_id === $area->id)? "selected" : "" }}>{{$area->name}}</option>
                         @endforeach
                       </select>
                   </div>

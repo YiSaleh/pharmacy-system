@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <!-- Main content -->
@@ -15,17 +15,19 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <dl class="row">
-                    <dt class="col-sm-4">User Name :</dt>
-                    <dd class="col-sm-8">{{$useraddress->User->name}}</dd>
-                    <dt class="col-sm-4">Street Name :</dt>
+                    <dt class="col-sm-4 font-weight-bolder">User Name :</dt>
+                    <dd class="col-sm-8 ">{{$useraddress->User->name}}</dd>
+                    <dt class="col-sm-4 font-weight-bolder">Area Name :</dt>
+                    <dd class="col-sm-8 ">{{$useraddress->area->name}}</dd>
+                    <dt class="col-sm-4 font-weight-bolder">Street Name :</dt>
                     <dd class="col-sm-8">{{$useraddress->street_name}}</dd>
-                    <dt class="col-sm-4">Building Number :</dt>
+                    <dt class="col-sm-4 font-weight-bolder">Building Number :</dt>
                     <dd class="col-sm-8">{{$useraddress->building_no}}</dd>
-                    <dt class="col-sm-4">Floor Number :</dt>
+                    <dt class="col-sm-4 font-weight-bolder">Floor Number :</dt>
                     <dd class="col-sm-8">{{$useraddress->floor_no}}</dd>
-                    <dt class="col-sm-4">flat Number :</dt>
+                    <dt class="col-sm-4 font-weight-bolder">flat Number :</dt>
                     <dd class="col-sm-8">{{$useraddress->flat_no}}</dd>
-                    <dt class="col-sm-4">Street :</dt>
+                    <dt class="col-sm-4 font-weight-bolder">Street :</dt>
                     @if($useraddress->is_main === 1)
                     <dd class="col-sm-8">Main Street</dd>
                     @else

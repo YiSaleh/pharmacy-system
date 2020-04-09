@@ -24,7 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/home/create/{field}', 'HomeController@create')->name('home.create');
 // Route::get('/home/{field}', 'HomeController@show')->name('home.show');
 
-//user index
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+//user index 
 Route::get('/users','UserController@index')->name('users.index');
 //create new user
 Route::get('/users/create','UserController@create')->name('users.create');
@@ -38,8 +40,9 @@ Route::delete('users/{user}','UserController@destroy')->name('users.destroy');
 Route::get('/users/{user}/edit','UserController@edit')->name('users.edit');
 // to show one user
 Route::get('/users/{user}','UserController@show')->name('users.show');
+});
 
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
 //show all users addresses
 Route::get('/useraddresses','AddressController@index')->name('useraddresses.index');
 // create new user address
@@ -54,8 +57,17 @@ Route::delete('useraddresses/{useraddress}','AddressController@destroy')->name('
 Route::get('/useraddresses/{useraddress}/edit','AddressController@edit')->name('useraddresses.edit');
 // view specific address
 Route::get('/useraddresses/{useraddress}','AddressController@show')->name('useraddresses.show');
+});
 
 
+//show all areas
+Route::get('/areas','AreaController@index')->name('areas.index');
+Route::get('/areas/create','AreaController@create')->name('areas.create');
+Route::post('/areas','AreaController@store')->name('areas.store');
+Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
+Route::put('/areas/{area}','AreaController@update')->name('areas.update');
+Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
+Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 
 
 //show all users orders
@@ -73,5 +85,26 @@ Route::get('/order/{order}','OrderController@show')->name('orders.show');
 // send data directly to database
 Route::post('/order','OrderController@store')->name('order.store');
 
+<<<<<<< HEAD
 //  
 Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('order.autocomplete');
+=======
+Route::get('/revenue','RevenueController@show')->name('revenue.show');
+
+Route::get('/revenues','RevenueController@index')->name('revenue.index');
+
+
+//all pharmacy
+Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');
+//create new pharmacy
+Route::get('/pharmacy/create','PharmacyController@create')->name('pharmacy.create');
+Route::post('/pharmacy','PharmacyController@store')->name('pharmacy.store');
+//edit pharmacy info
+Route::get('/pharmacy/edit/{pharmacy}','PharmacyController@edit')->name('pharmacy.edit');
+Route::put('/pharmacy/{pharmacy}','PharmacyController@update')->name('pharmacy.update');
+//show a specific pharmacy details
+Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.show');
+//delete pharmacy
+Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
+
+>>>>>>> 7cd124562326011f0894654a9225b0220953ae40

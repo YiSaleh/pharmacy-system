@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
-<form role="form" method="POST" action="{{route('users.store')}}">
+<form role="form" method="POST" enctype="multipart/form-data" action="{{route('users.store')}}">
     @csrf
                 <div class="card-body">
                 <div class="form-group">
@@ -30,7 +30,7 @@
 <!-- ################################################################################################################################## -->
                   <div class="form-group">
                     <label for="exampleInputPasswordConfirm">Confirm Password</label>
-                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="exampleInputPasswordConfirm" placeholder="re-enter your Password">
+                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="exampleInputPasswordConfirm" placeholder="re-enter your Password" name="password_confirmation">
                     @error('password_confirmation')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -54,7 +54,7 @@
 <!-- ################################################################################################################################## -->
                   <div class="form-group">
                     <label for="exampleInputDOB">Date of Birth 1980-01-01 </label>
-                    <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" id="exampleInputDOB" placeholder="User Date of birth" name="dob">
+                    <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" id="exampleInputDOB" placeholder="User Date of birth" name="date_of_birth">
                     @error('date_of_birth')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -73,18 +73,15 @@
 <!-- ################################################################################################################################## -->
                   <div class="form-group">
                     <label for="exampleInputFile">Upload Photo</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="profile_image">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile" name="profile_image">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                     @error('profile_image')
                       <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
-                </div>
-
+              
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary"> Create </button>
                 </div>

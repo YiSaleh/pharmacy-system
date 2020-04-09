@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <!-- Main content -->
@@ -16,6 +16,7 @@
                 <tr>
                   <th>#Id</th>
                   <th>User</th>
+                  <th>Area Name </th>
                   <th>street Name</th>
                   <th>building Number</th>
                   <th>floor Number</th>
@@ -29,6 +30,7 @@
                 <tr>
                   <td>{{$address->id}}</td>
                   <td>{{$address->User->name}}</td>
+                  <td>{{$address->area->name}}</td>
                   <td>{{$address->street_name}}</td>
                   <td>{{$address->building_no}}</td>
                   <td>{{$address->floor_no}}</td>
@@ -65,6 +67,7 @@
                 <tr>
                   <th>#Id</th>
                   <th>User</th>
+                  <th>Area Name </th>
                   <th>street Name</th>
                   <th>building Number</th>
                   <th>floor Number</th>
