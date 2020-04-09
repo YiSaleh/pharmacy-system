@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <!-- Main content -->
@@ -29,24 +29,23 @@
                   <td>{{$area->name}}</td>
                   <td>{{$area->created_at}}</td>
                   <td class="project-actions text-left"> 
-                      <!-- <div class="btn-group btn-group-sm"> -->
+                    <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm mr-3" href="{{route('areas.show',['area'=>$area->id])}}">
                           <i class="fas fa-folder"> </i>View</a>
 
-                         <a class="btn btn-primary btn-sm mr-3" href="{{route('areas.edit',['area'=>$area->id])}}">
+                      <a class="btn btn-primary btn-sm mr-3" href="{{route('areas.edit',['area'=>$area->id])}}">
                           <i class="fas fa-folder"> </i>Edit</a>
-                           <form method="POST" action="{{route('areas.destroy',['area'=>$area->id])}}">
-                            @csrf 
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this area?');">
+                      <form method="POST" action="{{route('areas.destroy',['area'=>$area->id])}}">
+                        @csrf 
+                        @method('DELETE')
+                          <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this area?');">
                             <i class="fas fa-trash"></i>Delete</button>
-                          </form>
-
-                        
+                      </form>
                 </tr>
                 @endforeach
                 </tbody>
               </table>
+              {{!! $areas->links() !!}}
             </div>
             <!-- /.card-body -->
           </div>
@@ -54,17 +53,4 @@
       </div>
  </section>    
 
- <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
  @endsection

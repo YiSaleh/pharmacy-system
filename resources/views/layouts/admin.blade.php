@@ -88,8 +88,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -132,12 +131,16 @@
                 </a>
               </li>
               @endrole
+
+              @role('admin')
                <li class="nav-item">
                 <a href="{{route('pharmacy.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Pharmacy</p>
                 </a>
               </li>
+              @endrole
+
               <li class="nav-item">
                 <a href="/home/create/doctors" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -155,8 +158,9 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
-               @role('admin')
               </li>
+
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('users.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -164,6 +168,7 @@
                 </a>
               </li>
               @endrole
+
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -183,6 +188,7 @@
                 </a>
               </li>
               @endrole
+
               <li class="nav-item">
                 <a href="{{route('areas.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -254,8 +260,6 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
     <!-- Main content -->
     @yield('content')
     <!-- /.content -->

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <form role="form" method="POST" action="{{route('pharmacy.store')}}">
