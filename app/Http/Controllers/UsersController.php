@@ -11,7 +11,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     public function index()
     {
@@ -64,18 +64,24 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request)
     {   
-        $user= $request->user();
-        if ($request->file('profile_image')->isValid()) {
-            $user->avatar= $request->profile_image->store('uploads','public');
-        }         
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->password =Hash::make($request->password);
-        $user->date_of_birth = $request->date_of_birth;
-        $user->phone = $request->phone;
-        $user->national_id = $request->national_id;
+        
+        if ($request->hasFile('profile_image')) {
+            $request->file('profile_image')->isValid();
+            $avatar= $request->profile_image->store('uploads','public');
+        }else{
+             $avatar=User::where('id',$request->user)->value('avatar');
+        }
 
-        $user->save();
+        User::where('id',$request->user)->update([
+            'name'=>$request->name,
+            'gender'=>$request->gender,
+            'password'=> Hash::make($request->password),
+            'date_of_birth'=> $request->date_of_birth,
+            'phone'=>  $request->phone,
+            'national_id'=>  $request->national_id,
+            'avatar'=>$avatar,
+        ]);   
+
         return redirect()->route('users.index');
 
     }

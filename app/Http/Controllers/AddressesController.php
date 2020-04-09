@@ -7,7 +7,7 @@ use App\User_Address;
 use App\User;
 use App\Area;
 
-class AddressController extends Controller
+class AddressesController extends Controller
 {
     public function index()
     {
@@ -26,8 +26,6 @@ class AddressController extends Controller
 
     public function create()
     {  
-        // $users=User::role('user')->get();
-        // $areas=Area::all();
         return view('addresses.create',[
             'users' => User::role('user')->get(),
             'areas' => Area::all(),
@@ -36,7 +34,6 @@ class AddressController extends Controller
 
     public function store()
     {    
-        // dd(request());
         User_Address::create([
             'street_name' => request()->street_name,
             'floor_no' => request()->floor_no,

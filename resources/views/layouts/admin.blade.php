@@ -171,12 +171,15 @@
               </li>
               @endrole
 
+              @role('admin|owner')
               <li class="nav-item">
-                <a href="/home/create/doctors" class="nav-link">
+                <a href="{{route('doctors.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Doctor</p>
                 </a>
               </li>
+              @endrole
+
               <li class="nav-item">
                 <a href="/home/create/medicines" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -190,7 +193,7 @@
                 </a>
               </li>
 
-              @role('admin')
+              @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('users.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -231,12 +234,16 @@
                   <p>Pharmacies</p>
                 </a>
               </li>
+
+              @role('admin|owner')
               <li class="nav-item">
-                <a href="/home/doctors" class="nav-link">
+                <a href="{{route('doctors.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Doctors</p>
                 </a>
               </li>
+              @endrole
+
               <li class="nav-item">
                 <a href="/home/medicines" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

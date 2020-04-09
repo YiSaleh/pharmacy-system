@@ -4,28 +4,37 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10 offset-sm-1">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">
+                    <h3 class="card-title font-weight-bolder">
                     <i class="fas fa-text-width"></i>
-                    Description Horizontal
+                    Doctor Details
                     </h3>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
+     <!-- /.card-header -->
+         <div class="card-body">
+                <div class="row pb-3">
+                        <img class="col-4 ml-5" src="{{ asset('storage/'. $doctor->avatar)}}" style="width:100px; height:250px; border-radius:10%; margin-bottom:3rem;" >
+                    </div>
                     <dl class="row">
-                    <dt class="col-sm-4">Description lists</dt>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
-                    <dt class="col-sm-4">Euismod</dt>
-                    <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                    <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd>
-                    <dt class="col-sm-4">Malesuada porta</dt>
-                    <dd class="col-sm-8">Etiam porta sem malesuada magna mollis euismod.</dd>
-                    <dt class="col-sm-4">Felis euismod semper eget lacinia</dt>
-                    <dd class="col-sm-8">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                        sit amet risus.
-                    </dd>
+                    <dt class="col-sm-4">Doctor Name :</dt>
+                    <dd class="col-sm-8">{{$doctor->name}}</dd>
+                    <dt class="col-sm-4">Email :</dt>
+                    <dd class="col-sm-8">{{$doctor->email}}</dd>
+                    <!-- <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd> -->
+                    <dt class="col-sm-4">Phone :</dt>
+                    <dd class="col-sm-8">{{$doctor->phone}}</dd>
+                    <dt class="col-sm-4">Pharmacy Name :</dt>
+                    <dd class="col-sm-8">{{$doctor->pharmacy->name}}</dd>
+                    <dt class="col-sm-4">Gender :</dt>
+                    <dd class="col-sm-8">{{$doctor->gender}}</dd>
+                    <dt class="col-sm-4">Date Of Birth :</dt>
+                    <dd class="col-sm-8">{{ Carbon\Carbon::parse($doctor->date_of_birth)->format('Y-m-d') }}</dd>
+                    <dt class="col-sm-4">National Id :</dt>
+                    <dd class="col-sm-8">{{$doctor->national_id}}</dd>
+                    <dt class="col-sm-4">Created at :</dt>
+                    <dd class="col-sm-8">{{$doctor->created_at->toDateString()}}</dd>
                     </dl>
                 </div>
                 <!-- /.card-body -->

@@ -72,11 +72,11 @@
                   </div>
 <!-- ################################################################################################################################## -->
                   <div class="form-group">
-                    <label for="exampleInputFile">Upload Photo</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile" name="profile_image">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label for="image">Upload Photo</label>
+                    <div class="row">
+                       <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror">
                     </div>
+                    
                     @error('profile_image')
                       <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
