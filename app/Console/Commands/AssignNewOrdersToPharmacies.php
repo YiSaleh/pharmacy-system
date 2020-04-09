@@ -45,6 +45,7 @@ class AssignNewOrdersToPharmacies extends Command
            $user_address=User_Address::where('id',$new_order->user_address_id)->first();
            $pharmacy=Pharmacy::where('area_id',$user_address->area_id)->where('periority','High')->first();
            $new_order->pharmacy_id=$pharmacy->id;
+           $new_order->status='processing';
            $new_order->save();
        } 
     }
