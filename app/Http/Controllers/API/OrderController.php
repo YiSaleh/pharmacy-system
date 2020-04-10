@@ -28,6 +28,10 @@ class OrderController extends Controller
         $order = new Order();
         $order->status = $request->input('order_status');
         $order->prescription = $request->input('prescription');
+      //   if ($order->file('prescription')->isValid()) {
+      //     $order->prescription->store('uploads','public');
+      // }         
+      
         $order->is_insured = $request->input('is_insured');
         $order->user_address_id = $request->input('user_address_id');
         $order->pharmacy_id = $request->input('pharmacy_id');
@@ -36,8 +40,8 @@ class OrderController extends Controller
         $order->save();
       
         $userOrder = new User_Order(); 
-        $userOrder->user_id = $request->input('user_id');//user_order
-        $userOrder->order_id = $request->input('order_id');//user_order
+        $userOrder->user_id = $request->input('user_id');//user_order table
+        $userOrder->order_id = $request->input('order_id');//user_order table
 
         $userOrder->save();
         
@@ -59,32 +63,35 @@ class OrderController extends Controller
     public function view($id)
 
     {
-      
-        //  $orderDetails = "";
       $order  = Order::firstWhere('id',$id);
-      // $order = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
+      $CustomOrder = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
 
       $orderMedicines = Order_Medicine::where('order_id',$order->id)->get();
       $medicineIds =   Arr::pluck($orderMedicines, 'medicine_id');
 
       $medicines = Medicine::find($medicineIds);
 
+      // $filteredMedicines = Arr::only($medicines, ['type', 'quantity']);
+
       // $medicinesDetails = Arr::pluck($medicines, 'name','type','quantity');
       $pharmacy = Pharmacy::firstWhere('id',$order->pharmacy_id);
 
       $orderDetails = array(
         'order_id'=> $order->id,
-        'medicines' => $medicines
+        'ordered_at'=> $order->created_at,
+        'status'=>$order->status,
+        'medicines' => $medicines,
+        'assigned_pharmacy'=> array('id'=>$pharmacy->id,'name'=>$pharmacy->name,'address'=>$pharmacy->area_id)
     );
 
       // $orderDetails->order_id = $order->id;
-    	return  response()->json([
+    	return response()->json([
         'order_details'=>$orderDetails,
-            'order'=>$order,
-            'userOrders'=>$orderMedicines,
-            'ids'=>$medicineIds ,
-            'medicines'=>$medicines,
-            'pharmacy'=>$pharmacy
+            // 'order'=>$order,
+            // 'userOrders'=>$orderMedicines,
+            // 'ids'=>$medicineIds ,
+            // 'medicines'=>$medicines,
+            // 'pharmacy'=>$pharmacy
         ]);
     
     }

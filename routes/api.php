@@ -29,6 +29,12 @@ Route::post('/users/login','API\UserController@login');
 // _methoduserAddress and it's value=put because postman doesn't support put requestMethod 
 Route::put('/users/{user}','API\UserController@update')->middleware('auth:sanctum','verified');
 
+
+
+// Route::group(['middleware'=>'auth:sanctum'], function(){
+
+// return $request
+// });
 //------------user addresses urls------------
 
 Route::post('/user-address/create', 'API\UserAddressesController@create');
@@ -53,5 +59,3 @@ Route::put('/orders/update/{id}', 'API\OrderController@update');
 Route::get('/user-orders/view/{user_id}', 'API\UserOrderController@viewUserOrders');
 
 Route::get('/user-orders/view/{user_id}/{order_id}', array('as'=>'user_id/order_id','uses'=>'API\UserOrderController@viewOrder'));
-
-// Route::get('people.php/{username}/{age}', array('as' => 'people/username/age', 'uses' => 'ExtraController@xfunction'));
