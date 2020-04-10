@@ -10,10 +10,8 @@ use App\Medicine;
 use App\Order_Medicine;
 use App\Pharmacy;
 use App\User_Address;
-use Illuminate\Support\Facades\DB;
 
-// use App\Http\Requests\StoreOderRequest;
-// use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller
@@ -21,19 +19,15 @@ class OrderController extends Controller
 
     public function index()
     {
+
     $orders= Order::orderBy('created_at','asc')->with(['user','useraddress'])->paginate(5);
-    dd($orders);
+
     return view('orders.index',['orders'=>$orders,]);
       
 
     }
     
-    // public function autocomplete(Request $request)
-    // {
-    //     $data = Medicine::where("name","LIKE","%{$request->input('query')}%")->get();
-    //     return response()->json($data);
-        
-    // }
+   
     function autocomplete(Request $request)
     {
      if($request->get('query'))
@@ -46,7 +40,7 @@ class OrderController extends Controller
       foreach($data as $row)
       {
        $output .= '
-       <li><a href="#">'.$row->name.'</a></li>
+       <li><a href="#" >'.$row->name.'</a></li>
        ';
       }
       $output .= '</ul>';
@@ -65,53 +59,37 @@ class OrderController extends Controller
 
 
     public function create()
-    {
-        return view('orders.create',[
-            'users' => User::get(),
-            'useraddresses'=>User_Address::get(),
-            'pharmacies'=>Pharmacy::get(),
+    {     
+          $req=request()->order;
+         $order=Order::find(request()->order);
+         $user=$order->user[0];
+        return view('orders.create',['order'=>$order,
+             'user'=>$user,
+             'addresses'=>User_Address::get(),
             'medicines'=>Medicine::get(),
-
-            
             ]);
-
     }
-
-
 
     public function store()
     {   
-        //   $r =  request();
-        // dd($r);
-
-        Order::create([
-            'status' => request()->status,
-            'prescription' => request()->prescription,
-            'is_insured' => request()->is_insured ? true : false ,
-            'created_at'=> request()->created_at,
-            'updated_at'=> request()->updated_at,   
+        $name=request()->medicine_id;
+        $id=Medicine::where('name',$name)->value('id');
+       Order::find(request()->order)->update([
+            'status' => 'waiting',
             'user_address_id'=>request()->user_address_id,
-            'pharmacy_id'=>request()->pharmacy_id, 
-            'medicines'=>Medicine::get(),
- 
-           
         ]);
-     
-        Order_Medicine::create([
-            'order_id'=>request()->order_id,
-            'medicine_id' =>request()->medicine_id,
-            'quantity'=>request()->quantity
-        ]);
-
+       Order_Medicine::create([
+        'order_id'=>request()->order,
+        'medicine_id'=>$id,
+        'quantity'=>request()->quantity,
+       ]);
        
         return redirect()->route('orders.index');
     }
     
     public function edit()
     {  
-        // $r = request();
-        // dd($r);
-
+        
         return view('orders.edit',[
             'order' => Order::find(request()->order),
             'users' => User::get(),

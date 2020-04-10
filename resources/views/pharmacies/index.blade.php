@@ -13,7 +13,7 @@
             <a class="btn btn-danger btn-sm ml-3" href="{{route('pharmacy.trash')}}">
                           <i class="fas fa-trash"> </i>View Trash</a>
              </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>

@@ -15,16 +15,15 @@
 
 
 
-<form role="form"  method="POST" action="{{route('orders.store',['order'=>$orde->id])}}">
+<form role="form"  method="POST" action="{{route('orders.store',['order'=>$order->id])}}">
     @csrf
    
-    <!-- drop down list where doctors can select user -->
 <div class="col-6">
 <label align:center>User Name </label>
 <select class="form-control" name="user_id">
-@foreach($users as $user)  
+
 <option value="{{$user->id}}">{{$user->name}}</option>
-@endforeach
+
 </select>
 </div>
                  
@@ -34,7 +33,7 @@
   <div class="card-body">
   <label for="exampleInput">Select a drug </label>
       <div class="form-group">
-    <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Enter Drug Name" />
+    <input type="text" name="medicine_id" id="name" class="form-control input-lg" placeholder="Enter Drug Name" />
     <div id="druglist">
     </div>
    </div>
@@ -56,66 +55,15 @@
  <label for="InputBuildingNum">Quantity </label>
 <input type="number" class="form-control" id="InputQuantity" placeholder="Drug Quantity " name="quantity">
 </div>
-
-<!-- are you covered by insurance? -->
-
-
-<div class="form-group">
-<label for="InputInsurance"> Do you have insurance?</label>
-<div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="insured" name="is_insured" value="1">
-<label for="insured" class="custom-control-label">covered</label>
-</div>        
-</div>
-<div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="notinsured" name="is_insured" value="0">
-<label for="notinsured" class="custom-control-label">Not covered</label>
-</div>        
-</div>
- 
-<br>
-     <!-- enter order status   -->
-
-
-<div class="col-sm-6">
- <div class="form-group">
-<label>Select Order Status</label>
-<select class="form-control" name="status">
-<option>new</option>
-</select>
-</div>
-</div>
-<br>
-     <!-- Prescribed for?   -->
-
-<div class="card-body col-6">  
-<div class="form-group">
-<label for="exampleInput">Prescriped for</label>
-<input type="text" class="form-control" id="exampleInput" placeholder="Prescribed for..? " name="prescription">
-</div>
-
-
-     <!-- User_Address_Id  -->
 <div class="col-6">
-<label align:center>Addres </label>
+<label align:center>Address </label>
 <select class="form-control" name="user_address_id">
-@foreach($useraddresses as $address)  
-<option value="{{$address->id}}">{{$address->id}}</option>
+   @foreach($addresses as $address) 
+<option value="{{$address->id}}">{{$address->street_name}}</option>
 @endforeach
 </select>
 </div>
 
-     <!-- Pharmacy_Id  -->
-
-<div class="col-6">
-<label align:center>Pharmacy</label>
-<select class="form-control" name="pharmacy_id">
-@foreach($pharmacies as $pharmacy)  
-<option value="{{$pharmacy->id}}">{{$pharmacy->name}}</option>
-@endforeach
-</select>
-</div>
-     <!-- Create button -->
 
 
 <div class="card-footer">

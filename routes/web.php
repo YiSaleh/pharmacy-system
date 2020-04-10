@@ -74,7 +74,7 @@ Route::middleware(['auth', 'role:admin|owner|doctor'])->group(function () {
 //show all users orders
 Route::get('/order','OrderController@index')->name('orders.index');
 //create an order 
-Route::get('/order/create', 'OrderController@create')->name('orders.create');
+Route::get('/order/create/{order}', 'OrderController@create')->name('orders.create');
 //to edit a certain order
 Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
 //to update an order
