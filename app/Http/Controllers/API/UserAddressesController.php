@@ -42,13 +42,19 @@ class UserAddressesController extends Controller
     
          public function view($user_id)
 
+    {
+        // $model = App\Flight::findOrFail(1);
+
+        // $model = App\Flight::where('legs', '>', 100)->firstOrFail();
+    	// $request  = request();
+        // $user_id = $request->user_id;  
     {  
     	$userAddress  = User_Address::firstWhere('user_id',$user_id);
     	return  response()->json([
             'userAddress'=>$userAddress
         ]);
     
-    }
+    }}
 
 
         public function update(Request $request,$user_id)
@@ -100,6 +106,12 @@ class UserAddressesController extends Controller
                 ]);
                 
                 };
+//       if ($userAddress->trashed()) {
+        // $userAddress = User_Address::withTrashed()->where('user_id',$user_id)->get();
+        // $userAddress = User_Address::onlyTrashed()->get();
+        // $response = $this->successfulMessage(200, 'Successfully', true, $userAddress->count(), $userAddress);
+       
+
 
         }
 

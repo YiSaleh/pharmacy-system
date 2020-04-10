@@ -9,22 +9,21 @@
                 <div class="card-header">
                     <h3 class="card-title">
                     <i class="fas fa-text-width"></i>
-                    Description Horizontal
+                    Medicine description
                     </h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <dl class="row">
-                    <dt class="col-sm-4">Description lists</dt>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
-                    <dt class="col-sm-4">Euismod</dt>
-                    <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                    <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd>
-                    <dt class="col-sm-4">Malesuada porta</dt>
-                    <dd class="col-sm-8">Etiam porta sem malesuada magna mollis euismod.</dd>
-                    <dt class="col-sm-4">Felis euismod semper eget lacinia</dt>
-                    <dd class="col-sm-8">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                        sit amet risus.
+                    <dt class="col-sm-4 font-weight-bolder">Drug name</dt>
+                    <dd class="col-sm-8 ">{{$medicine->name}}</dd>
+                    <dt class="col-sm-4 font-weight-bolder">Price</dt>
+                    <dd class="col-sm-8 ">{{$medicine->price }}</dd>
+                    <dt class="col-sm-4 font-weight-bolder">Quantity</dt>
+                    <dd class="col-sm-8">{{$medicine->quantity}}</dd>
+                    <dt class="col-sm-4 font-weight-bolder">Type</dt>
+                    <dd class="col-sm-8">{{$medicine->type}}</dd>
+                   
                     </dd>
                     </dl>
                 </div>

@@ -76,17 +76,42 @@ Route::get('/order','OrderController@index')->name('orders.index');
 //create an order 
 Route::get('/order/create/{order}', 'OrderController@create')->name('orders.create');
 //to edit a certain order
+Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
+// autocomplete function for medicine in creation order
 Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
 //to update an order
 Route::put('/order/{order}','OrderController@update')->name('orders.update');
 //to delete a user by id
-Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
+Route::delete('order/{order}','OrderController@destroy')->name('orders.destroy');
 // send data directly to database
 Route::post('/order','OrderController@store')->name('orders.store');
-// autocomplete function for medicine in creation order
-Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
+
+
+
+//show all medicine
+Route::get('/medicine','MedicineController@index')->name('medicines.index');
+//create a medicine
+Route::get('/medicine/create','MedicineController@create')->name('medicines.create');
+//
+Route::post('/medicine','MedicineController@store')->name('medicines.store');
+
+//to edit a medicines
+Route::get('/medicine/{medicine}/edit','MedicineController@edit')->name('medicines.edit');
+
+Route::put('/medicine/{medicine}','MedicineController@update')->name('medicines.update');
+
+//to delete a medicine
+Route::delete('medicine/{medicine}','MedicineController@destroy')->name('medicines.destroy');
+//to 
+Route::get('/medicine/{medicine}','MedicineController@show')->name('medicines.show');
+
+
+
+
+
+
 
 });
 

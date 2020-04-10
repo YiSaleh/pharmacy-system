@@ -40,14 +40,16 @@ class OrderController extends Controller
       foreach($data as $row)
       {
        $output .= '
-       <li><a href="#" >'.$row->name.'</a></li>
+       <li><a href="#">'.$row->name.'</a></li>
        ';
       }
       $output .= '</ul>';
+
       echo $output;
      }
     }  
 
+    
     public function show()
     {
     $order = Order::find(request()->order);
@@ -71,27 +73,33 @@ class OrderController extends Controller
     }
 
     public function store()
-    {   
+    {    
+    // dd(request()->order);
         $name=request()->medicine_id;
         $id=Medicine::where('name',$name)->value('id');
        Order::find(request()->order)->update([
             'status' => 'waiting',
             'user_address_id'=>request()->user_address_id,
         ]);
-       Order_Medicine::create([
-        'order_id'=>request()->order,
-        'medicine_id'=>$id,
-        'quantity'=>request()->quantity,
-       ]);
+
+     
+        Order_Medicine::create([
+            'order_id'=>request()->order,
+            'medicine_id' =>request()->medicine_id,
+            'quantity'=>request()->quantity
+        ]);
        
         return redirect()->route('orders.index');
     }
     
     public function edit()
     {  
-        
+
+      
+
         return view('orders.edit',[
-            'order' => Order::find(request()->order),
+            'orders'=>Order::find(request()->order),
+            'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
@@ -114,7 +122,7 @@ class OrderController extends Controller
         }
 
 
-    public function delete(){
+    public function destroy(){
         $orderId =request()->order;
         $order=Order::find($orderId);
         $order->delete();

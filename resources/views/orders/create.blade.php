@@ -44,10 +44,7 @@
 
 
   <div class="card-body col-6">  
-                  <div class="form-group">
-                    <label for="exampleInput">Price</label>
-                    <input type="text" class="form-control" id="exampleInput" placeholder="Drug Price " name="price">
-                  </div>
+                  
 
                       <!-- enter medicine qty  -->
 
@@ -55,16 +52,17 @@
  <label for="InputBuildingNum">Quantity </label>
 <input type="number" class="form-control" id="InputQuantity" placeholder="Drug Quantity " name="quantity">
 </div>
+
+
 <div class="col-6">
 <label align:center>Address </label>
 <select class="form-control" name="user_address_id">
-   @foreach($addresses as $address) 
+
+@foreach($addresses as $address)  
 <option value="{{$address->id}}">{{$address->street_name}}</option>
 @endforeach
 </select>
 </div>
-
-
 
 <div class="card-footer">
 <div>
@@ -72,9 +70,6 @@
 </div>
             
 </div>
-
-
-
 
 
 <script>
@@ -90,6 +85,7 @@ $('#name').keyup(function(){
          method:"POST",
          data:{query:query, _token:_token},
          success:function(data){
+          console.log(data)
           $('#druglist').fadeIn();  
                    $('#druglist').html(data);
          }
@@ -103,5 +99,8 @@ $('#name').keyup(function(){
    });  
 
 });
+
+
+
 </script>
 @endsection

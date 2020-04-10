@@ -257,7 +257,7 @@ use Illuminate\Support\Facades\Auth;
               @endrole
 
               <li class="nav-item">
-                <a href="/home/medicines" class="nav-link">
+                <a href="{{route('medicines.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Medicines</p>
                 </a>

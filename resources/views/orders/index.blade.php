@@ -75,7 +75,7 @@
                       <a class="btn btn-info btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
                           <i class="fas fa-pencil-alt"> </i>Edit</a>
                           
-                  <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
+                  <form method="POST" action="{{route('orders.destroy',['order'=>$order->id])}}">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('You are going to delete this item?,ok?');">
