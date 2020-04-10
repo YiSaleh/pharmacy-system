@@ -11,11 +11,10 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
 
 
-class User extends Authenticatable implements MustVerifyEmail 
+class User extends Authenticatable implements MustVerifyEmail ,BannableContract
 //  BannableContract
 {
-     use HasApiTokens, Notifiable, HasRoles ;
-    //  Bannable;
+     use HasApiTokens, Notifiable, HasRoles ,Bannable ;
 
     /**
      * The attributes that are mass assignable.

@@ -64,33 +64,33 @@ class HomeController extends Controller
 
     //  }
 
-     public function show(){
+    //  public function show(){
          
-        $field_create=request()->field; 
+    //     $field_create=request()->field; 
         
-        if($field_create=='addresses'){
-            return view('addresses.index');
+    //     if($field_create=='addresses'){
+    //         return view('addresses.index');
             
-        }
-        if($field_create=='areas'){
-            return view('areas.index');
+    //     }
+    //     if($field_create=='areas'){
+    //         return view('areas.index');
             
-        }
-        if($field_create=='doctors'){
-            return view('doctors.index');
+    //     }
+    //     if($field_create=='doctors'){
+    //         return view('doctors.index');
             
-        }
-        if($field_create=='medicines'){
-            return view('medicines.index');
+    //     }
+    //     if($field_create=='medicines'){
+    //         return view('medicines.index');
             
-        }
-        if($field_create=='orders'){
-            return view('orders.index');
+    //     }
+    //     if($field_create=='orders'){
+    //         return view('orders.index');
             
-        }
-        if($field_create=='users'){
-            return view('users.index');
+    //     }
+    //     if($field_create=='users'){
+    //         return view('users.index');
             
-        }
-     }
+    //     }
+    //  }
 }

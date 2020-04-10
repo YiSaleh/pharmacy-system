@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('home');
-})->name('mainPage')->middleware('auth');
+})->name('mainPage')->middleware('is-ban','auth');
+// middleware('auth');
 
 Auth::routes(['register' => false ,'verify' => true ]);
-Route::get('/home', 'HomeController@index')->name('home')->middleware('is-ban|auth');
+Route::get('/home', ['uses'=>'HomeController@index','middleware' => ['auth','is-ban']])->name('home');
+// ->middleware('auth');
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
