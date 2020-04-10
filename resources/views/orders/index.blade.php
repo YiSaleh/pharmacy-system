@@ -22,9 +22,9 @@
                 <tr>
                   <th>ID</th>
                   <th>UserName</th>
+                  <th>Doctor Name</th>
                   <th>Address</th>
                   <th>Status</th>
-                  <th>Doctor Name</th>
                   <th>Is_insured</th>
                   <th>Created_at</th>
                   @role('admin')
@@ -40,46 +40,56 @@
                 <tbody>
                 @foreach ($orders as $order)  
                 <tr>
-                  <?php
-                  dd($order->user);
-                  ?>
+                   <?php 
+                 // dd($order->user[0]);
+                 ?> 
                   <td>{{$order->id}}</td>
-                  <!-- if($order->user->hasRole('user'))
+                  @if($order->user[0]->hasRole('user'))
                   {
-                  <td>{{$order->user->name->name ?? 'not exist'}}</td>
-                  } -->
+                  <td>{{$order->user[0]->name ?? 'not exist'}}</td>
+                  } 
+                  @elseif($order->user[1]->hasRole('doctor|owner|admin'))
+                  {
+                    <td></td>
+                    <td>{{$order->user[1]->name ?? 'not exist'}}</td>
+                  }
+
+                  @endif
+
                   <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
-
-                  <td></td>
-                  <td>{{$order->prescription}}</td>
                   @if($order->is_insured === 1)
                   <td> <span class="badge badge-success">Insured </span> </td>
                   @else
                   <td><span class="badge badge-secondary">Not covered</span></td>
                   @endif
                   <td>{{$order->created_at->toDateString()}}</td>
-                  <!-- <td>{{$order->updated_at}}</td> -->
-                  <td>{{$order->pharmacy->name}}</td>
                   @role('admin')
-                  <td>{{$order->role}}</td>
-                  @endrole
-                 
-                  <td> 
+                  <td>{{$order->pharmacy->name}}</td>
 
-                  <div class="btn-group btn-group-sm">
-                      <a class="btn btn-primary btn-sm" href="{{route('orders.show',['order'=>$order->id])}}">
-                          <i class="fas fa-folder"> </i>View</a>
+                  @if($order->user[1]->hasRole('doctor'))
+                 <td> Doctor</td>
+                 @elseif($order->user[1]->hasRole('owner'))
+                 <td> Pharmacy Owner</td>
+                 @elseif($order->user[1]->hasRole('admin'))
+                 <td> Admin</td>
+                 @endif
+                 @endrole
 
-                  <div class="btn-group btn-group-sm"> 
-                      <a class="btn btn-info btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
-                          <i class="fas fa-pencil-alt"> </i>Edit</a>
-                          
-                  <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('You are going to delete this item?,ok?');">
-                              <i class="fas fa-trash"> </i>Delete</a></form>
+                <td> 
+                    <div class="btn-group btn-group-sm">
+                        <a class="btn btn-primary btn-sm" href="{{route('orders.show',['order'=>$order->id])}}">
+                            <i class="fas fa-folder"> </i>View</a>
+
+                    <div class="btn-group btn-group-sm"> 
+                        <a class="btn btn-info btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
+                            <i class="fas fa-pencil-alt"> </i>Edit</a>
+                            
+                    <form method="POST" action="{{route('orders.destroy',['order'=>$order->id])}}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('You are going to delete this order?,ok?');">
+                          <i class="fas fa-trash"> </i>Delete</a></form>
                   </td>
                 </tr>
               
@@ -104,7 +114,7 @@
                 </tfoot> 
              
               </table>
-              {{ $orders->links()}}
+              {{ $orders->links() }}
             </div>
             <!-- /.card-body -->
           </div>

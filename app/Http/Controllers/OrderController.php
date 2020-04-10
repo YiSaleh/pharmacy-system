@@ -20,36 +20,29 @@ class OrderController extends Controller
     {
 
     $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-    // dd($orders);
     return view('orders.index',['orders'=>$orders,]);
       
-
     }
     
-    // public function autocomplete(Request $request)
-    // {
-    //     $data = Medicine::where("name","LIKE","%{$request->input('query')}%")->get();
-    //     return response()->json($data);
-        
-    // }
+
     function autocomplete(Request $request)
     {
      if($request->get('query'))
      {
-      $query = $request->get('query');
-      $data = DB::table('medicines')
-        ->where('name', 'LIKE', "%{$query}%")
-        ->get();
-      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-      foreach($data as $row)
-      {
-       $output .= '
-       <li><a href="#">'.$row->name.'</a></li>
-       ';
-      }
-      $output .= '</ul>';
-      echo $output;
-     }
+            $query = $request->get('query');
+            $data = DB::table('medicines')
+                    ->where('name', 'LIKE', "%{$query}%")
+                    ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($data as $row)
+            {
+            $output .= '
+            <li><a href="#">'.$row->name.'</a></li>
+            ';
+            }
+            $output .= '</ul>';
+            echo $output;
+            }
     }  
 
     public function show()
@@ -63,6 +56,7 @@ class OrderController extends Controller
 
     public function create()
     {
+
         return view('orders.create',[
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
@@ -93,9 +87,8 @@ class OrderController extends Controller
     
     public function edit()
     {  
-        // $r = request();
-        // dd($r);
-
+       $order=Order::find(request()->order);
+         dd($order->user[0]);
         return view('orders.edit',[
             'order' => Order::find(request()->order),
             'users' => User::get(),
@@ -120,10 +113,11 @@ class OrderController extends Controller
         }
 
 
-    public function delete(){
-        $orderId =request()->order;
-        $order=Order::find($orderId);
-        $order->delete();
+    public function destroy()
+    {
+        $order=Order::find(request()->order);
+        if($order->status === 'canceled' || $order->status === 'delivered')
+        { $order->delete(); }
         return redirect()->route('orders.index');
      }
 

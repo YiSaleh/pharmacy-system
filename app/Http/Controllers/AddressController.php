@@ -26,8 +26,6 @@ class AddressController extends Controller
 
     public function create()
     {  
-        // $users=User::role('user')->get();
-        // $areas=Area::all();
         return view('addresses.create',[
             'users' => User::role('user')->get(),
             'areas' => Area::all(),
@@ -36,7 +34,6 @@ class AddressController extends Controller
 
     public function store()
     {    
-        // dd(request());
         User_Address::create([
             'street_name' => request()->street_name,
             'floor_no' => request()->floor_no,
@@ -51,7 +48,6 @@ class AddressController extends Controller
 
     public function edit()
     {  
-        //  $users=User::role('user')->get();
         return view('addresses.edit',[
             'useraddress' => User_Address::find(request()->useraddress),
             'users' => User::role('user')->get(),

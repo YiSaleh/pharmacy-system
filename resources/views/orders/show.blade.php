@@ -22,12 +22,10 @@
                     <dd class="col-sm-8 ">{{$order->useraddress->street_name }}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Status:</dt>
                     <dd class="col-sm-8">{{$order->status}}</dd>
-                    <dt class="col-sm-4 font-weight-bolder">Prescription :</dt>
-                    <dd class="col-sm-8">{{$order->prescription}}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Created at:</dt>
-                    <dd class="col-sm-8">{{$order->created_at}}</dd>
+                    <dd class="col-sm-8">{{$order->created_at->toDateString()}}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Updated at :</dt>
-                    <dd class="col-sm-8">{{$order->updated_at}}</dd>
+                    <dd class="col-sm-8">{{$order->updated_at->toDateString()}}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Pharmacy name :</dt>
                     <dd class="col-sm-8">{{$order->pharmacy->name}}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Insurance :</dt>
