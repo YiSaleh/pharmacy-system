@@ -57,7 +57,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/useraddresses/{useraddress}','AddressesController@show')->name('useraddresses.show');
 });
 
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
 //show all areas
 Route::get('/areas','AreaController@index')->name('areas.index');
 Route::get('/areas/create','AreaController@create')->name('areas.create');
@@ -66,7 +66,7 @@ Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
 Route::put('/areas/{area}','AreaController@update')->name('areas.update');
 Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
-
+});
 
 
 //show all users orders
@@ -101,7 +101,7 @@ Route::get('/revenues','RevenueController@index')->name('revenue.index');
 
 
 
-
+Route::middleware(['auth', 'role:admin|owner'])->group(function () {
 //all pharmacy
 Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');
 //create new pharmacy
@@ -115,7 +115,7 @@ Route::put('/pharmacy/{pharmacy}','PharmacyController@update')->name('pharmacy.u
 Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.show');
 //delete pharmacy
 Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
-
+});
 
 
 
