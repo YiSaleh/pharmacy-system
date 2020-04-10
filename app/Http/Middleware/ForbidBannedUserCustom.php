@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Cog\Contracts\Ban\Bannable as BannableContract;
 
 class ForbidBannedUserCustom
 {
@@ -36,9 +37,10 @@ class ForbidBannedUserCustom
     {
         $user = $this->auth->user();
 
-        if ($user && $user->is_banned) {
-            return redirect()->back()->withInput()->withErrors([
-                'login' => 'This account is blocked.',
+        if ($user && $user instanceof BannableContract && $user->isBanned()) {
+           $request->session()->flush();
+            return redirect('login')->withInput()->withErrors([
+                'email' => 'This account is blocked.',
             ]);
         }
 

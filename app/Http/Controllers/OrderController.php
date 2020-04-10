@@ -12,9 +12,6 @@ use App\Pharmacy;
 use App\User_Address;
 use Illuminate\Support\Facades\DB;
 
-// use App\Http\Requests\StoreOderRequest;
-// use App\Http\Requests\UpdateOrderRequest;
-
 
 class OrderController extends Controller
 {
@@ -23,7 +20,7 @@ class OrderController extends Controller
     {
 
     $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-    // dd($orders->pluck('user'));
+    // dd($orders);
     return view('orders.index',['orders'=>$orders,]);
       
 
@@ -106,30 +103,20 @@ class OrderController extends Controller
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
             'medicines'=>Medicine::get(),
-
-            
             ]);
-
     }
-
-
 
     public function store()
     {   
-        //   $r =  request();
-        // dd($r);
-
         Order::create([
-            'status' => request()->status,
-            'prescription' => request()->prescription,
-            'is_insured' => request()->is_insured ? true : false ,
-            'created_at'=> request()->created_at,
-            'updated_at'=> request()->updated_at,   
+            'status' => 'waiting',
+            'created_at'=> request()->updated_at,   
             'user_address_id'=>request()->user_address_id,
             'pharmacy_id'=>request()->pharmacy_id, 
-            Medicine::where('name','like',request()->name)->first()
+            Medicine::where('name','like',request()->name)->first(),
  
            
+            'medicines'=>Medicine::get(),
         ]);
      
         Order_Medicine::create([

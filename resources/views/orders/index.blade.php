@@ -7,28 +7,16 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Dashboard to know status for your orders.</h3>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Orders</h3>
-                <div class="card-tools">
+              <h3 class="card-title">Orders Tables.</h3>
+              <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
                   <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                     <i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <!-- /.card-header -->
-            
-            <div class="container m-5">
-             <a href="{{route('orders.create')}}" class="btn btn-success m-1">Create</a>
-              <table class="table">
-            <!-- <div>
-              <button class="btn btn-success m-3" href="{{route('orders.create')}}">Create Order</button>
-            </div> -->
 
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -36,13 +24,14 @@
                   <th>UserName</th>
                   <th>Address</th>
                   <th>Status</th>
-                  <th>Prescription</th>
+                  <th>Doctor Name</th>
                   <th>Is_insured</th>
                   <th>Created_at</th>
-                  <th>Updated_at</th>
-                  <th>Pharmacy</th>
                   @role('admin')
-                  <th>Creator</th>
+                  <th>Pharmacy</th>
+                  @endrole
+                  @role('admin')
+                  <th>Creator Type</th>
                   @endrole
                   <th>Action</th>
 
@@ -51,18 +40,26 @@
                 <tbody>
                 @foreach ($orders as $order)  
                 <tr>
+                  <?php
+                  dd($order->user);
+                  ?>
                   <td>{{$order->id}}</td>
-                  <td>{{$order->user->first->name->name ?? 'not exist'}}</td>
+                  <!-- if($order->user->hasRole('user'))
+                  {
+                  <td>{{$order->user->name->name ?? 'not exist'}}</td>
+                  } -->
                   <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
+
+                  <td></td>
                   <td>{{$order->prescription}}</td>
                   @if($order->is_insured === 1)
                   <td> <span class="badge badge-success">Insured </span> </td>
                   @else
                   <td><span class="badge badge-secondary">Not covered</span></td>
                   @endif
-                  <td>{{$order->created_at}}</td>
-                  <td>{{$order->updated_at}}</td>
+                  <td>{{$order->created_at->toDateString()}}</td>
+                  <!-- <td>{{$order->updated_at}}</td> -->
                   <td>{{$order->pharmacy->name}}</td>
                   @role('admin')
                   <td>{{$order->role}}</td>
@@ -72,37 +69,36 @@
 
                   <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm" href="{{route('orders.show',['order'=>$order->id])}}">
-                          <i class=> </i>View</a>
+                          <i class="fas fa-folder"> </i>View</a>
 
                   <div class="btn-group btn-group-sm"> 
-                      <a class="btn btn-warning btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
-                          <i class=> </i>Edit</a>
+                      <a class="btn btn-info btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
+                          <i class="fas fa-pencil-alt"> </i>Edit</a>
                           
-              <form method="POST" action="{{route('orders.destroy',['order'=>$order->id])}}">
-              @csrf
-              @method('DELETE')
-              <button class="btn btn-danger btn-sm" type="submit"              
-       onclick="return confirm('You are going to delete this item?,ok?');">
-                          <i class=""> </i>Delete</a></form>
+                  <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('You are going to delete this item?,ok?');">
+                              <i class="fas fa-trash"> </i>Delete</a></form>
                   </td>
                 </tr>
               
                 @endforeach
                 </tbody>
                 <tfoot>
-                  <th>ID</th>
-                  <th>username</th>
+                <th>ID</th>
+                  <th>UserName</th>
                   <th>Address</th>
                   <th>Status</th>
-                  <th>Prescription</th>
+                  <th>Doctor Name</th>
                   <th>Is_insured</th>
                   <th>Created_at</th>
-                  <th>Updated_at</th>
-                  <th>Pharmacy</th>
                   @role('admin')
-                  <th>Creator</th>
+                  <th>Pharmacy</th>
                   @endrole
-                 
+                  @role('admin')
+                  <th>Creator Type</th>
+                  @endrole
                   <th>Action</th>
                     
                 </tfoot> 

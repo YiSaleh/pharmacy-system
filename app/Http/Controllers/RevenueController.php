@@ -10,15 +10,15 @@ class RevenueController extends Controller
 {
     public function show()
     {
-        $userId=auth()->user()->id;
+        $userId=Auth()->id();
         $pharmacy_id=Pharmacy::where('owner_id',$userId)->value('id');
         $orders=Order::where([
             ['pharmacy_id', '=', $pharmacy_id],
             ['status', '=', 'delivered'],
         ])->value('id');
 
-        foreach ($orders as $key => $value) {
-            # code...
+        foreach ($orders as  $value) {
+            
         }
 
      }

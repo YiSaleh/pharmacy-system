@@ -45,6 +45,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -104,7 +107,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('storage/uploads/'. Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('storage/'. Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block"></a>
@@ -142,13 +145,22 @@
                   <p>Create Address</p>
                 </a>
               </li>
-              @endrole
+               @endrole
 
-              @role('admin')
+               @role('admin')
               <li class="nav-item">
                 <a href="{{route('areas.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Area</p>
+                </a>
+              </li>
+              @endrole
+
+              @role('admin')
+              <li class="nav-item">
+                <a href="{{route('owners.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Owner</p>
                 </a>
               </li>
               @endrole
@@ -160,9 +172,9 @@
                   <p>Create Pharmacy</p>
                 </a>
               </li>
-              @endrole
+               @endrole
 
-              @role('admin|owner')
+                @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('doctors.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -177,12 +189,16 @@
                   <p>Create Medicine</p>
                 </a>
               </li>
+             
+
+              @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="/home/create/orders" class="nav-link">
+                <a href="{{route('orders.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
               </li>
+              @endrole
 
               @role('admin|owner')
               <li class="nav-item">
@@ -213,20 +229,34 @@
               </li>
               @endrole
 
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('areas.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Areas</p>
                 </a>
               </li>
+                 @endrole
+
+                 @role('admin')
+              <li class="nav-item">
+                <a href="{{route('owners.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Owners</p>
+                </a>
+              </li>
+              @endrole
+
+                @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('pharmacy.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pharmacies</p>
                 </a>
               </li>
+              @endrole
 
-              @role('admin|owner')
+               @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('doctors.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -241,12 +271,16 @@
                   <p>Medicines</p>
                 </a>
               </li>
+                 
+              @role('admin|owner|doctor')
               <li class="nav-item">
                 <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
               </li>
+
+              @endrole
             @role('admin')
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">

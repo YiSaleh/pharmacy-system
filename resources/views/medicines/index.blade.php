@@ -13,7 +13,7 @@
              <a href="{{route('medicines.create')}}" class="btn btn-success m-1">Create</a>
               <table class="table">
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
