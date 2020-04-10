@@ -12,7 +12,7 @@
             <!-- <div class="row mt-3"> <a class="btn btn-primary btn-sm ml-5" href="{{route('areas.create')}}">
                           <i class="fas fa-folder"> </i>Create New Area</a></div> -->
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>

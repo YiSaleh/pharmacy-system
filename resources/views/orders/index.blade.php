@@ -28,7 +28,7 @@
               <button class="btn btn-success m-3" href="{{route('orders.create')}}">Create Order</button>
             </div> -->
 
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
