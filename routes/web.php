@@ -70,24 +70,21 @@ Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 
 
+
 //show all users orders
 Route::get('/order','OrderController@index')->name('orders.index');
-
 //create an order 
 Route::get('/order/create', 'OrderController@create')->name('orders.create');
-
-Route::get('/order/edit/{order}','OrderController@edit')->name('orders.edit');
-
+//to edit a certain order
+Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
+//to update an order
+Route::put('/order/{order}','OrderController@update')->name('orders.update');
 //to delete a user by id
 Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
-
-
 // send data directly to database
 Route::post('/order','OrderController@store')->name('orders.store');
-
 // autocomplete function for medicine in creation order
 Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
-
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 

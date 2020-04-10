@@ -70,6 +70,7 @@ class OrderController extends Controller
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
+            'medicines'=>Medicine::get(),
 
             
             ]);
@@ -90,7 +91,9 @@ class OrderController extends Controller
             'created_at'=> request()->created_at,
             'updated_at'=> request()->updated_at,   
             'user_address_id'=>request()->user_address_id,
-            'pharmacy_id'=>request()->pharmacy_id,  
+            'pharmacy_id'=>request()->pharmacy_id, 
+            'medicines'=>Medicine::get(),
+ 
            
         ]);
      
@@ -100,18 +103,17 @@ class OrderController extends Controller
         //     'quantity'=>request()->quantity
         // ]);
 
-        // User_Order::create([
-        //     'order_id'=>request()->order_id,
-        //     'user_id'=>request()->user_id,
-        // ]);
+       
         return redirect()->route('order.index');
     }
     
     public function edit()
     {  
-       
+        // $r = request();
+        // dd($r);
+
         return view('orders.edit',[
-            'orders' => Order::find(request()->orders),
+            'order' => Order::find(request()->order),
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
@@ -119,8 +121,19 @@ class OrderController extends Controller
         ]);
     }
 
-
-
+    public function update()
+    {
+        Order::find(request()->order)->update([
+            'status' => request()->status,
+            'prescription' => request()->prescription,
+            'is_insured' => request()->is_insured ? true : false ,
+            'created_at'=> request()->created_at,
+            'updated_at'=> request()->updated_at,   
+            'user_address_id'=>request()->user_address_id,
+            'pharmacy_id'=>request()->pharmacy_id,  
+        ]);
+        return redirect()->route('orders.index');
+        }
 
 
     public function delete(){

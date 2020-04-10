@@ -41,7 +41,7 @@
                   <th>Created_at</th>
                   <th>Updated_at</th>
                   <th>Pharmacy</th>
-                 @role('admin')
+                  @role('admin')
                   <th>Creator</th>
                   @endrole
                   <th>Action</th>
@@ -65,8 +65,9 @@
                   <td>{{$order->updated_at}}</td>
                   <td>{{$order->pharmacy->name}}</td>
                   @role('admin')
-                  <td>{{$order->model_has_roles}}</td>
+                  <td>{{$order->role}}</td>
                   @endrole
+                 
                   <td> 
 
                   <div class="btn-group btn-group-sm">
@@ -101,6 +102,7 @@
                   @role('admin')
                   <th>Creator</th>
                   @endrole
+                 
                   <th>Action</th>
                     
                 </tfoot> 

@@ -22,7 +22,7 @@ class Order extends Model
     
     public function medicine()
     {
-        return $this->belongsToMany('App\Medicine');
+        return $this->belongsToMany('App\Medicine','name','price');
     }
 
     
