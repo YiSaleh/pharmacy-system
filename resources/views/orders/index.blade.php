@@ -78,7 +78,7 @@
                       <a class="btn btn-warning btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
                           <i class=> </i>Edit</a>
                           
-              <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
+              <form method="POST" action="{{route('orders.destroy',['order'=>$order->id])}}">
               @csrf
               @method('DELETE')
               <button class="btn btn-danger btn-sm" type="submit"              

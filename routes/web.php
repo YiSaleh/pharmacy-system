@@ -74,15 +74,15 @@ Route::get('/order','OrderController@index')->name('orders.index');
 //create an order 
 Route::get('/order/create', 'OrderController@create')->name('orders.create');
 //to edit a certain order
+// autocomplete function for medicine in creation order
+Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
 Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
 //to update an order
 Route::put('/order/{order}','OrderController@update')->name('orders.update');
 //to delete a user by id
-Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
+Route::delete('order/{order}','OrderController@destroy')->name('orders.destroy');
 // send data directly to database
 Route::post('/order','OrderController@store')->name('orders.store');
-// autocomplete function for medicine in creation order
-Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
