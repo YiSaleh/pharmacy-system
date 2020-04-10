@@ -138,7 +138,7 @@ $('#name').keyup(function(){
        {
         var _token = $('input[name="_token"]').val();
         $.ajax({
-         url:"{{ route('order.autocomplete') }}",
+         url:"{{ route('orders.autocomplete') }}",
          method:"POST",
          data:{query:query, _token:_token},
          success:function(data){

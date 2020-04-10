@@ -193,7 +193,7 @@ use Illuminate\Support\Facades\Auth;
 
               @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="/home/create/orders" class="nav-link">
+                <a href="{{route('orders.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>

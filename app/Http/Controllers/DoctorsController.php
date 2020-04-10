@@ -119,7 +119,7 @@ class DoctorsController extends Controller
     public function banned()
     {
         $user = User::find(request()->doctor);
-        // dd($user->isBanned());
+       
         if($user->isNotBanned())
         {  
           $user->ban();
