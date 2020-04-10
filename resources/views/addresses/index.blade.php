@@ -10,7 +10,7 @@
               <h3 class="card-title">DataTable with minimal features & hover style</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -55,8 +55,6 @@
                             <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this address?');">
                             <i class="fas fa-trash"></i>Delete</button>
                           </form>
-                        <!-- <a href="users.show" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
-                        <!-- <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
                         </div>
                       </div>
                   </td>
