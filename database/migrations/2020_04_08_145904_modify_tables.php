@@ -20,6 +20,8 @@ class ModifyTables extends Migration
 
         });
        Schema::table('pharmacies', function (Blueprint $table) {
+           $table->unsignedBigInteger('owner_id');
+           $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->softDeletes();
         });
@@ -32,8 +34,7 @@ class ModifyTables extends Migration
         Schema::table('orders', function (Blueprint $table) {
            $table->unsignedBigInteger('user_address_id');
             $table->foreign('user_address_id')->references('id')->on('user_addresses')->onDelete('cascade');
-            $table->unsignedBigInteger('pharmacy_id');
-            $table->foreign('pharmacy_id')->references('id')->on('pharmacies')->onDelete('cascade');
+            $table->unsignedBigInteger('pharmacy_id')->nullable();
         });
         
     }

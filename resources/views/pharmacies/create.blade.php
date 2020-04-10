@@ -27,6 +27,14 @@
                         @endforeach
                       </select>
                   </div>
+                  <div class="form-group">
+                    <label>Select Owner </label>
+                      <select class="form-control" name="owner_id">
+                        @foreach($owners as $owner)  
+                          <option value="{{$owner->id}}">{{$owner->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
