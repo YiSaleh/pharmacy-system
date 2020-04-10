@@ -42,12 +42,16 @@ class UserAddressesController extends Controller
     
          public function view($user_id)
 
+<<<<<<< HEAD
     {
         // $model = App\Flight::findOrFail(1);
 
         // $model = App\Flight::where('legs', '>', 100)->firstOrFail();
     	// $request  = request();
         // $user_id = $request->user_id;  
+=======
+    {  
+>>>>>>> 742464ab4f91d700c7b6ad1a7a450afe46930946
     	$userAddress  = User_Address::firstWhere('user_id',$user_id);
     	return  response()->json([
             'userAddress'=>$userAddress

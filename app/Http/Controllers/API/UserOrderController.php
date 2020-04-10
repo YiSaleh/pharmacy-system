@@ -11,17 +11,28 @@ use Illuminate\Support\Arr;
 class UserOrderController extends Controller
 {
  
-    public function viewAllOrders($user_id){
+    public function viewUserOrders($user_id){
                  
             $orders  = User_Order::where('user_id',$user_id)->get();
             $userOrderIds =   Arr::pluck($orders, 'order_id');
             $userOrders = Order::find($userOrderIds);
-
+// 
             return  response()->json([
-                'orders'=>$userOrders
+                'user_orders'=>$userOrders
             ]);
         
         }
+
+
+    public function viewOrder($order_id){
+        $order  =User_Order::firstWhere('order_id',$order_id);
+
+        
+    	return  response()->json([
+            'order'=>$order
+        ]);
+
+    }
     
     }
  

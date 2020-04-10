@@ -17,13 +17,14 @@
 
 <form role="form"  method="POST" action="{{route('orders.update',['order'=>$order->id])}}">
     @csrf                                   
-   
+    @method('PUT')
+
     <!-- drop down list where doctors can select user -->
 <div class="col-6">
 <label align:center>User Name </label>
 <select class="form-control" name="user_id">
 @foreach($users as $user)  
-<option value="{{$user->id}}" {{ ($order->user_id === $user->id)? "selected" : "" }}>{{$user->name}}</option>
+<option value="{{$user->id}}"{{($order->user->first->id->id === $user->id)? "selected" : "" }}>{{$user->name}}</option>
 @endforeach
 </select>
 </div>
@@ -34,7 +35,7 @@
   <div class="card-body">
   <label for="exampleInput">Select a drug </label>
       <div class="form-group">
-    <input type="text" name="name" id="name" class="form-control input-lg" value="" placeholder="Enter Drug Name" />
+    <input type="text" name="name" id="name" class="form-control input-lg" value="{{$order->id}}" placeholder="Enter Drug Name" />
     <div id="druglist">
     </div>
    </div>
@@ -100,7 +101,7 @@
 <label align:center>Addres </label>
 <select class="form-control" name="user_address_id">
 @foreach($useraddresses as $address)  
-<option value="{{$useraddress->id}}" {{($order->user_address_id === $useraddress->id)? "selected" : ""}}{{$useraddress->street_name}}></option>
+<option value="{{$address->id}}"{{($order->user_address_id === $address->id)? "selected" : ""}}>{{$address->street_name}}</option>
 @endforeach
 </select>
 </div>

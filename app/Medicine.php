@@ -11,6 +11,6 @@ class Medicine extends Model
         return $this->belongsToMany('App\Order');
     }
     protected $fillable = [
-        'name', 'price','quantity',
+        'name', 'price','quantity','type'
     ];
 }

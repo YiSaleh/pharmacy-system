@@ -47,10 +47,11 @@ class OrderController extends Controller
       foreach($data as $row)
       {
        $output .= '
-       <li><a href="#">'.$row->name.'</a></li>
+       <li><a href="#">'.$row->name.' '.$row->price.'</a></li>
        ';
       }
       $output .= '</ul>';
+
       echo $output;
      }
     }  
@@ -126,28 +127,33 @@ class OrderController extends Controller
             'updated_at'=> request()->updated_at,   
             'user_address_id'=>request()->user_address_id,
             'pharmacy_id'=>request()->pharmacy_id, 
-            'medicines'=>Medicine::get(),
+            Medicine::where('name','like',request()->name)->first()
  
            
         ]);
      
-        // Order_Medicine::create([
-        //     'order_id'=>request()->order_id,
-        //     'medicine_id' =>request()->medicine_id,
-        //     'quantity'=>request()->quantity
-        // ]);
+        Order_Medicine::create([
+            'order_id'=>request()->order_id,
+            'medicine_id' =>request()->medicine_id,
+            'quantity'=>request()->quantity
+        ]);
 
        
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
     
     public function edit()
     {  
         // $r = request();
         // dd($r);
+           
+            //    $r=(Order_Medicine::where('order_id',request()->order));
+            //    dd($r)->medicine_id;
+               
 
         return view('orders.edit',[
-            'order' => Order::find(request()->order),
+            'orders'=>Order::find(request()->order),
+            'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),

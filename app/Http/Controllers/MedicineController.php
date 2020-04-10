@@ -9,25 +9,67 @@ class MedicineController extends Controller
 {
     public function index()
     {
-        $medicines= Medicine::find()->paginate(5);
+        $medicines=Medicine::all();
         return view('medicines.index',[
-            'medicines'=>$medicines,
-            ]);
+            'medicines'=> $medicines,
+        ]);
     }
 
+    
     public function show()
     {
-        return view('addresses.show',[
-            'useraddress'=> User_Address::find(request()->useraddress),
-        ]);
+    $medicine = Medicine::find(request()->medicine);
+    return view('medicines.show',[
+        'medicine'=> $medicine,
+    ]);
     }
 
     public function create()
     {  
-        return view('addresses.create',[
-            'users' => User::role('user')->get(),
-            'areas' => Area::all(),
+        return view('medicines.create',[
+            'medicines' => Medicine::get(),
+           
         ]);
     }
 
+    public function store()
+    {    
+        // dd(request());
+        Medicine::create([
+            'name' => request()->name,
+            'price' => request()->price,
+            'type' => request()->type,
+            'quantity'=> request()->quantity,
+           
+        ]);
+        return redirect()->route('medicines.index');
+    }
+
+    public function edit()
+    { 
+            $medicineId=request()->medicine;
+    	$medicine = Medicine::find($medicineId);
+    	return view('medicines.edit',['medicine'=>$medicine]);
+       
+    }
+    public function update(){
+		$medicineId=request()->medicine;
+        
+        Medicine::find($medicineId)->update([
+            'name'=>request()->name,
+            'price'=>request()->price,
+            'type'=>request()->type,
+            'quantity'=>request()->quantity
+            ]);
+    	return redirect()->route('medicines.index');
+    }
+
+
+    public function destroy(){
+        $medicineId =request()->medicine;
+        $medicine=Medicine::find($medicineId);
+        $medicine->delete();
+        return redirect()->route('medicines.index');
+     }
+     
 }
