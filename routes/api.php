@@ -30,11 +30,6 @@ Route::post('/users/login','API\UserController@login');
 Route::put('/users/{user}','API\UserController@update')->middleware('auth:sanctum','verified');
 
 
-
-// Route::group(['middleware'=>'auth:sanctum'], function(){
-
-// return $request
-// });
 //------------user addresses urls------------
 
 Route::post('/user-address/create', 'API\UserAddressesController@create');

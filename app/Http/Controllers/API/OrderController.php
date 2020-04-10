@@ -26,12 +26,8 @@ class OrderController extends Controller
 
        
         $order = new Order();
-        $order->status = $request->input('order_status');
+        $order->status = $request->input('order_status');        
         $order->prescription = $request->input('prescription');
-      //   if ($order->file('prescription')->isValid()) {
-      //     $order->prescription->store('uploads','public');
-      // }         
-      
         $order->is_insured = $request->input('is_insured');
         $order->user_address_id = $request->input('user_address_id');
         $order->pharmacy_id = $request->input('pharmacy_id');
@@ -59,39 +55,43 @@ class OrderController extends Controller
 
 
 
-
+    //TODO:// use joins
     public function view($id)
 
     {
       $order  = Order::firstWhere('id',$id);
-      $CustomOrder = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
-
+      // $CustomOrder = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
+      
       $orderMedicines = Order_Medicine::where('order_id',$order->id)->get();
       $medicineIds =   Arr::pluck($orderMedicines, 'medicine_id');
+      
+      // $medicines = Medicine::find($medicineIds); // old but gold
+      $medicines = DB::table('medicines')->select('name', 'type','price','quantity')->whereIn('id',$medicineIds)->get();
 
-      $medicines = Medicine::find($medicineIds);
-
-      // $filteredMedicines = Arr::only($medicines, ['type', 'quantity']);
-
-      // $medicinesDetails = Arr::pluck($medicines, 'name','type','quantity');
+      // get array of medicine prices.
+      $medicinesPrice = Arr::pluck($medicines,'price');
+      //get array of medicine quantities.
+      $orderMedicinesQuantity = Arr::pluck($orderMedicines,'quantity');
+      
+      // calculate order total price [ multiply 2 array of prices and quantites]
+      $orderTotalPrice = 0;
+      foreach ($medicinesPrice as $k => $v) {
+        $orderTotalPrice += $v * ($orderMedicinesQuantity[$k] ?? 1);
+      }
+      //get pharmacy document
       $pharmacy = Pharmacy::firstWhere('id',$order->pharmacy_id);
-
+      
       $orderDetails = array(
-        'order_id'=> $order->id,
+        'id'=> $order->id,
+        'order_total_price'=>$orderTotalPrice,
         'ordered_at'=> $order->created_at,
         'status'=>$order->status,
         'medicines' => $medicines,
         'assigned_pharmacy'=> array('id'=>$pharmacy->id,'name'=>$pharmacy->name,'address'=>$pharmacy->area_id)
     );
 
-      // $orderDetails->order_id = $order->id;
     	return response()->json([
         'order_details'=>$orderDetails,
-            // 'order'=>$order,
-            // 'userOrders'=>$orderMedicines,
-            // 'ids'=>$medicineIds ,
-            // 'medicines'=>$medicines,
-            // 'pharmacy'=>$pharmacy
         ]);
     
     }
@@ -118,7 +118,6 @@ class OrderController extends Controller
         'msg' => 'order is updated succssfully!',
         'order' => $order,
       ]);
-//-------------validation........
 
   }
 
