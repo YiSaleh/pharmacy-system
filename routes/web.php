@@ -68,7 +68,7 @@ Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 });
 
-
+Route::middleware(['auth', 'role:admin|owner|doctor'])->group(function () {
 //show all users orders
 Route::get('/order','OrderController@index')->name('orders.index');
 //create an order 
@@ -86,7 +86,7 @@ Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
-
+});
 
 
 
@@ -99,8 +99,10 @@ Route::get('/revenue','RevenueController@show')->name('revenue.show');
 Route::get('/revenues','RevenueController@index')->name('revenue.index');
 
 
-
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::get('pharmacy/trash','PharmacyController@trash')->name('pharmacy.trash');
+Route::get('pharmacy/restore/{pharmacy)','PharmacyController@restore')->name('pharmacy.restore');
+});
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
 //all pharmacy
 Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');

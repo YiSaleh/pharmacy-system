@@ -142,13 +142,22 @@
                   <p>Create Address</p>
                 </a>
               </li>
-              @endrole
+               @endrole
 
-              @role('admin')
+               @role('admin')
               <li class="nav-item">
                 <a href="{{route('areas.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Area</p>
+                </a>
+              </li>
+              @endrole
+
+              @role('admin')
+              <li class="nav-item">
+                <a href="{{route('owners.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Owner</p>
                 </a>
               </li>
               @endrole
@@ -160,9 +169,9 @@
                   <p>Create Pharmacy</p>
                 </a>
               </li>
-              @endrole
+               @endrole
 
-              @role('admin|owner')
+                @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('doctors.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -177,12 +186,16 @@
                   <p>Create Medicine</p>
                 </a>
               </li>
+             
+
+              @role('admin|owner|doctor')
               <li class="nav-item">
                 <a href="/home/create/orders" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
               </li>
+              @endrole
 
               @role('admin|owner')
               <li class="nav-item">
@@ -213,20 +226,34 @@
               </li>
               @endrole
 
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('areas.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Areas</p>
                 </a>
               </li>
+                 @endrole
+
+                 @role('admin')
+              <li class="nav-item">
+                <a href="{{route('owners.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Owners</p>
+                </a>
+              </li>
+              @endrole
+
+                @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('pharmacy.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pharmacies</p>
                 </a>
               </li>
+              @endrole
 
-              @role('admin|owner')
+               @role('admin|owner')
               <li class="nav-item">
                 <a href="{{route('doctors.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -241,12 +268,16 @@
                   <p>Medicines</p>
                 </a>
               </li>
+                 
+              @role('admin|owner|doctor')
               <li class="nav-item">
                 <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
               </li>
+
+              @endrole
             @role('admin')
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">

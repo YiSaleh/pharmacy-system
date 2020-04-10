@@ -9,6 +9,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
+use Spatie\Permission\Models\Role;
+
 
 
 class User extends Authenticatable implements MustVerifyEmail 
@@ -53,4 +55,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\Pharmacy');
     }
+    
 }
