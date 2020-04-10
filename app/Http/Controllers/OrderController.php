@@ -10,6 +10,7 @@ use App\Medicine;
 use App\Order_Medicine;
 use App\Pharmacy;
 use App\User_Address;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -47,40 +48,40 @@ class OrderController extends Controller
     public function show()
     {
     $order = Order::find(request()->order);
+
     return view('orders.show',[
         'order'=> $order,
     ]);
     }
 
     public function create()
-    {
-        return view('orders.create',[
-            'users' => User::get(),
-            'useraddresses'=>User_Address::get(),
-            'pharmacies'=>Pharmacy::get(),
+    {     
+          $req=request()->order;
+         $order=Order::find(request()->order);
+         $user=$order->user[0];
+        return view('orders.create',['order'=>$order,
+             'user'=>$user,
+             'addresses'=>User_Address::get(),
             'medicines'=>Medicine::get(),
             ]);
     }
 
     public function store()
-    {   
-        Order::create([
+    {    
+    // dd(request()->order);
+        $name=request()->medicine_id;
+        $id=Medicine::where('name',$name)->value('id');
+       Order::find(request()->order)->update([
             'status' => 'waiting',
-            'created_at'=> request()->updated_at,   
             'user_address_id'=>request()->user_address_id,
-            'pharmacy_id'=>request()->pharmacy_id, 
-            Medicine::where('name','like',request()->name)->first(),
- 
-           
-            'medicines'=>Medicine::get(),
         ]);
+
      
         Order_Medicine::create([
-            'order_id'=>request()->order_id,
+            'order_id'=>request()->order,
             'medicine_id' =>request()->medicine_id,
             'quantity'=>request()->quantity
         ]);
-
        
         return redirect()->route('orders.index');
     }

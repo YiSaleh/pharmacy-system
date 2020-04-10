@@ -40,9 +40,6 @@
                 <tbody>
                 @foreach ($orders as $order)  
                 <tr>
-                   <?php 
-                 // dd($order->user[0]);
-                 ?> 
                   <td>{{$order->id}}</td>
                   @if($order->user[0]->hasRole('user'))
                   {
@@ -53,7 +50,6 @@
                     <td></td>
                     <td>{{$order->user[1]->name ?? 'not exist'}}</td>
                   }
-
                   @endif
 
                   <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
