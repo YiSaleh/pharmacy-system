@@ -21,7 +21,8 @@ class OrderController extends Controller
 
     public function index()
     {
-
+          $r=Order_Medicine::where('order_id',1);
+    dd($r);
     $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
     // dd($orders->pluck('user'));
     return view('orders.index',['orders'=>$orders,]);
@@ -58,6 +59,7 @@ class OrderController extends Controller
     public function show()
     {
     $order = Order::find(request()->order);
+
     return view('orders.show',[
         'order'=> $order,
     ]);
