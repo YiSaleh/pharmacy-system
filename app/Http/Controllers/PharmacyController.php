@@ -7,7 +7,7 @@ use App\Area;
 use App\Pharmacy;
 use App\User;
 use Spatie\Permission\Models\Role;
-
+use App\Http\Requests\PharmacyRequest;
 
 
 
@@ -34,21 +34,18 @@ class PharmacyController extends Controller
     		['areas'=>$areas,'owners'=>$owners
     	]);
     }
-    public function store()
+    public function store(PharmacyRequest $request)
     {   
-    	Pharmacy::create([
-    		'name'=>request()->name,
-    	     'periority'=>request()->periority,
-    	      'area_id'=>request()->area_id,
-              'owner_id'=>request()->owner_id,
+        Pharmacy::create([
+            'name'=>$request->name,
+             'periority'=>$request->periority,
+              'area_id'=>$request->area_id,
+              'owner_id'=>$request->owner_id,
           ]);
     		return redirect()->route('pharmacy.index');
     }
     public function show(){
-        // $owner=request()->owner;
-        // dd(request()->pharmacy);
     	$pharmacy=Pharmacy::find(request()->pharmacy);
-        // dd($pharmacy->owner_id);
         $owner=User::find($pharmacy->owner_id);
     	return view('pharmacies.show',['pharmacy'=>$pharmacy, 'owner'=>$owner]);
     }
@@ -71,5 +68,15 @@ class PharmacyController extends Controller
     public function destroy(){
          Pharmacy::where('id',request()->pharmacy)->delete();
         return redirect()->route('pharmacy.index');
+    }
+    public function trash(){
+        $pharmacies= Pharmacy::onlyTrashed()->paginate(4);
+        return view('pharmacies.deleted',['pharmacies'=>$pharmacies]);
+    }
+    public function restore(){
+        $pharmacy=request()->pharmacy;
+        // dd($pharmacy);
+        Pharmacy::onlyTrashed()->find($pharmacy)->restore();
+      return redirect()->route('pharmacy.index');
     }
 }

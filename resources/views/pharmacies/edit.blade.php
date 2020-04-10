@@ -12,22 +12,28 @@
                         <label>Select Pertority</label>
                         <select class="form-control @error('gender') is-invalid @enderror" name='periority'>
                           <option value="{{$pharmacy->periority}}">{{$pharmacy->periority}}</option>
+                          @role('admin')
                           <option>High</option>
                           <option>Medium</option>
                           <option>Low</option>
+                          @endrole
                         </select>
+
                   </div>
                   <div class="form-group">
                     <label>Select Area </label>
-                         @role('admin')
                       <select class="form-control" name="area_id">
+                        @role('owner')
+                        <option value="{{$pharmacy->area_id}}">{{$pharmacy->area->name}}</option>
+                        @endrole
+
+                        @role('admin')
                         @foreach($areas as $area)  
                           <option value="{{$area->id}}" {{ ($pharmacy->area_id === $area->id)? "selected" : "" }}>{{$area->name}}</option>
                         @endforeach
+                        @endrole
+                        
                       </select>
-                      @endrole
-                      @role('owner')
-                      @endrole
                   </div>
                   <div class="form-group">
                     <label>Select Owner </label>
