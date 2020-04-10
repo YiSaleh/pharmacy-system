@@ -100,12 +100,6 @@ class UserAddressesController extends Controller
                 ]);
                 
                 };
-//       if ($userAddress->trashed()) {
-        // $userAddress = UserAddresses::withTrashed()->where('user_id',$user_id)->get();
-        // $userAddress = UserAddresses::onlyTrashed()->get();
-        // $response = $this->successfulMessage(200, 'Successfully', true, $userAddress->count(), $userAddress);
-       
-
 
         }
 
