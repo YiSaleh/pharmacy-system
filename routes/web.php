@@ -90,12 +90,6 @@ Route::get('/order/{order}','OrderController@show')->name('orders.show');
 
 });
 
-
-
-
-
-
-
 Route::get('/revenue','RevenueController@show')->name('revenue.show');
 
 Route::get('/revenues','RevenueController@index')->name('revenue.index');
@@ -105,6 +99,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('pharmacy/trash','PharmacyController@trash')->name('pharmacy.trash');
 Route::get('pharmacy/restore/{pharmacy)','PharmacyController@restore')->name('pharmacy.restore');
 });
+
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
 //all pharmacy
 Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');
@@ -143,20 +138,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
-//doctors
-Route::get('/doctors','DoctorsController@index')->name('doctors.index');
-//create new user
-Route::get('/doctors/create','DoctorsController@create')->name('doctors.create');
-// store user data in db
-Route::post('/doctors','DoctorsController@store')->name('doctors.store');
-// to update user info 
-Route::put('doctors/{user}','DoctorsController@update')->name('doctors.update');
-// to delete user
-Route::delete('doctors/{doctor}','DoctorsController@destroy')->name('doctors.destroy');
-// to edit user info 
-Route::get('/doctors/{doctor}/edit','DoctorsController@edit')->name('doctors.edit');
-// to show one user
-Route::get('/doctors/{doctor}','DoctorsController@show')->name('doctors.show');
-// to ban doctor 
-Route::get('/doctor/{doctor}','DoctorsController@banned')->name('doctors.banned');
+        //doctors
+        Route::get('/doctors','DoctorsController@index')->name('doctors.index');
+        //create new user
+        Route::get('/doctors/create','DoctorsController@create')->name('doctors.create');
+        // store user data in db
+        Route::post('/doctors','DoctorsController@store')->name('doctors.store');
+        // to update user info 
+        Route::put('doctors/{user}','DoctorsController@update')->name('doctors.update');
+        // to delete user
+        Route::delete('doctors/{doctor}','DoctorsController@destroy')->name('doctors.destroy');
+        // to edit user info 
+        Route::get('/doctors/{doctor}/edit','DoctorsController@edit')->name('doctors.edit');
+        // to show one user
+        Route::get('/doctors/{doctor}','DoctorsController@show')->name('doctors.show');
+        // to ban doctor 
+        Route::get('/doctor/{doctor}','DoctorsController@banned')->name('doctors.banned');
 });
