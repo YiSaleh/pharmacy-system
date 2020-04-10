@@ -72,18 +72,17 @@
 
                   <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm" href="{{route('orders.show',['order'=>$order->id])}}">
-                          <i class=> </i>View</a>
+                          <i class="fas fa-folder"> </i>View</a>
 
                   <div class="btn-group btn-group-sm"> 
-                      <a class="btn btn-warning btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
-                          <i class=> </i>Edit</a>
+                      <a class="btn btn-info btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
+                          <i class="fas fa-pencil-alt"> </i>Edit</a>
                           
-              <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
-              @csrf
-              @method('DELETE')
-              <button class="btn btn-danger btn-sm" type="submit"              
-       onclick="return confirm('You are going to delete this item?,ok?');">
-                          <i class=""> </i>Delete</a></form>
+                  <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('You are going to delete this item?,ok?');">
+                              <i class="fas fa-trash"> </i>Delete</a></form>
                   </td>
                 </tr>
               

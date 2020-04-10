@@ -75,11 +75,11 @@
 
                       @if($doctor->isNotBanned())
                       <a class="btn btn-success btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
-                          <i class="fas fa-pencil-alt"> </i> Ban
+                           <i class="fas fa-ban"></i> Ban
                       </a>
                       @else
                       <a class="btn btn-warning btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
-                          <i class="fas fa-pencil-alt"> </i> Unban
+                           <i class="fas fa-ban"></i> Unban
                       </a>
                       @endif
                       
