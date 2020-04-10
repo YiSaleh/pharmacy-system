@@ -16,8 +16,6 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <dl class="row">
-                    <dt class="col-sm-4 font-weight-bolder">User Name :</dt>
-                    <dd class="col-sm-8 ">{{$order->user->first->name->name}}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Address :</dt>
                     <dd class="col-sm-8 ">{{$order->useraddress->street_name }}</dd>
                     <dt class="col-sm-4 font-weight-bolder">Status:</dt>

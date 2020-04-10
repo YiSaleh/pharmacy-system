@@ -21,10 +21,8 @@ class OrderController extends Controller
 
     public function index()
     {
-          $r=Order_Medicine::where('order_id',1);
-    dd($r);
-    $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-    // dd($orders->pluck('user'));
+    $orders= Order::orderBy('created_at','asc')->with(['user','useraddress'])->paginate(5);
+    dd($orders);
     return view('orders.index',['orders'=>$orders,]);
       
 
@@ -99,14 +97,14 @@ class OrderController extends Controller
            
         ]);
      
-        // Order_Medicine::create([
-        //     'order_id'=>request()->order_id,
-        //     'medicine_id' =>request()->medicine_id,
-        //     'quantity'=>request()->quantity
-        // ]);
+        Order_Medicine::create([
+            'order_id'=>request()->order_id,
+            'medicine_id' =>request()->medicine_id,
+            'quantity'=>request()->quantity
+        ]);
 
        
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
     
     public function edit()
