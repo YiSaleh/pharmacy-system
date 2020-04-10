@@ -59,7 +59,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/useraddresses/{useraddress}','AddressesController@show')->name('useraddresses.show');
 });
 
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
 //show all areas
 Route::get('/areas','AreaController@index')->name('areas.index');
 Route::get('/areas/create','AreaController@create')->name('areas.create');
@@ -68,19 +68,32 @@ Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
 Route::put('/areas/{area}','AreaController@update')->name('areas.update');
 Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
 Route::get('/areas/{area}','AreaController@show')->name('areas.show');
+});
 
-
+Route::middleware(['auth', 'role:admin|owner|doctor'])->group(function () {
 //show all users orders
 Route::get('/order','OrderController@index')->name('orders.index');
-
 //create an order 
 Route::get('/order/create', 'OrderController@create')->name('orders.create');
-
+//to edit a certain order
+Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
+//to update an order
+Route::put('/order/{order}','OrderController@update')->name('orders.update');
 //to delete a user by id
 Route::delete('order/{order}','OrderController@delete')->name('orders.delete');
-
+// send data directly to database
+Route::post('/order','OrderController@store')->name('orders.store');
+// autocomplete function for medicine in creation order
+Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
 //view a selected user by id 
 Route::get('/order/{order}','OrderController@show')->name('orders.show');
+
+});
+
+
+
+
+
 
 
 Route::get('/revenue','RevenueController@show')->name('revenue.show');
@@ -88,6 +101,11 @@ Route::get('/revenue','RevenueController@show')->name('revenue.show');
 Route::get('/revenues','RevenueController@index')->name('revenue.index');
 
 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::get('pharmacy/trash','PharmacyController@trash')->name('pharmacy.trash');
+Route::get('pharmacy/restore/{pharmacy)','PharmacyController@restore')->name('pharmacy.restore');
+});
+Route::middleware(['auth', 'role:admin|owner'])->group(function () {
 //all pharmacy
 Route::get('/pharmacy','PharmacyController@index')->name('pharmacy.index');
 //create new pharmacy
@@ -101,7 +119,7 @@ Route::put('/pharmacy/{pharmacy}','PharmacyController@update')->name('pharmacy.u
 Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.show');
 //delete pharmacy
 Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
-
+});
 
 
 

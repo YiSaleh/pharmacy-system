@@ -7,10 +7,13 @@
                 <div class="form-group">
                     <label for="name">Pharmacy name </label>
                     <input type="text" class="form-control" id="name" placeholder="Enter pharmacy name" name="name">
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                         <label>Select Pertority</label>
-                        <select class="form-control @error('gender') is-invalid @enderror" name='periority'>
+                        <select class="form-control @error('periority') is-invalid @enderror" name='periority'>
                           <option>High</option>
                           <option>Medium</option>
                           <option>Low</option>

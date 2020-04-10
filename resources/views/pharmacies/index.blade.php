@@ -7,8 +7,12 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <h3 class="card-title">DataTable of Pharmacies</h3>
             </div>
+            <div>
+            <a class="btn btn-danger btn-sm ml-3" href="{{route('pharmacy.trash')}}">
+                          <i class="fas fa-trash"> </i>View Trash</a>
+             </div>
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -16,8 +20,8 @@
                   <th> ID</th>
                   <th>Name</th>
                   <th>Created At</th>
-                 <!--  <th>Periority</th>
-                  <th>Area</th> -->
+                  <!-- <th>Periority</th> -->
+                  <th>Area</th>
                   <th>Actions </th>
                 </tr>
                 </thead>
@@ -27,8 +31,8 @@
                   <td>{{$pharmacy->id}}</td>
                   <td>{{$pharmacy->name}}</td>
                   <td>{{$pharmacy->created_at}}</td>
-                 <!--  <td>{{$pharmacy->periority}}</td>
-                  <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td> -->
+                  <!-- <td>{{$pharmacy->periority}}</td> -->
+                  <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td>
                   <td class="project-actions text-left"> 
                     <div class="btn-group btn-group-sm">
                       <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">

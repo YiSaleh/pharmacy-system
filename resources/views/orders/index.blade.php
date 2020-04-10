@@ -33,11 +33,17 @@
                 <thead>
                 <tr>
                   <th>ID</th>
+                  <th>UserName</th>
+                  <th>Address</th>
                   <th>Status</th>
                   <th>Prescription</th>
                   <th>Is_insured</th>
                   <th>Created_at</th>
                   <th>Updated_at</th>
+                  <th>Pharmacy</th>
+                  @role('admin')
+                  <th>Creator</th>
+                  @endrole
                   <th>Action</th>
 
                 </tr>
@@ -46,11 +52,22 @@
                 @foreach ($orders as $order)  
                 <tr>
                   <td>{{$order->id}}</td>
+                  <td>{{$order->user->first->name->name ?? 'not exist'}}</td>
+                  <td>{{$order->useraddress->street_name ?? 'not exist'}}</td>
                   <td>{{$order->status}}</td>
                   <td>{{$order->prescription}}</td>
-                  <td>{{$order->is_insured}}</td>
+                  @if($order->is_insured === 1)
+                  <td> <span class="badge badge-success">Insured </span> </td>
+                  @else
+                  <td><span class="badge badge-secondary">Not covered</span></td>
+                  @endif
                   <td>{{$order->created_at}}</td>
                   <td>{{$order->updated_at}}</td>
+                  <td>{{$order->pharmacy->name}}</td>
+                  @role('admin')
+                  <td>{{$order->role}}</td>
+                  @endrole
+                 
                   <td> 
 
                   <div class="btn-group btn-group-sm">
@@ -58,8 +75,9 @@
                           <i class=> </i>View</a>
 
                   <div class="btn-group btn-group-sm"> 
-                      <a class="btn btn-warning btn-sm" href="">
+                      <a class="btn btn-warning btn-sm" href="{{route('orders.edit',['order'=>$order->id])}}">
                           <i class=> </i>Edit</a>
+                          
               <form method="POST" action="{{route('orders.delete',['order'=>$order->id])}}">
               @csrf
               @method('DELETE')
@@ -73,11 +91,18 @@
                 </tbody>
                 <tfoot>
                   <th>ID</th>
+                  <th>username</th>
+                  <th>Address</th>
                   <th>Status</th>
                   <th>Prescription</th>
                   <th>Is_insured</th>
                   <th>Created_at</th>
                   <th>Updated_at</th>
+                  <th>Pharmacy</th>
+                  @role('admin')
+                  <th>Creator</th>
+                  @endrole
+                 
                   <th>Action</th>
                     
                 </tfoot> 

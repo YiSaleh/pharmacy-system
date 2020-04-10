@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\UserAddresses;
+use App\User_Address;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,7 +19,7 @@ class UserAddressesController extends Controller
 
 
             //  dd($request->input('street_number'));
-             $userAddress = new UserAddresses();
+             $userAddress = new User_Address();
              $userAddress->user_id = $request->input('user_id');
              $userAddress->street_name = $request->input('street_name');
              $userAddress->building_no = $request->input('building_no');
@@ -42,13 +42,8 @@ class UserAddressesController extends Controller
     
          public function view($user_id)
 
-    {
-        // $model = App\Flight::findOrFail(1);
-
-        // $model = App\Flight::where('legs', '>', 100)->firstOrFail();
-    	// $request  = request();
-        // $user_id = $request->user_id;  
-    	$userAddress  = UserAddresses::firstWhere('user_id',$user_id);
+    {  
+    	$userAddress  = User_Address::firstWhere('user_id',$user_id);
     	return  response()->json([
             'userAddress'=>$userAddress
         ]);
@@ -59,7 +54,7 @@ class UserAddressesController extends Controller
         public function update(Request $request,$user_id)
 		{
 			
-			$userAddress = UserAddresses::firstWhere('user_id',$user_id);
+			$userAddress = User_Address::firstWhere('user_id',$user_id);
 			// $userAddress->user_id = $request->user_id;
 			$userAddress->street_name = $request->street_name;
             $userAddress->building_no= $request->building_no;
@@ -90,7 +85,7 @@ class UserAddressesController extends Controller
 
         public function delete(Request $request,$user_id ){
 
-           $userAddress = UserAddresses::where('user_id',$user_id)->delete();
+           $userAddress = User_Address::where('user_id',$user_id)->delete();
         
            if ($userAddress > 0) {
             return response()->json([

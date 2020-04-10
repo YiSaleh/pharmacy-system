@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
+use App\Medicine;
 use App\Order;
+use App\Order_Medicine;
+use App\Pharmacy;
+use App\User_Order;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+
 
 class OrderController extends Controller
 {
@@ -22,14 +29,18 @@ class OrderController extends Controller
         $order->status = $request->input('order_status');
         $order->prescription = $request->input('prescription');
         $order->is_insured = $request->input('is_insured');
-        $order->user_id = $request->input('user_id');
         $order->user_address_id = $request->input('user_address_id');
-        $order->doctor_id = $request->input('dr_id');
-
-
+        $order->pharmacy_id = $request->input('pharmacy_id');
 
 
         $order->save();
+      
+        $userOrder = new User_Order(); 
+        $userOrder->user_id = $request->input('user_id');//user_order
+        $userOrder->order_id = $request->input('order_id');//user_order
+
+        $userOrder->save();
+        
  
        //  return  o$order::all()/;
         
@@ -48,10 +59,32 @@ class OrderController extends Controller
     public function view($id)
 
     {
-         
-    	$order  = Order::firstWhere('id',$id);
+      
+        //  $orderDetails = "";
+      $order  = Order::firstWhere('id',$id);
+      // $order = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
+
+      $orderMedicines = Order_Medicine::where('order_id',$order->id)->get();
+      $medicineIds =   Arr::pluck($orderMedicines, 'medicine_id');
+
+      $medicines = Medicine::find($medicineIds);
+
+      // $medicinesDetails = Arr::pluck($medicines, 'name','type','quantity');
+      $pharmacy = Pharmacy::firstWhere('id',$order->pharmacy_id);
+
+      $orderDetails = array(
+        'order_id'=> $order->id,
+        'medicines' => $medicines
+    );
+
+      // $orderDetails->order_id = $order->id;
     	return  response()->json([
-            'order'=>$order
+        'order_details'=>$orderDetails,
+            'order'=>$order,
+            'userOrders'=>$orderMedicines,
+            'ids'=>$medicineIds ,
+            'medicines'=>$medicines,
+            'pharmacy'=>$pharmacy
         ]);
     
     }
