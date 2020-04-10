@@ -16,7 +16,7 @@ class UserOrderController extends Controller
             $orders  = User_Order::where('user_id',$user_id)->get();
             $userOrderIds =   Arr::pluck($orders, 'order_id');
             $userOrders = Order::find($userOrderIds);
-
+// 
             return  response()->json([
                 'user_orders'=>$userOrders
             ]);
@@ -24,8 +24,8 @@ class UserOrderController extends Controller
         }
 
 
-    public function viewOrder($user_id,$order_id){
-        $order  =User_Order::firstWhere('user_id',$user_id&&'order_id',$order_id);
+    public function viewOrder($order_id){
+        $order  =User_Order::firstWhere('order_id',$order_id);
 
         
     	return  response()->json([

@@ -21,7 +21,6 @@ class OrderController extends Controller
 
 
 
-
     public function show()
     {
     $order = Order::find(request()->order);
