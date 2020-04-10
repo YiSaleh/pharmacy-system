@@ -101,8 +101,29 @@ Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.sho
 Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
 
 
-Route::middleware(['auth', 'role:admin|owner'])->group(function () {
 
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+  //owners
+  Route::get('/owners','OwnerController@index')->name('owners.index');
+  //create new user
+  Route::get('/owners/create','OwnerController@create')->name('owners.create');
+  // store user data in db
+  Route::post('/owners','OwnerController@store')->name('owners.store');
+  // to update user info 
+  Route::put('owners/{owner}','OwnerController@update')->name('owners.update');
+  // to delete user
+  Route::delete('owners/{owner}','OwnerController@destroy')->name('owners.destroy');
+  // to edit user info 
+  Route::get('/owners/{owner}/edit','OwnerController@edit')->name('owners.edit');
+  // to show one user
+  Route::get('/owners/{owner}','OwnerController@show')->name('owners.show');
+});
+
+
+
+Route::middleware(['auth', 'role:admin|owner'])->group(function () {
+//doctors
 Route::get('/doctors','DoctorsController@index')->name('doctors.index');
 //create new user
 Route::get('/doctors/create','DoctorsController@create')->name('doctors.create');
