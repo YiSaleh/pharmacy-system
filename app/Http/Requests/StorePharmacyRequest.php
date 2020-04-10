@@ -22,7 +22,7 @@ class StorePharmacyRequest extends FormRequest
      * @return array
      */
     public function rules()
-    // {
+    {
     //     return [
     //         'title' => ['required','min:3',
     //         Rule::unique('posts', 'title')->ignore($this->post)],
@@ -40,5 +40,5 @@ class StorePharmacyRequest extends FormRequest
     //             'description.min' => 'Please the description has minimum of 10 chars',
 
     //         ];
-    // }
+    }
 }

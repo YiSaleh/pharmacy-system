@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <!-- Main content -->
@@ -23,6 +23,8 @@
                     <dd class="col-sm-8">{{$pharmacy->periority}}</dd>
                     <dt class="col-sm-4">Area</dt>
                     <dd class="col-sm-8">{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</dd>
+                   <dt class="col-sm-4">Owner</dt>
+                    <dd class="col-sm-8">{{$owner->name}}</dd>
                     </dl>
                 </div>
                 <!-- /.card-body -->

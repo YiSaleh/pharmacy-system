@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form" method="POST" enctype="multipart/form-data" action="{{route('users.store')}}">
+<form role="form" method="POST" enctype="multipart/form-data" action="{{route('owners.store')}}">
     @csrf
                 <div class="card-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">User Name</label>
+                    <label for="exampleInputEmail1">Owner Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" placeholder="Enter user name" name="name">
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>

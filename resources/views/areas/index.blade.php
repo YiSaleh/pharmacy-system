@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <!-- Main content -->
@@ -45,7 +45,7 @@
                 @endforeach
                 </tbody>
               </table>
-              {{!! $areas->links() !!}}
+              {{ $areas->links() }}
             </div>
             <!-- /.card-body -->
           </div>

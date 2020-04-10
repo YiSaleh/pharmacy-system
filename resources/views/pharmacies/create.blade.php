@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <form role="form" method="POST" action="{{route('pharmacy.store')}}">
@@ -24,6 +24,14 @@
                       <select class="form-control" name="area_id">
                         @foreach($areas as $area)  
                           <option value="{{$area->id}}">{{$area->name}}</option>
+                        @endforeach
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Select Owner </label>
+                      <select class="form-control" name="owner_id">
+                        @foreach($owners as $owner)  
+                          <option value="{{$owner->id}}">{{$owner->name}}</option>
                         @endforeach
                       </select>
                   </div>

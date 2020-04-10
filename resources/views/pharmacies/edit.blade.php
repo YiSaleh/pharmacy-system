@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <form role="form" method="POST" action="{{route('pharmacy.update',['pharmacy'=>$pharmacy->id])}}">
@@ -19,9 +19,21 @@
                   </div>
                   <div class="form-group">
                     <label>Select Area </label>
+                         @role('admin')
                       <select class="form-control" name="area_id">
                         @foreach($areas as $area)  
                           <option value="{{$area->id}}" {{ ($pharmacy->area_id === $area->id)? "selected" : "" }}>{{$area->name}}</option>
+                        @endforeach
+                      </select>
+                      @endrole
+                      @role('owner')
+                      @endrole
+                  </div>
+                  <div class="form-group">
+                    <label>Select Owner </label>
+                      <select class="form-control" name="owner_id">
+                        @foreach($owners as $owner)  
+                          <option value="{{$owner->id}}" {{ ($pharmacy->owner_id === $owner->id)? "selected" : "" }}>{{$owner->name}}</option>
                         @endforeach
                       </select>
                   </div>
