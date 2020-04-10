@@ -45,10 +45,7 @@
 
 
   <div class="card-body col-6">  
-                  <div class="form-group">
-                    <label for="exampleInput">Price</label>
-                    <input type="text" class="form-control" id="exampleInput" placeholder="Drug Price " name="price">
-                  </div>
+                  
 
                       <!-- enter medicine qty  -->
 
@@ -77,15 +74,19 @@
      <!-- enter order status   -->
 
 
-<div class="col-sm-6">
- <div class="form-group">
-<label>Select Order Status</label>
-<select class="form-control" name="status">
-<option>new</option>
-</select>
-</div>
-</div>
+
+ 
+
 <br>
+<div class="col-6">
+<div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" name="status">
+                          <option>New</option>
+                          <option>Processed</option>
+                        </select>
+                        </div>
+</div>                        
      <!-- Prescribed for?   -->
 
 <div class="card-body col-6">  
@@ -100,7 +101,7 @@
 <label align:center>Addres </label>
 <select class="form-control" name="user_address_id">
 @foreach($useraddresses as $address)  
-<option value="{{$address->id}}">{{$address->id}}</option>
+<option value="{{$address->id}}">{{$address->street_name}}</option>
 @endforeach
 </select>
 </div>
@@ -142,6 +143,7 @@ $('#name').keyup(function(){
          method:"POST",
          data:{query:query, _token:_token},
          success:function(data){
+          console.log(data)
           $('#druglist').fadeIn();  
                    $('#druglist').html(data);
          }
@@ -155,5 +157,8 @@ $('#name').keyup(function(){
    });  
 
 });
+
+
+
 </script>
 @endsection

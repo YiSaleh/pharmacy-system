@@ -73,7 +73,7 @@ Route::middleware(['auth', 'role:admin|owner|doctor','is-ban'])->group(function 
         //show all users orders
         Route::get('/orders','OrderController@index')->name('orders.index');
         //create an order 
-        Route::get('/orders/create', 'OrderController@create')->name('orders.create');
+        Route::get('/orders/create','OrderController@create')->name('orders.create');
         //to edit a certain order
         Route::get('/orders/{order}/edit','OrderController@edit')->name('orders.edit');
         //to update an order
@@ -86,6 +86,24 @@ Route::middleware(['auth', 'role:admin|owner|doctor','is-ban'])->group(function 
         Route::post('/orders/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
         //view a selected user by id 
         Route::get('/orders/{order}','OrderController@show')->name('orders.show');
+
+});
+
+Route::middleware(['auth', 'role:admin|owner|doctor','is-ban'])->group(function () {
+//show all medicine
+Route::get('/medicines','MedicineController@index')->name('medicines.index');
+//create a medicine
+Route::get('/medicines/create','MedicineController@create')->name('medicines.create');
+//
+Route::post('/medicines','MedicineController@store')->name('medicines.store');
+//to edit a medicines
+Route::get('/medicines/{medicine}/edit','MedicineController@edit')->name('medicines.edit');
+
+Route::put('/medicines/{medicine}','MedicineController@update')->name('medicines.update');
+//to delete a medicine
+Route::delete('medicines/{medicine}','MedicineController@destroy')->name('medicines.destroy');
+//to show only specific medicine
+Route::get('/medicines/{medicine}','MedicineController@show')->name('medicines.show');
 
 });
 
@@ -116,7 +134,6 @@ Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmac
 });
 
 
-
 Route::middleware(['auth', 'role:admin'])->group(function () {
   //owners
   Route::get('/owners','OwnerController@index')->name('owners.index');
@@ -133,8 +150,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   // to show one user
   Route::get('/owners/{owner}','OwnerController@show')->name('owners.show');
 });
-
-
 
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
         //doctors

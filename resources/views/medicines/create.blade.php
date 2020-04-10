@@ -1,49 +1,25 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form">
+<form role="form" method="POST" action="{{route('medicines.store')}}">
     @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <label for="exampleInputEmail1">Medicine Name</label>
+                    <input type="text" class="form-control" id="drugName" placeholder="drug name" name="name">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInputPassword1">Price</label>
+                    <input type="text" class="form-control" id="drugprice" placeholder="Drug Price" name="price">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
+                    <label for="exampleInputPassword1">Type</label>
+                    <input type="text" class="form-control" id="drugtype" placeholder="Drug Type" name="type">
                   </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Quantity</label>
+                    <input type="number" class="form-control" id="drugqty" placeholder="Drug Quantity" name="quantity">
                   </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                      <!-- select -->
-                      <div class="form-group">
-                        <label>Select</label>
-                        <select class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
-                        </select>
-                      </div>
-                    </div>
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

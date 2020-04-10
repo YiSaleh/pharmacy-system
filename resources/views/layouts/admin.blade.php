@@ -183,28 +183,29 @@ use Illuminate\Support\Facades\Auth;
               </li>
               @endrole
 
+              @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="/home/create/medicines" class="nav-link">
+                <a href="{{route('medicines.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Medicine</p>
                 </a>
               </li>
-             
-
-              @role('admin|owner|doctor')
+              @endrole
+         
+            @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="{{route('orders.create')}}" class="nav-link">
+                <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
               </li>
               @endrole
 
-              @role('admin|owner')
+              @role('admin')
               <li class="nav-item">
-                <a href="{{route('users.create')}}" class="nav-link">
+                <a href="{{route('users.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Create User</p>
+                  <p>Addresses</p>
                 </a>
               </li>
               @endrole
@@ -265,12 +266,14 @@ use Illuminate\Support\Facades\Auth;
               </li>
               @endrole
 
+              @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="/home/medicines" class="nav-link">
+                <a href="{{route('medicines.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Medicines</p>
                 </a>
               </li>
+              @endrole
                  
               @role('admin|owner|doctor')
               <li class="nav-item">
@@ -289,14 +292,8 @@ use Illuminate\Support\Facades\Auth;
                 </a>
                </li>
             @endrole
-              <li class="nav-item">
-                <a href="{{route('revenue.show')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Revenue </p>
-                </a>
-              </li> 
-            
-                      </ul>
+             
+           </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

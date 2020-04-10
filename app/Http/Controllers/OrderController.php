@@ -18,10 +18,8 @@ class OrderController extends Controller
 
     public function index()
     {
-
-    $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-    return view('orders.index',['orders'=>$orders,]);
-      
+        $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
+        return view('orders.index',['orders'=>$orders,]);
     }
     
 
@@ -44,7 +42,8 @@ class OrderController extends Controller
             echo $output;
             }
     }  
-
+    
+    
     public function show()
     {
     $order = Order::find(request()->order);
@@ -53,10 +52,8 @@ class OrderController extends Controller
     ]);
     }
 
-
     public function create()
     {
-
         return view('orders.create',[
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
@@ -72,17 +69,20 @@ class OrderController extends Controller
             'created_at'=> request()->updated_at,   
             'user_address_id'=>request()->user_address_id,
             'pharmacy_id'=>request()->pharmacy_id, 
+            Medicine::where('name','like',request()->name)->first(),
+ 
+           
             'medicines'=>Medicine::get(),
         ]);
      
-        // Order_Medicine::create([
-        //     'order_id'=>request()->order_id,
-        //     'medicine_id' =>request()->medicine_id,
-        //     'quantity'=>request()->quantity
-        // ]);
+        Order_Medicine::create([
+            'order_id'=>request()->order_id,
+            'medicine_id' =>request()->medicine_id,
+            'quantity'=>request()->quantity
+        ]);
 
        
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
     
     public function edit()
@@ -90,7 +90,8 @@ class OrderController extends Controller
        $order=Order::find(request()->order);
          dd($order->user[0]);
         return view('orders.edit',[
-            'order' => Order::find(request()->order),
+            'orders'=>Order::find(request()->order),
+            'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
@@ -120,6 +121,5 @@ class OrderController extends Controller
         { $order->delete(); }
         return redirect()->route('orders.index');
      }
-
 
 }
