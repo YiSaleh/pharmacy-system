@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <head>
@@ -15,26 +15,26 @@
 
 
 
-<form role="form"  method="POST" action="{{route('orders.store')}}">
-    @csrf
+<form role="form"  method="POST" action="{{route('orders.update',['order'=>$order->id])}}">
+    @csrf                                   
    
     <!-- drop down list where doctors can select user -->
 <div class="col-6">
 <label align:center>User Name </label>
 <select class="form-control" name="user_id">
 @foreach($users as $user)  
-<option value="{{$user->id}}">{{$user->name}}</option>
+<option value="{{$user->id}}" {{ ($order->user_id === $user->id)? "selected" : "" }}>{{$user->name}}</option>
 @endforeach
 </select>
 </div>
-                 
+
    <!-- enter medicine name price and quantity  -->
    <body>
   <br />
   <div class="card-body">
   <label for="exampleInput">Select a drug </label>
       <div class="form-group">
-    <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Enter Drug Name" />
+    <input type="text" name="name" id="name" class="form-control input-lg" value="" placeholder="Enter Drug Name" />
     <div id="druglist">
     </div>
    </div>
@@ -63,12 +63,12 @@
 <div class="form-group">
 <label for="InputInsurance"> Do you have insurance?</label>
 <div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="insured" name="is_insured" value="1">
+<input class="custom-control-input" type="radio" id="insured" name="is_insured" value="1" {{ ($order->is_insured=="1")? "checked" : "" }}>
 <label for="insured" class="custom-control-label">covered</label>
 </div>        
 </div>
 <div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="notinsured" name="is_insured" value="0">
+<input class="custom-control-input" type="radio" id="notinsured" name="is_insured" value="0" {{ ($order->is_insured=="0")? "checked" : "" }}>
 <label for="notinsured" class="custom-control-label">Not covered</label>
 </div>        
 </div>
@@ -80,7 +80,7 @@
 <div class="col-sm-6">
  <div class="form-group">
 <label>Select Order Status</label>
-<select class="form-control" name="status">
+<select class="form-control" value="{{$order->status}}" name="status">
 <option>new</option>
 </select>
 </div>
@@ -91,7 +91,7 @@
 <div class="card-body col-6">  
 <div class="form-group">
 <label for="exampleInput">Prescriped for</label>
-<input type="text" class="form-control" id="exampleInput" placeholder="Prescribed for..? " name="prescription">
+<input type="text" class="form-control" id="exampleInput" placeholder="Prescribed for..? " name="prescription" value="{{$order->prescription}}">
 </div>
 
 
@@ -100,18 +100,17 @@
 <label align:center>Addres </label>
 <select class="form-control" name="user_address_id">
 @foreach($useraddresses as $address)  
-<option value="{{$address->id}}">{{$address->id}}</option>
+<option value="{{$useraddress->id}}" {{($order->user_address_id === $useraddress->id)? "selected" : ""}}{{$useraddress->street_name}}></option>
 @endforeach
 </select>
 </div>
-
      <!-- Pharmacy_Id  -->
 
 <div class="col-6">
 <label align:center>Pharmacy</label>
 <select class="form-control" name="pharmacy_id">
 @foreach($pharmacies as $pharmacy)  
-<option value="{{$pharmacy->id}}">{{$pharmacy->name}}</option>
+<option value=""></option>
 @endforeach
 </select>
 </div>
@@ -120,7 +119,7 @@
 
 <div class="card-footer">
 <div>
-<button type="submit" class="btn btn-primary">Create</button>
+<button type="submit" class="btn btn-primary">Update</button>
 </div>
             
 </div>
@@ -138,7 +137,7 @@ $('#name').keyup(function(){
        {
         var _token = $('input[name="_token"]').val();
         $.ajax({
-         url:"{{ route('order.autocomplete') }}",
+         url:"#",
          method:"POST",
          data:{query:query, _token:_token},
          success:function(data){

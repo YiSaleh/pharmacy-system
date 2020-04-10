@@ -45,7 +45,7 @@
                 @endforeach
                 </tbody>
               </table>
-              {{!! $areas->links() !!}}
+              {{ $areas->links() }}
             </div>
             <!-- /.card-body -->
           </div>

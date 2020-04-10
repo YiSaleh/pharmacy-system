@@ -30,38 +30,30 @@
                  <!--  <td>{{$pharmacy->periority}}</td>
                   <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td> -->
                   <td class="project-actions text-left"> 
-                     <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
+                    <div class="btn-group btn-group-sm">
+                      <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
                           <i class="fas fa-folder"> </i>View</a>
+
                       <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.edit',['pharmacy'=>$pharmacy->id])}}">
                           <i class="fas fa-folder"> </i>Edit</a>
-                          <form method="POST" action="{{route('pharmacy.destroy',['pharmacy'=>$pharmacy->id])}}">
-                            @csrf 
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this pharmacy?');">
+                          @role('admin')
+                      <form method="POST" action="{{route('pharmacy.destroy',['pharmacy'=>$pharmacy->id])}}">
+                        @csrf 
+                        @method('DELETE')
+                          <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this area?');">
                             <i class="fas fa-trash"></i>Delete</button>
-                          </form>
+                      </form>
+                      @endrole
                 </tr>
                 @endforeach
                 </tbody>
               </table>
+                {{ $pharmacies->links() }}
             </div>
-            <!-- /.card-body -->
           </div>
         </div>
       </div>
  </section>    
 
- <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
+
  @endsection

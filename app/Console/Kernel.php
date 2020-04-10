@@ -24,7 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // this command run every day to send email to each user who never logged in for a month 
         $schedule->command('notify:users-not-logged-in-for-month')->daily();
+        // this command run every minute to assign new orders to the highest priority pharmacy 
+        $schedule->command('assign:new-orders')->everyMinute();
     }
 
     /**

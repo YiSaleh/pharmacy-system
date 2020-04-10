@@ -37,11 +37,10 @@ class UpdateUserRequest extends FormRequest
                 'password'=>'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
                 'phone'=>'regex:/^(?=.*?[0-9]).{11}$/i|numeric',
                 'national_id'=>['regex:/^(?=.*?[0-9]).{14}$/i','numeric',
-                                Rule::unique('users')->ignore($user)],
+                                Rule::unique('users')->ignore($this->user)],
                 'password_confirmation'=>'same:password',
                 'date_of_birth'=>'date',
-                'profile_image'=>'image|mimes:jpeg,bmp,png,jpg',  
-            
+                'profile_image'=>'image|mimes:jpeg,bmp,png,jpg|sometimes',
         ];
     }
     public function messages()

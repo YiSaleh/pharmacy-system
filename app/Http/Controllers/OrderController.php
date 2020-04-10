@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\User;
+use APP\User_Order;
+use App\Medicine;
+use App\Order_Medicine;
+use App\Pharmacy;
+use App\User_Address;
+use Illuminate\Support\Facades\DB;
+
 // use App\Http\Requests\StoreOderRequest;
 // use App\Http\Requests\UpdateOrderRequest;
 
@@ -14,12 +21,39 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::orderBy('created_at','desc')->paginate(5);
-        return view('orders.index', compact('orders'))
-        ->with('i',(request()->input('page',1) -1) * 5);
+
+    $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
+    // dd($orders->pluck('user'));
+    return view('orders.index',['orders'=>$orders,]);
+      
+
     }
-
-
+    
+    // public function autocomplete(Request $request)
+    // {
+    //     $data = Medicine::where("name","LIKE","%{$request->input('query')}%")->get();
+    //     return response()->json($data);
+        
+    // }
+    function autocomplete(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('medicines')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= '
+       <li><a href="#">'.$row->name.'</a></li>
+       ';
+      }
+      $output .= '</ul>';
+      echo $output;
+     }
+    }  
 
     public function show()
     {
@@ -32,23 +66,74 @@ class OrderController extends Controller
 
     public function create()
     {
-        $users = User::all();
-        return view('orders.create',['users' => $users]);
+        return view('orders.create',[
+            'users' => User::get(),
+            'useraddresses'=>User_Address::get(),
+            'pharmacies'=>Pharmacy::get(),
+            'medicines'=>Medicine::get(),
+
+            
+            ]);
 
     }
 
-    // public function store(StoreOrderRequest $request)
-    // {
-    //     Order::create([
-    //         'title'=>$request->title,
-    //         'description'=>$request->description,
-    //         'user_id' => $request->user_id,
-    //     ]);
-    //     return redirect()->route('posts.index');
-    // }
 
 
+    public function store()
+    {   
+        //   $r =  request();
+        // dd($r);
 
+        Order::create([
+            'status' => request()->status,
+            'prescription' => request()->prescription,
+            'is_insured' => request()->is_insured ? true : false ,
+            'created_at'=> request()->created_at,
+            'updated_at'=> request()->updated_at,   
+            'user_address_id'=>request()->user_address_id,
+            'pharmacy_id'=>request()->pharmacy_id, 
+            'medicines'=>Medicine::get(),
+ 
+           
+        ]);
+     
+        // Order_Medicine::create([
+        //     'order_id'=>request()->order_id,
+        //     'medicine_id' =>request()->medicine_id,
+        //     'quantity'=>request()->quantity
+        // ]);
+
+       
+        return redirect()->route('order.index');
+    }
+    
+    public function edit()
+    {  
+        // $r = request();
+        // dd($r);
+
+        return view('orders.edit',[
+            'order' => Order::find(request()->order),
+            'users' => User::get(),
+            'useraddresses'=>User_Address::get(),
+            'pharmacies'=>Pharmacy::get(),
+
+        ]);
+    }
+
+    public function update()
+    {
+        Order::find(request()->order)->update([
+            'status' => request()->status,
+            'prescription' => request()->prescription,
+            'is_insured' => request()->is_insured ? true : false ,
+            'created_at'=> request()->created_at,
+            'updated_at'=> request()->updated_at,   
+            'user_address_id'=>request()->user_address_id,
+            'pharmacy_id'=>request()->pharmacy_id,  
+        ]);
+        return redirect()->route('orders.index');
+        }
 
 
     public function delete(){
