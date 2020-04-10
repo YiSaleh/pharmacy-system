@@ -20,9 +20,7 @@ Route::get('/', function () {
 })->name('mainPage')->middleware('auth');
 
 Auth::routes(['register' => false ,'verify' => true ]);
-Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/home/create/{field}', 'HomeController@create')->name('home.create');
-// Route::get('/home/{field}', 'HomeController@show')->name('home.show');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('is-ban|auth');
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -103,6 +101,8 @@ Route::get('/pharmacy/{pharmacy}','PharmacyController@show')->name('pharmacy.sho
 Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmacy.destroy');
 
 
+Route::middleware(['auth', 'role:admin|owner'])->group(function () {
+
 Route::get('/doctors','DoctorsController@index')->name('doctors.index');
 //create new user
 Route::get('/doctors/create','DoctorsController@create')->name('doctors.create');
@@ -116,3 +116,6 @@ Route::delete('doctors/{doctor}','DoctorsController@destroy')->name('doctors.des
 Route::get('/doctors/{doctor}/edit','DoctorsController@edit')->name('doctors.edit');
 // to show one user
 Route::get('/doctors/{doctor}','DoctorsController@show')->name('doctors.show');
+// to ban doctor 
+Route::get('/doctor/{doctor}','DoctorsController@banned')->name('doctors.banned');
+});

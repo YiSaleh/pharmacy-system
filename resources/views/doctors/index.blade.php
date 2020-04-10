@@ -72,7 +72,17 @@
                           <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
                             <i class="fas fa-trash"></i>Delete</button>
                       </form>
-                       
+
+                      @if($doctor->is_banned === 0)
+                      <a class="btn btn-success btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
+                          <i class="fas fa-pencil-alt"> </i> Ban
+                      </a>
+                      @else
+                      <a class="btn btn-warning btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
+                          <i class="fas fa-pencil-alt"> </i> Unban
+                      </a>
+                      @endif
+                      
                       </div>
                   </td>
                 </tr>

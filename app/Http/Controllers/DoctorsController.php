@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Builder;
+// use Cog\Contracts\Ban\BanService;
 use App\Pharmacy;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+
 
 class DoctorsController extends Controller
 {
@@ -109,6 +112,23 @@ class DoctorsController extends Controller
 
         return redirect()->route('doctors.index');
 
+    }
+
+    public function banned()
+    {
+        $user = User::find(request()->doctor);
+        // $user->Ban();
+        if($user->is_banned)
+        {  
+          User::where('id',request()->doctor)->update([
+                'is_banned'=> false,
+          ]);
+        }else {
+            User::where('id',request()->doctor)->update([
+                'is_banned'=> true,
+            ]);
+        }
+        return redirect()->route('doctors.index');
     }
 
 
