@@ -45,6 +45,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -104,7 +107,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('storage/uploads/'. Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('storage/'. Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block"></a>

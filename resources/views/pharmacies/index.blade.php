@@ -35,11 +35,11 @@
                   <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td>
                   <td class="project-actions text-left"> 
                     <div class="btn-group btn-group-sm">
-                      <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
+                      <a class="btn btn-primary btn-sm " href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
                           <i class="fas fa-folder"> </i>View</a>
 
-                      <a class="btn btn-primary btn-sm mr-3" href="{{route('pharmacy.edit',['pharmacy'=>$pharmacy->id])}}">
-                          <i class="fas fa-folder"> </i>Edit</a>
+                      <a class="btn btn-info btn-sm " href="{{route('pharmacy.edit',['pharmacy'=>$pharmacy->id])}}">
+                      <i class="fas fa-pencil-alt"> </i>Edit</a>
                           @role('admin')
                       <form method="POST" action="{{route('pharmacy.destroy',['pharmacy'=>$pharmacy->id])}}">
                         @csrf 

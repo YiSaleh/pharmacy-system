@@ -55,8 +55,6 @@
                             <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this address?');">
                             <i class="fas fa-trash"></i>Delete</button>
                           </form>
-                        <!-- <a href="users.show" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
-                        <!-- <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
                         </div>
                       </div>
                   </td>

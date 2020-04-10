@@ -13,11 +13,10 @@ use Spatie\Permission\Models\Role;
 
 
 
-class User extends Authenticatable implements MustVerifyEmail 
+class User extends Authenticatable implements MustVerifyEmail ,BannableContract
 //  BannableContract
 {
-     use HasApiTokens, Notifiable, HasRoles ;
-    //  Bannable;
+     use HasApiTokens, Notifiable, HasRoles ,Bannable ;
 
     /**
      * The attributes that are mass assignable.

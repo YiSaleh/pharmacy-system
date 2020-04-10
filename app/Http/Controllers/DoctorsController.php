@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Builder;
-// use Cog\Contracts\Ban\BanService;
+use Illuminate\Support\Facades\Auth;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 use App\Pharmacy;
 use App\User;
 use Spatie\Permission\Models\Role;
@@ -18,7 +20,7 @@ class DoctorsController extends Controller
 {
     public function index()
     {  
-       $user=User::find(auth()->user()->id);
+       $user=User::find(Auth::id());
        if($user->hasRole('admin')) {
         $doctors=User::role('doctor')->orderBy('id','asc')->paginate(5);
        }
@@ -49,7 +51,7 @@ class DoctorsController extends Controller
     public function store(StoreUserRequest $req)
     {   
         // to get data of logged in user 
-        $loggedInUser=User::find(auth()->user()->id);
+        $loggedInUser=User::find(Auth::id());
 
         if($loggedInUser->hasRole('admin'))
             {
@@ -117,15 +119,17 @@ class DoctorsController extends Controller
     public function banned()
     {
         $user = User::find(request()->doctor);
-        // $user->Ban();
-        if($user->is_banned)
+        // dd($user->isBanned());
+        if($user->isNotBanned())
         {  
+          $user->ban();
           User::where('id',request()->doctor)->update([
-                'is_banned'=> false,
+                'is_banned'=> true,
           ]);
         }else {
+            $user->unban();
             User::where('id',request()->doctor)->update([
-                'is_banned'=> true,
+                'is_banned'=> false,
             ]);
         }
         return redirect()->route('doctors.index');
