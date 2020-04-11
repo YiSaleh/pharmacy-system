@@ -7,12 +7,15 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+            <h3 class="card-title">Medicines Tables</h3>
+              <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i></button>
+                </div>
             </div>
-            <div class="container m-5">
-             <a href="{{route('medicines.create')}}" class="btn btn-success m-1">Create</a>
-              <table class="table">
-            <!-- /.card-header -->
+             
             <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -37,19 +40,18 @@
 
                   <td> 
 
-                    <div class="btn-group btn-group-sm">
-                    <a class="btn btn-primary btn-sm" href="{{route('medicines.show',['medicine'=>$medicine->id])}}">
-                    <i class="fas fa-folder"> </i>View</a>
+                  <div class="btn-group btn-group-sm">
+                    <div class="row">
+                      <a class="btn btn-primary btn-sm" href="{{route('medicines.show',['medicine'=>$medicine->id])}}">
+                      <i class="fas fa-folder"> </i>View</a>
 
-                      <div class="btn-group btn-group-sm"> 
-                <a class="btn btn-warning btn-sm" href="{{route('medicines.edit',['medicine'=>$medicine->id])}}">
-                <i class="fas fa-pencil-alt"> </i>Edit</a>
+                    <a class="btn btn-info btn-sm" href="{{route('medicines.edit',['medicine'=>$medicine->id])}}">
+                    <i class="fas fa-pencil-alt"> </i>Edit</a>
         
-                      <form method="POST" action="{{route('medicines.destroy',['medicine'=>$medicine->id])}}">
+                    <form method="POST" action="{{route('medicines.destroy',['medicine'=>$medicine->id])}}">
                     @csrf
                   @method('DELETE')
-                      <button class="btn btn-danger btn-sm" type="submit"              
-                        onclick="return confirm('You are going to delete this item?,ok?');">
+                      <button class="btn btn-danger btn-sm" type="submit"    onclick="return confirm('You are going to delete this medicines?,ok?');">
                         <i class="fas fa-trash"></i>Delete</a></form>
                   </td>
                 </tr>

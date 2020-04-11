@@ -18,11 +18,10 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('home');
 })->name('mainPage')->middleware('is-ban','auth');
-// middleware('auth');
+
 
 Auth::routes(['register' => false ,'verify' => true ]);
 Route::get('/home', ['uses'=>'HomeController@index','middleware' => ['auth','is-ban']])->name('home');
-// ->middleware('auth');
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -60,58 +59,51 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-//show all areas
-Route::get('/areas','AreaController@index')->name('areas.index');
-Route::get('/areas/create','AreaController@create')->name('areas.create');
-Route::post('/areas','AreaController@store')->name('areas.store');
-Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
-Route::put('/areas/{area}','AreaController@update')->name('areas.update');
-Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
-Route::get('/areas/{area}','AreaController@show')->name('areas.show');
+        //show all areas
+        Route::get('/areas','AreaController@index')->name('areas.index');
+        Route::get('/areas/create','AreaController@create')->name('areas.create');
+        Route::post('/areas','AreaController@store')->name('areas.store');
+        Route::get('/areas/edit/{area}','AreaController@edit')->name('areas.edit');
+        Route::put('/areas/{area}','AreaController@update')->name('areas.update');
+        Route::delete('areas/{area}','AreaController@destroy')->name('areas.destroy');
+        Route::get('/areas/{area}','AreaController@show')->name('areas.show');
 });
 
-Route::middleware(['auth', 'role:admin|owner|doctor'])->group(function () {
-//show all users orders
-Route::get('/order','OrderController@index')->name('orders.index');
-//create an order 
-Route::get('/order/create', 'OrderController@create')->name('orders.create');
-//to edit a certain order
-Route::post('/order/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
-// autocomplete function for medicine in creation order
-Route::get('/order/{order}/edit','OrderController@edit')->name('orders.edit');
-//to update an order
-Route::put('/order/{order}','OrderController@update')->name('orders.update');
-//to delete a user by id
-Route::delete('order/{order}','OrderController@destroy')->name('orders.destroy');
-// send data directly to database
-Route::post('/order','OrderController@store')->name('orders.store');
-//view a selected user by id 
-Route::get('/order/{order}','OrderController@show')->name('orders.show');
+Route::middleware(['auth', 'role:admin|owner|doctor','is-ban'])->group(function () {
+        //show all users orders
+        Route::get('/orders','OrderController@index')->name('orders.index');
+        //create an order 
+        Route::get('/orders/create','OrderController@create')->name('orders.create');
+        //to edit a certain order
+        Route::get('/orders/{order}/edit','OrderController@edit')->name('orders.edit');
+        //to update an order
+        Route::put('/orders/{order}','OrderController@update')->name('orders.update');
+        //to delete a user by id
+        Route::delete('orders/{order}','OrderController@destroy')->name('orders.destroy');
+        // send data directly to database
+        Route::post('/orders','OrderController@store')->name('orders.store');
+        // autocomplete function for medicine in creation order
+        Route::post('/orders/autocomplete', 'OrderController@autocomplete')->name('orders.autocomplete');
+        //view a selected user by id 
+        Route::get('/orders/{order}','OrderController@show')->name('orders.show');
 
+});
 
-
+Route::middleware(['auth', 'role:admin|owner|doctor','is-ban'])->group(function () {
 //show all medicine
-Route::get('/medicine','MedicineController@index')->name('medicines.index');
+Route::get('/medicines','MedicineController@index')->name('medicines.index');
 //create a medicine
-Route::get('/medicine/create','MedicineController@create')->name('medicines.create');
+Route::get('/medicines/create','MedicineController@create')->name('medicines.create');
 //
-Route::post('/medicine','MedicineController@store')->name('medicines.store');
-
+Route::post('/medicines','MedicineController@store')->name('medicines.store');
 //to edit a medicines
-Route::get('/medicine/{medicine}/edit','MedicineController@edit')->name('medicines.edit');
+Route::get('/medicines/{medicine}/edit','MedicineController@edit')->name('medicines.edit');
 
-Route::put('/medicine/{medicine}','MedicineController@update')->name('medicines.update');
-
+Route::put('/medicines/{medicine}','MedicineController@update')->name('medicines.update');
 //to delete a medicine
-Route::delete('medicine/{medicine}','MedicineController@destroy')->name('medicines.destroy');
-//to 
-Route::get('/medicine/{medicine}','MedicineController@show')->name('medicines.show');
-
-
-
-
-
-
+Route::delete('medicines/{medicine}','MedicineController@destroy')->name('medicines.destroy');
+//to show only specific medicine
+Route::get('/medicines/{medicine}','MedicineController@show')->name('medicines.show');
 
 });
 
@@ -121,8 +113,8 @@ Route::get('/revenues','RevenueController@index')->name('revenue.index');
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::get('pharmacy/trash','PharmacyController@trash')->name('pharmacy.trash');
-Route::get('pharmacy/restore/{pharmacy)','PharmacyController@restore')->name('pharmacy.restore');
+        Route::get('pharmacy/trash','PharmacyController@trash')->name('pharmacy.trash');
+        Route::get('pharmacy/restore/{pharmacy)','PharmacyController@restore')->name('pharmacy.restore');
 });
 
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
@@ -142,7 +134,6 @@ Route::delete('pharmacy/{pharmacy}','PharmacyController@destroy')->name('pharmac
 });
 
 
-
 Route::middleware(['auth', 'role:admin'])->group(function () {
   //owners
   Route::get('/owners','OwnerController@index')->name('owners.index');
@@ -159,8 +150,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   // to show one user
   Route::get('/owners/{owner}','OwnerController@show')->name('owners.show');
 });
-
-
 
 Route::middleware(['auth', 'role:admin|owner'])->group(function () {
         //doctors

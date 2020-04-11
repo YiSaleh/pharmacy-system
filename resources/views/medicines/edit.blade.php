@@ -5,11 +5,11 @@
     @csrf
     @method('PUT')
 
-                <div class="card-body">
-                  <div class="form-group">
+      <div class="card-body">
+           <div class="form-group">
                     <label for="exampleInputEmail1">Medicine Name</label>
                     <input type="text" class="form-control" id="drugName" placeholder="drug name" name="name" value="{{$medicine->name}}">
-                  </div>
+            </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Price</label>
                     <input type="text" class="form-control" id="drugprice" placeholder="Drug Price" name="price" value="{{$medicine->price}}">
@@ -20,15 +20,8 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Quantity</label>
-                    <input type="text" class="form-control" id="drugqty" placeholder="Drug Quantity" name="quantity" value="{{$medicine->quantity}}">
+                    <input type="number" class="form-control" id="drugqty" placeholder="Drug Quantity" name="quantity" value="{{$medicine->quantity}}">
                   </div>
-                  
-                    
-
-                <div class="row">
-                    <div class="col-6">
-                     
-                    </div>
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

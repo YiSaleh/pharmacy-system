@@ -18,15 +18,8 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Quantity</label>
-                    <input type="text" class="form-control" id="drugqty" placeholder="Drug Quantity" name="quantity">
+                    <input type="number" class="form-control" id="drugqty" placeholder="Drug Quantity" name="quantity">
                   </div>
-                  
-                    
-
-                <div class="row">
-                    <div class="col-6">
-                     
-                    </div>
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

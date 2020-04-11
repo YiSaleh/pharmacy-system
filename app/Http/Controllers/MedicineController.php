@@ -34,7 +34,6 @@ class MedicineController extends Controller
 
     public function store()
     {    
-        // dd(request());
         Medicine::create([
             'name' => request()->name,
             'price' => request()->price,
