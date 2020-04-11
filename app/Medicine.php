@@ -10,7 +10,18 @@ class Medicine extends Model
     {
         return $this->belongsToMany('App\Order');
     }
-    protected $fillable = [
+  
+    public function getPriceAttribute($price)
+{
+    return $price / 100;
+}
+
+public function setPriceAttribute($price)
+{
+    $this->attributes['price'] = $price * 100;
+}
+
+protected $fillable = [
         'name', 'price','quantity','type'
     ];
 }

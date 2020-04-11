@@ -31,7 +31,7 @@
                 <tr>
                   <th>{{$medicine->id}}</th>
                   <th>{{$medicine->name}}</th>
-                  <th>{{$medicine->price}}</th>
+                  <th>{{$medicine->price}} $ </th>
                   <th>{{$medicine->type}}</th>
                   <th>{{$medicine->quantity}}</th>
 
