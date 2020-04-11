@@ -17,7 +17,6 @@
                     <dl class="row">
                     <dt class="col-sm-4 font-weight-bolder">Drug name :</dt>
                     <dd class="col-sm-8 ">{{$medicine->name}}</dd>
-                    <dt class="col-sm-4 font-weight-bolder">Quantity</dt>
                     <dt class="col-sm-4 font-weight-bolder">Price :</dt>
                     <dd class="col-sm-8 ">{{$medicine->price }} $</dd>
                     <dt class="col-sm-4 font-weight-bolder">Quantity :</dt>
