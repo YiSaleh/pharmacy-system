@@ -43,16 +43,12 @@ class DoctorsController extends Controller
     // function to create new user
     public function create()
     {
-        return view('doctors.create',[
-            'pharmacies' =>  Pharmacy::all() ,
-        ]);
+        return view('doctors.create',['pharmacies' =>  Pharmacy::all() ]);
     }
 
     public function store(StoreUserRequest $req)
     {   
-        // to get data of logged in user 
         $loggedInUser=User::find(Auth::id());
-
         if($loggedInUser->hasRole('admin'))
             {
                 $pharmacyId= $req->pharmacy_id;
@@ -61,57 +57,36 @@ class DoctorsController extends Controller
             {
                 $pharmacyId=$loggedInUser->pharmacy_id;
             }
+           
+        $req['pharmacy_id'] = $pharmacyId;
+        $req['password'] = Hash::make($req->password);
+        $user = User::create($req->validated());
 
-        $user = new User();
         if ($req->file('profile_image')->isValid()) {
             $user->avatar= $req->profile_image->store('uploads','public');
         }         
-        
-        $user->name = $req->name;
-        $user->email = $req->email;
-        $user->gender = $req->gender;
-        $user->password =Hash::make($req->password);
-        $user->date_of_birth = $req->date_of_birth;
-        $user->phone = $req->phone;
-        $user->national_id = $req->national_id;
-        $user->is_banned = false ;
-        $user->pharmacy_id=$pharmacyId;
 
-        $user->save();
-        $role=Role::find(3);
-        $user->assignRole($role);
+        $user->assignRole('doctor');
         return redirect()->route('doctors.index');
     }
     
     public function edit($doctor)
     {
-        return view('doctors.edit',[
-            'doctor' => User::find($doctor),
-        ]);
+        return view('doctors.edit',['doctor' => User::find($doctor)]);
     }
 
     public function update(UpdateUserRequest $request)
     {   
-        $avatar=User::where('id',$request->user)->value('avatar');
+        $avatar= User::where('id',$request->user)->value('avatar');
 
-        if ($request->hasFile('profile_image')) {
-            if($request->file('profile_image')->isValid())
-            { 
-                File::delete(storage_path().'/app/public/'.$avatar);
-                $avatar= $request->profile_image->store('uploads','public');
-            }
+        if ($request->hasFile('profile_image')&& $request->file('profile_image')->isValid())
+        { 
+            File::delete(storage_path().'/app/public/'.$avatar);
+            $avatar= $request->profile_image->store('uploads','public');
+            $request['avatar']=$avatar ;
         }   
 
-        User::where('id',$request->user)->update([
-            'name'         => $request->name,
-            'gender'       => $request->gender,
-            'password'     => Hash::make($request->password),
-            'date_of_birth'=> $request->date_of_birth,
-            'phone'        =>  $request->phone,
-            'national_id'  =>  $request->national_id,
-            'avatar'       =>$avatar,
-        ]);   
-
+        User::where('id',$request->user)->update($request->validated());
         return redirect()->route('doctors.index');
 
     }
@@ -119,18 +94,13 @@ class DoctorsController extends Controller
     public function banned()
     {
         $user = User::find(request()->doctor);
-       
         if($user->isNotBanned())
         {  
           $user->ban();
-          User::where('id',request()->doctor)->update([
-                'is_banned'=> true,
-          ]);
+          User::where('id',request()->doctor)->update(['is_banned'=> true]);
         }else {
             $user->unban();
-            User::where('id',request()->doctor)->update([
-                'is_banned'=> false,
-            ]);
+            User::where('id',request()->doctor)->update(['is_banned'=> false]);
         }
         return redirect()->route('doctors.index');
     }

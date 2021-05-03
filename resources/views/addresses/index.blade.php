@@ -2,23 +2,19 @@
 
 @section('content')
 <!-- Main content -->
- <section class="content">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
+<div class="row">
+    <div class="col-12">
+       <div class="card">
+          <div class="card-header">
               <h3 class="card-title">UserAddresses Tables</h3>
-              <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fas fa-times"></i></button>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button>
                 </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
+          </div> <!-- /.card-header -->
+          <div class="card-body table-responsive">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
                 <tr>
                   <th>#Id</th>
                   <th>User</th>
@@ -30,8 +26,8 @@
                   <th>Mainstreet </th>
                   <th>Actions</th>
                 </tr>
-                </thead>
-                <tbody>  
+              </thead>
+              <tbody>  
                 @foreach ($useraddresses as $address)              
                 <tr>
                   <td>{{$address->id}}</td>
@@ -47,22 +43,22 @@
                   <td><span class="badge badge-warning">Side street</span></td>
                   @endif
                   <td class="project-actions text-center"> 
-                      <div class="btn-group btn-group-sm">
-                       <div class="row">
-                      <a class="btn btn-primary btn-sm" href="{{route('useraddresses.show',['useraddress'=>$address->id])}}">
-                          <i class="fas fa-folder"> </i>View 
+                    <div class="btn-group btn-group-sm">
+                      <div class="row">
+                      <a class="btn btn-outline-info mr-2 btn-sm" href="{{route('useraddresses.show',['useraddress'=>$address->id])}}">
+                          <i class="fas fa-folder"> </i> View 
                       </a>
-                      <a class="btn btn-info btn-sm" href="{{route('useraddresses.edit',['useraddress'=>$address->id])}}">
-                          <i class="fas fa-pencil-alt"> </i>Edit
+                      <a class="btn btn-outline-warning mr-2 btn-sm" href="{{route('useraddresses.edit',['useraddress'=>$address->id])}}">
+                          <i class="fas fa-pencil-alt"> </i> Edit
                       </a>
-                          <form method="POST" action="{{route('useraddresses.destroy',['useraddress'=>$address->id])}}">
-                            @csrf 
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this address?');">
-                            <i class="fas fa-trash"></i>Delete</button>
-                          </form>
-                        </div>
-                      </div>
+                      <form method="POST" action="{{route('useraddresses.destroy',['useraddress'=>$address->id])}}">
+                        @csrf 
+                        @method('DELETE')
+                        <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this address?');">
+                        <i class="fas fa-trash"></i> Delete</button>
+                      </form>
+                     </div>
+                    </div>
                   </td>
                 </tr>
                 @endforeach
@@ -84,9 +80,8 @@
               {!! $useraddresses->links() !!}
             </div>
             <!-- /.card-body -->
-          </div>
-        </div>
-      </div>
- </section>    
- 
+    </div>
+  </div>
+</div>
+
  @endsection

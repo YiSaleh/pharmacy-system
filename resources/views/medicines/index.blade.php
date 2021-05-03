@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Main content -->
  <section class="content">
       <div class="row">
         <div class="col-12">
@@ -11,8 +10,6 @@
               <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fas fa-times"></i></button>
                 </div>
             </div>
              
@@ -42,28 +39,26 @@
 
                   <div class="btn-group btn-group-sm">
                     <div class="row">
-                      <a class="btn btn-primary btn-sm" href="{{route('medicines.show',['medicine'=>$medicine->id])}}">
-                      <i class="fas fa-folder"> </i>View</a>
+                      <a class="btn btn-outline-info mr-2 btn-sm" href="{{route('medicines.show',['medicine'=>$medicine->id])}}">
+                      <i class="fas fa-folder"> </i> View</a>
 
-                    <a class="btn btn-info btn-sm" href="{{route('medicines.edit',['medicine'=>$medicine->id])}}">
-                    <i class="fas fa-pencil-alt"> </i>Edit</a>
+                    <a class="btn btn-outline-warning mr-2 btn-sm" href="{{route('medicines.edit',['medicine'=>$medicine->id])}}">
+                    <i class="fas fa-pencil-alt"> </i> Edit</a>
         
                     <form method="POST" action="{{route('medicines.destroy',['medicine'=>$medicine->id])}}">
                     @csrf
                   @method('DELETE')
-                      <button class="btn btn-danger btn-sm" type="submit"    onclick="return confirm('You are going to delete this medicines?,ok?');">
-                        <i class="fas fa-trash"></i>Delete</a></form>
+                      <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('You are going to delete this medicines?,ok?');">
+                        <i class="fas fa-trash"></i> Delete</a></form>
                   </td>
                 </tr>
                 @endforeach
 
                 </tfoot>
               </table>
-            </div>
-            <!-- /.card-body -->
+            </div>  <!-- /.card-body -->
           </div>
         </div>
       </div>
  </section>   
-
  @endsection

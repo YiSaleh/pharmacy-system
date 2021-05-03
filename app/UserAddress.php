@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; 
 
 
-class User_Address extends Model
+class UserAddress extends Model
 {
-    // use SoftDeletes;
     public $table = 'user_addresses';
     public $timestamps = false;
   
@@ -19,13 +18,11 @@ class User_Address extends Model
     public function User()
     {   
         return $this->belongsTo('App\User');
- 
     }
 
     public function area()
     {   
         return $this->belongsTo('App\Area');
- 
     }
 
 }

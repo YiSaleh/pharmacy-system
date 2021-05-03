@@ -26,7 +26,7 @@ class PharmacyRequest extends FormRequest
     public function rules()
     {
         return [
-           'name' => 'required',
+            'name' => 'required',
             'periority' => 'required',
             'area_id'=>'exists:areas,id',
         ];

@@ -11,8 +11,6 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
 use Spatie\Permission\Models\Role;
 
-
-
 class User extends Authenticatable implements MustVerifyEmail ,BannableContract
 //  BannableContract
 {
@@ -24,7 +22,10 @@ class User extends Authenticatable implements MustVerifyEmail ,BannableContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_banned',
+                    'name', 'email','avatar',
+                    'password', 'is_banned',
+                    'phone','date_of_birth',
+                    'national_id','gender' ,
     ];
 
     /**
@@ -47,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail ,BannableContract
 
     public function order()
     {
-        return $this->belongsToMany('App\Order');
+        return $this->belongsToMany('App\Order','user_order')->withTimestamps();
     }
 
     public function pharmacy()

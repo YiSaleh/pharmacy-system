@@ -13,7 +13,7 @@ class CreateOrderRelations extends Migration
      */
     public function up()
     {
-        Schema::create('orders_medicines', function (Blueprint $table) {
+        Schema::create('order_medicine', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('order_id');
@@ -23,7 +23,7 @@ class CreateOrderRelations extends Migration
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
 
         });
-        Schema::create('users_orders', function (Blueprint $table) {
+        Schema::create('user_order', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('order_id');

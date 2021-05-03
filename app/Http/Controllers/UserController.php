@@ -13,22 +13,18 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
+
     public function index()
     {
-       $users=User::role('user')->orderBy('id','asc')->paginate(5);
-        return view('users.index',[
-            'users'=> $users,
-        ]);
+        $users=User::role('user')->orderBy('id','asc')->paginate(5);
+        return view('users.index',['users'=> $users ]);
     }
 
     public function show()
     {
-        return view('users.show',[
-            'user'=> User::find(request()->user),
-        ]);
+        return view('users.show',['user'=> User::find(request()->user) ]);
     }
 
-    // function to create new user
     public function create()
     {
         return view('users.create');
@@ -36,50 +32,39 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $req)
     {   
-        $user = new User();
+        $req['password'] = Hash::make($req->password);
+        $user = User::create($req->validated());
+
         if ($req->file('profile_image')->isValid()) {
             $user->avatar= $req->profile_image->store('uploads','public');
+            $user->save();
         }         
-        
-        $user->name = $req->name;
-        $user->email = $req->email;
-        $user->gender = $req->gender;
-        $user->password =Hash::make($req->password);
-        $user->date_of_birth = $req->date_of_birth;
-        $user->phone = $req->phone;
-        $user->national_id = $req->national_id;
 
-        $user->save();
-        $role=Role::find(4);
-        $user->assignRole($role);
+        $user->assignRole('user');
         return redirect()->route('users.index');
     }
     
     public function edit($user)
     {
-        return view('users.edit',[
-            'user' => User::find($user),
-        ]);
+        return view('users.edit',['user' => User::find($user)]);
     }
 
     public function update(UpdateUserRequest $request)
     {   
-        $user= $request->user();
-        if ($request->file('profile_image')->isValid()) {
-            $user->avatar= $request->profile_image->store('uploads','public');
-        }         
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->password =Hash::make($request->password);
-        $user->date_of_birth = $request->date_of_birth;
-        $user->phone = $request->phone;
-        $user->national_id = $request->national_id;
+        if ($request->hasFile('profile_image')) {
+            $request->file('profile_image')->isValid();
+            $avatar= $request->profile_image->store('uploads','public');
+        }else{
+            $avatar=User::where('id',$request->user)->value('avatar');
+        }
+        
+        $request['avatar'] = $avatar ;
+        $request['password'] = Hash::make($request->password);
 
-        $user->save();
+        User::where('id',$request->user)->update($request);   
+
         return redirect()->route('users.index');
-
     }
-
 
     public function destroy()
     {    

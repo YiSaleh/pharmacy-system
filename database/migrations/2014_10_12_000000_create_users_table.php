@@ -24,14 +24,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('date_of_birth')->nullable(); 
             $table->bigInteger('national_id')->unique();  
             $table->enum('gender', array('Female', 'Male'));
-            $table->boolean('is_banned')->nullable();
+            $table->boolean('is_banned')->default(false)->nullable();
             $table->string('avatar')->default('default.jpg');
             $table->string('phone',100);
-            // $table->unsignedBigInteger('pharmacy_id');
-            // $table->foreign('pharmacy_id')->references('id')->on('pharmacies')->onDelete('cascade');
-
-          
-
+    
         });
 
         

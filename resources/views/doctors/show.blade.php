@@ -22,7 +22,6 @@
                     <dd class="col-sm-8">{{$doctor->name}}</dd>
                     <dt class="col-sm-4">Email :</dt>
                     <dd class="col-sm-8">{{$doctor->email}}</dd>
-                    <!-- <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd> -->
                     <dt class="col-sm-4">Phone :</dt>
                     <dd class="col-sm-8">{{$doctor->phone}}</dd>
                     <dt class="col-sm-4">Pharmacy Name :</dt>

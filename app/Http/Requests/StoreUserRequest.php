@@ -25,7 +25,6 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {   
-        // dd(request()->all());
         return [
             'name'=>'required|min:3|string',
             'gender' => [

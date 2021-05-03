@@ -17,10 +17,9 @@ class RevenueController extends Controller
             ['status', '=', 'delivered'],
         ])->value('id');
 
-        foreach ($orders as  $value) {
+        // foreach ($orders as  $value) {
             
-        }
-
+        // }
      }
 
     public function index(){

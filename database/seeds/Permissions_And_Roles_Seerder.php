@@ -58,7 +58,7 @@ class Permissions_And_Roles_Seerder extends Seeder
        $p63=Permission::create(['name' => 'delete medicine']);
 
        //area permission
-        $p70=Permission::create(['name' => 'create area']);
+       $p70=Permission::create(['name' => 'create area']);
        $p71=Permission::create(['name' => 'show area']);
        $p72=Permission::create(['name' => 'edit area']);
        $p73=Permission::create(['name' => 'delete area']);

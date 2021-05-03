@@ -13,23 +13,16 @@
   </style>
  </head>
 
-
-
-<form role="form"  method="POST" action="{{route('orders.store',['order'=>$order->id])}}">
+<form role="form" method="POST" action="{{route('orders.store',['order'=>$order->id])}}">
     @csrf
    
-<div class="col-6">
-<label align:center>User Name </label>
-<select class="form-control" name="user_id">
-
-<option value="{{$user->id}}">{{$user->name}}</option>
-
-</select>
-</div>
-                 
-   <!-- enter medicine name price and quantity  -->
-   <body>
-  <br />
+    <div class="col-6">
+      <label align:center>User Name </label>
+      <select class="form-control" name="user_id">
+        <option value="{{$user->id}}">{{$user->name}}</option>
+      </select>
+    </div>
+                
   <div class="card-body">
   <label for="exampleInput">Select a drug </label>
       <div class="form-group">
@@ -40,13 +33,7 @@
    {{ csrf_field() }}
   </div>
 
-     <!-- enter medicine quantity  -->
-
-
   <div class="card-body col-6">  
-                  
-
-                      <!-- enter medicine qty  -->
 
 <div class="form-group col-6">
  <label for="InputBuildingNum">Quantity </label>
@@ -73,7 +60,7 @@
 
 
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
 
 $('#name').keyup(function(){ 
        var query = $(this).val();

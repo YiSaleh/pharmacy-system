@@ -7,10 +7,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <a class="btn btn-outline-success btn-md ml-5" href="{{route('areas.create')}}"><i class="fas fa-plus"></i> New Area</a>
             </div>
-            <!-- <div class="row mt-3"> <a class="btn btn-primary btn-sm ml-5" href="{{route('areas.create')}}">
-                          <i class="fas fa-folder"> </i>Create New Area</a></div> -->
             <!-- /.card-header -->
             <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
@@ -30,16 +28,16 @@
                   <td>{{$area->created_at}}</td>
                   <td class="project-actions text-left"> 
                     <div class="btn-group btn-group-sm">
-                      <a class="btn btn-primary btn-sm " href="{{route('areas.show',['area'=>$area->id])}}">
-                          <i class="fas fa-folder"> </i>View</a>
+                      <a class="btn btn-outline-info btn-sm mr-2 " href="{{route('areas.show',['area'=>$area->id])}}">
+                          <i class="fas fa-folder"> </i> View</a>
 
-                      <a class="btn btn-info btn-sm " href="{{route('areas.edit',['area'=>$area->id])}}">
-                        <i class="fas fa-pencil-alt"> </i>Edit </a>
+                      <a class="btn btn-outline-warning btn-sm mr-2 " href="{{route('areas.edit',['area'=>$area->id])}}">
+                        <i class="fas fa-pencil-alt"> </i> Edit </a>
                       <form method="POST" action="{{route('areas.destroy',['area'=>$area->id])}}">
                         @csrf 
                         @method('DELETE')
-                          <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this area?');">
-                            <i class="fas fa-trash"></i>Delete</button>
+                          <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this area?');">
+                            <i class="fas fa-trash"></i> Delete</button>
                       </form>
                 </tr>
                 @endforeach

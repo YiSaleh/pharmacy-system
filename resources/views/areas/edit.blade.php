@@ -5,14 +5,14 @@
     @csrf
         @method('PUT')
         <div class="form-group">
-                    <label for="name">Area name </label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{$area->name}}">
-                  </div>
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
+          <label for="name">Area name </label>
+          <input type="text" class="form-control" id="name" name="name" value="{{$area->name}}">
+        </div>
+        
+        <div class="card-footer">
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+      </div>
 </form>
 
 @endsection

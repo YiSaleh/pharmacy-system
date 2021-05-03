@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -50,58 +49,50 @@ use Illuminate\Support\Facades\Auth;
 ?>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Authentication Links -->
+          @guest
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+              </li>
+              
+          @else
+              <li class="nav-item dropdown">
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      {{ Auth::user()->name }} <span class="caret"></span>
+                  </a>
 
-                    </ul>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                          {{ __('Logout') }}
+                      </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                           
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </li>
+          @endguest
+      </ul>
+        </div>
+    </div>
+  </nav>
   <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-     
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -113,7 +104,7 @@ use Illuminate\Support\Facades\Auth;
           <a href="#" class="d-block"></a>
         </div>
       </div>
-
+    
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -127,7 +118,6 @@ use Illuminate\Support\Facades\Auth;
               </p>
             </a>
             <ul class="nav nav-treeview">
-               
               
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -145,27 +135,28 @@ use Illuminate\Support\Facades\Auth;
                   <p>Create Address</p>
                 </a>
               </li>
-               @endrole
 
-               @role('admin')
               <li class="nav-item">
                 <a href="{{route('areas.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Area</p>
                 </a>
               </li>
-              @endrole
 
-              @role('admin')
+              <li class="nav-item">
+                <a href="{{route('users.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create User</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{route('owners.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Owner</p>
                 </a>
               </li>
-              @endrole
 
-              @role('admin')
                <li class="nav-item">
                 <a href="{{route('pharmacy.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -194,7 +185,7 @@ use Illuminate\Support\Facades\Auth;
          
             @role('admin|owner|doctor')
               <li class="nav-item">
-                <a href="{{route('orders.index')}}" class="nav-link">
+                <a href="{{route('orders.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Order</p>
                 </a>
@@ -228,63 +219,21 @@ use Illuminate\Support\Facades\Auth;
                   <p>Addresses</p>
                 </a>
               </li>
-              @endrole
-
-              @role('admin')
+      
               <li class="nav-item">
                 <a href="{{route('areas.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Areas</p>
                 </a>
               </li>
-                 @endrole
-
-                 @role('admin')
+ 
               <li class="nav-item">
                 <a href="{{route('owners.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Owners</p>
                 </a>
               </li>
-              @endrole
 
-                @role('admin|owner')
-              <li class="nav-item">
-                <a href="{{route('pharmacy.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pharmacies</p>
-                </a>
-              </li>
-              @endrole
-
-               @role('admin|owner')
-              <li class="nav-item">
-                <a href="{{route('doctors.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Doctors</p>
-                </a>
-              </li>
-              @endrole
-
-              @role('admin|owner|doctor')
-              <li class="nav-item">
-                <a href="{{route('medicines.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Medicines</p>
-                </a>
-              </li>
-              @endrole
-                 
-              @role('admin|owner|doctor')
-              <li class="nav-item">
-                <a href="{{route('orders.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Orders</p>
-                </a>
-              </li>
-
-              @endrole
-            @role('admin')
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -292,12 +241,42 @@ use Illuminate\Support\Facades\Auth;
                 </a>
                </li>
             @endrole
-             
+
+            @role('admin|owner')
+              <li class="nav-item">
+                <a href="{{route('pharmacy.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pharmacies</p>
+                </a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="{{route('doctors.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Doctors</p>
+                </a>
+              </li>
+            @endrole
+
+            @role('admin|owner|doctor')
+              <li class="nav-item">
+                <a href="{{route('medicines.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Medicines</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('orders.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Orders</p>
+                </a>
+              </li>
+            @endrole
            </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -318,9 +297,10 @@ use Illuminate\Support\Facades\Auth;
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- Main content -->
-    @yield('content')
-    <!-- /.content -->
+
+    <main>
+      @yield('content')
+    </main>
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -349,10 +329,6 @@ use Illuminate\Support\Facades\Auth;
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
 <script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
 <script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>

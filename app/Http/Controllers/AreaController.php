@@ -15,32 +15,30 @@ class AreaController extends Controller
      public function create(){
     	return view('areas.create');
     }
-    public function store(){
-    	Area::create([
-    		'name'=>request()->name]);
+    public function store()
+    {
+    	Area::create(request()->all());
     	return redirect()->route('areas.index');
     }
-     public function destroy(){
-        $area_id=request()->area;
-         Area::where('id',$area_id)->delete();
+
+    public function destroy()
+    {
+         Area::where('id',request()->area)->delete();
         return redirect()->route('areas.index');
     }
-    public function show(){
-    	$Request= request();
-    	$area_id=$Request->area;
-    	$area=Area::find($area_id);
+    public function show()
+    {
+    	$area=Area::find(Request()->area);
     	return view('areas.show',['area'=>$area]);
     }
    
      public function edit(){
-    	$area_id=request()->area;
-    	$area=Area::find($area_id);
+    	$area=Area::find(request()->area);
     	return view('areas.edit',['area'=>$area]);
     }
-    public function update(){
-		$area_id=request()->area;
-    	Area::find($area_id)->update([
-            'name'=>request()->name]);
+    public function update()
+    {
+    	Area::find(request()->area)->update(request()->all());
     	return redirect()->route('areas.index');
     }
 }

@@ -25,7 +25,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $user= $this->user();
          return [
         
                 'name'=>'min:3|string',

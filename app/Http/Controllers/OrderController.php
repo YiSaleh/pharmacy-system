@@ -20,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
-        return view('orders.index',['orders'=>$orders,]);
+        return view('orders.index',['orders'=>$orders]);
     }
     
 
@@ -48,35 +48,27 @@ class OrderController extends Controller
     public function show()
     {
     $order = Order::find(request()->order);
-
-    return view('orders.show',[
-        'order'=> $order,
-    ]);
+    return view('orders.show',['order'=> $order]);
     }
 
     public function create()
     {     
-          $req=request()->order;
-         $order=Order::find(request()->order);
-         $user=$order->user[0];
+        $order=Order::find(request()->order);
+        $user=$order->user[0];
         return view('orders.create',['order'=>$order,
-             'user'=>$user,
-             'addresses'=>User_Address::get(),
+            'user'=>$user,
+            'addresses'=>User_Address::get(),
             'medicines'=>Medicine::get(),
             ]);
     }
 
     public function store()
     {    
-    // dd(request()->order);
-        $name=request()->medicine_id;
-        $id=Medicine::where('name',$name)->value('id');
        Order::find(request()->order)->update([
             'status' => 'waiting',
             'user_address_id'=>request()->user_address_id,
         ]);
 
-     
         Order_Medicine::create([
             'order_id'=>request()->order,
             'medicine_id' =>request()->medicine_id,
@@ -88,15 +80,12 @@ class OrderController extends Controller
     
     public function edit()
     {  
-       $order=Order::find(request()->order);
-         dd($order->user[0]);
-        return view('orders.edit',[
+       return view('orders.edit',[
             'orders'=>Order::find(request()->order),
             'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
             'users' => User::get(),
             'useraddresses'=>User_Address::get(),
             'pharmacies'=>Pharmacy::get(),
-
         ]);
     }
 

@@ -10,63 +10,40 @@ class MedicineController extends Controller
     public function index()
     {
         $medicines=Medicine::all();
-        return view('medicines.index',[
-            'medicines'=> $medicines,
-        ]);
+        return view('medicines.index',['medicines'=> $medicines]);
     }
 
-    
     public function show()
     {
-    $medicine = Medicine::find(request()->medicine);
-    return view('medicines.show',[
-        'medicine'=> $medicine,
-    ]);
+        $medicine = Medicine::find(request()->medicine);
+        return view('medicines.show',['medicine'=> $medicine]);
     }
 
     public function create()
     {  
-        return view('medicines.create',[
-            'medicines' => Medicine::get(),
-           
-        ]);
+        return view('medicines.create',['medicines' => Medicine::get() ]);
     }
 
     public function store()
     {    
-        Medicine::create([
-            'name' => request()->name,
-            'price' => request()->price,
-            'type' => request()->type,
-            'quantity'=> request()->quantity,
-           
-        ]);
+        Medicine::create(request()->all());
         return redirect()->route('medicines.index');
     }
 
     public function edit()
     { 
-            $medicineId=request()->medicine;
-    	$medicine = Medicine::find($medicineId);
+    	$medicine = Medicine::find(request()->medicine);
     	return view('medicines.edit',['medicine'=>$medicine]);
-       
     }
-    public function update(){
-		$medicineId=request()->medicine;
-        
-        Medicine::find($medicineId)->update([
-            'name'=>request()->name,
-            'price'=>request()->price,
-            'type'=>request()->type,
-            'quantity'=>request()->quantity
-            ]);
+
+    public function update()
+    {
+        Medicine::find(request()->medicine)->update(request()->all());
     	return redirect()->route('medicines.index');
     }
 
-
     public function destroy(){
-        $medicineId =request()->medicine;
-        $medicine=Medicine::find($medicineId);
+        $medicine=Medicine::find(request()->medicine);
         $medicine->delete();
         return redirect()->route('medicines.index');
      }
