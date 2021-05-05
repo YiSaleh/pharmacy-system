@@ -14,7 +14,7 @@
       </div>
 
       <div class="card-body table-responsive">
-        <table id="example2" class="table table-bordered table-hover">
+        <table id="orderTable" class="table table-bordered table-hover">
           <thead>
           <tr>
             <th>ID</th>
@@ -81,7 +81,6 @@
                     <i class="fas fa-trash"> </i> Delete</a></form>
           </td>
         </tr>
-        
           @endforeach
           </tbody>
           <tfoot>
@@ -101,10 +100,14 @@
         
         </table>
         {{ $orders->links() }}
-      </div>
-      <!-- /.card-body -->
+      </div> <!-- /.card-body -->
     </div>
   </div>
 </div> 
  
- @endsection
+<script>
+ $(document).ready( function () {
+    $('#orderTable').DataTable( );
+  });
+</script>
+@endsection

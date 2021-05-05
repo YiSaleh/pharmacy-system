@@ -81,8 +81,8 @@
           @enderror
         </div>
               
-  <div class="card-footer">
-    <button type="submit" class="btn btn-outline-success"> Create </button>
+  <div class="text-center my-5">
+    <button type="submit" class="btn btn-outline-success"> Submit </button>
   </div>
 </form>
 

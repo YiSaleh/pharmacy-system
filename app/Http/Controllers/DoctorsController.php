@@ -27,20 +27,15 @@ class DoctorsController extends Controller
        elseif ($user->hasRole('owner')) {
         $doctors=User::role('doctor')->where('pharmacy_id',$user->pharmacy_id)->orderBy('id','asc')->paginate(5);
        }
-
-       return view('doctors.index',[
-        'doctors'=> $doctors,
-        ]);
+       dd($doctors[0]->pharmacy);
+       return view('doctors.index',['doctors'=> $doctors]);
     }
 
     public function show()
     {
-        return view('doctors.show',[
-            'doctor'=> User::find(request()->doctor),
-        ]);
+        return view('doctors.show',['doctor'=> User::find(request()->doctor)]);
     }
 
-    // function to create new user
     public function create()
     {
         return view('doctors.create',['pharmacies' =>  Pharmacy::all() ]);
@@ -50,13 +45,13 @@ class DoctorsController extends Controller
     {   
         $loggedInUser=User::find(Auth::id());
         if($loggedInUser->hasRole('admin'))
-            {
-                $pharmacyId= $req->pharmacy_id;
-            }
+        {
+            $pharmacyId= $req->pharmacy_id;
+        }
         elseif ($loggedInUser->hasRole('owner'))
-            {
-                $pharmacyId=$loggedInUser->pharmacy_id;
-            }
+        {
+            $pharmacyId=$loggedInUser->pharmacy_id;
+        }
            
         $req['pharmacy_id'] = $pharmacyId;
         $req['password'] = Hash::make($req->password);

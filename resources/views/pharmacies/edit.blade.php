@@ -26,13 +26,13 @@
             <input type="hidden" id="area" name="area_id" value="{{$pharmacy->area_id}}" readonly> 
             <input type="text" class="form-control" value="{{$pharmacy->area->name}}" readonly>
           @endrole
+          @role('admin')
             <select class="form-control" name="area_id">
-              @role('admin')
               @foreach($areas as $area)  
                 <option value="{{$area->id}}" {{ ($pharmacy->area_id === $area->id)? "selected" : "" }}>{{$area->name}}</option>
-              @endforeach
-              @endrole          
+              @endforeach  
             </select>
+            @endrole   
         </div>
 <!-- ######################################################################################################################### -->
       <div class="form-group">
@@ -44,7 +44,7 @@
           </select>
       </div>
 
-      <div class="card-footer">
+      <div class="text-center my-5">
         <button type="submit" class="btn btn-outline-primary">Submit</button>
       </div>
 

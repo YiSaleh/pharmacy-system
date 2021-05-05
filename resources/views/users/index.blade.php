@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Main content -->
 <div class="row">
   <div class="col-12">
       <div class="card">
@@ -11,8 +10,7 @@
               <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fas fa-minus"></i></button>
             </div>
-          </div>
-        <!-- /.card-header -->
+          </div>  <!-- /.card-header -->
         <div class="card-body table-responsive">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
@@ -76,8 +74,7 @@
             </tfoot>
           </table>
           {!! $users->links() !!}
-        </div>
-        <!-- /.card-body -->
+        </div>  <!-- /.card-body -->
       </div>
     </div>
   </div>

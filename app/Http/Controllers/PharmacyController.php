@@ -9,19 +9,16 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\PharmacyRequest;
 
-
 class PharmacyController extends Controller
 {
      public function index(){
-        $user=auth()->user();
-        dd($user);
-        if($user->hasRole('admin'))
+        if(auth()->user()->hasRole('admin'))
         {
             $pharmacies=Pharmacy::orderBy('id' , 'asc')->paginate(5);
         }
-        elseif($user->hasRole('owner'))
+        elseif(auth()->user()->hasRole('owner'))
         {
-            $pharmacies=Pharmacy::where('owner_id',$user->id)->paginate(5);
+            $pharmacies=Pharmacy::where('owner_id',auth()->user()->id)->paginate(5);
         }
     	return view('pharmacies.index',['pharmacies'=>$pharmacies]);
     }

@@ -15,33 +15,20 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
 
-
-
-
 class UserController extends Controller
 {
-    public function store(StoreUserRequest $user_valid)
+    public function store(StoreUserRequest $request)
     {
-     
-        $user = new User();
-        if ($user_valid->file('profile_image')->isValid()) {
-            $user->avatar= $user_valid->profile_image->store('uploads','public');
+        $request['password'] = Hash::make($request->password);
+        $user = User::create($request->validated());
+        if ($request->file('profile_image')->isValid()) {
+            $user->avatar= $request->profile_image->store('uploads','public');
+            $user->save();
         }         
         
-        $user->name = $user_valid->name;
-        $user->email = $user_valid->email;
-        $user->gender = $user_valid->gender;
-        $user->password =Hash::make($user_valid->password);
-        $user->date_of_birth = $user_valid->date_of_birth;
-        $user->phone = $user_valid->phone;
-        $user->national_id = $user_valid->national_id;
-
-        $user->save();
-        $role=Role::find(4);
-        $user->assignRole($role);
+        $user->assignRole('user');
         event(new Registered($user));
         return response()->json(['status'=>"success"]);
-
     }
 
     public function login(Request $request )
@@ -49,8 +36,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'device_name' => 'required'
-             
+            'device_name' => 'required'    
         ]);
     
         $user = User::where('email', $request->email)->first();
@@ -59,27 +45,16 @@ class UserController extends Controller
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
-        }
-         
-         
-         return response()->json(['User Info'=>$user,'Access Token'=>$user->createToken($request->device_name)->plainTextToken]);
-    
+        } 
+        return response()->json(['User Info'=>$user,'Access Token'=>$user->createToken($request->device_name)->plainTextToken]);
     }
+    
     public function update(UpdateUserRequest $request )
     {
-        $user= $request->user();
         if ($request->file('profile_image')->isValid()) {
-            $user->avatar= $request->profile_image->store('uploads','public');
-        }         
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->password =Hash::make($request->password);
-        $user->date_of_birth = $request->date_of_birth;
-        $user->phone = $request->phone;
-        $user->national_id = $request->national_id;
-
-        $user->save();
-        return response()->json(['status'=>'your data has been updated','User Info'=>$user]);
-
+            $request['avatar']= $request->profile_image->store('uploads','public');
+        }  
+        User::find($request->user)->update($request->validated());
+        return response()->json(['status'=>'your data has been updated']);
     }
 }

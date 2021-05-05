@@ -23,7 +23,6 @@ Route::get('/', function () {
 Auth::routes(['register' => false ,'verify' => true ]);
 Route::get('/home', ['uses'=>'HomeController@index','middleware' => ['auth','is-ban']])->name('home');
 
-
 Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/users','UserController@index')->name('users.index');
         Route::get('/users/create','UserController@create')->name('users.create');

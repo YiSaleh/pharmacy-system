@@ -63,7 +63,7 @@
                 @enderror
             </div>
 
-        <div class="card-footer">
+        <div class="teext-center my-5">
           <button type="submit" class="btn btn-outline-primary"> Update </button>
         </div>
     </div>

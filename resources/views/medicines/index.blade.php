@@ -14,26 +14,26 @@
             </div>
              
             <div class="card-body table-responsive">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="medicineTable" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Medicine Name</td>
-                  <td>Medicine Price</td>
-                  <td>Medicine Type</td>
-                  <td>Medicine Quantity</td>
-                  <td>Actions</td>
+                  <th>ID</th>
+                  <th>Medicine Name</th>
+                  <th>Medicine Price</th>
+                  <th>Medicine Type</th>
+                  <th>Medicine Quantity</th>
+                  <th>Actions</th>
                 </tr>
                 </tbody>
                 @foreach ($medicines as $medicine)  
 
                 <tfoot>
                 <tr>
-                  <th>{{$medicine->id}}</th>
-                  <th>{{$medicine->name}}</th>
-                  <th>{{$medicine->price}} $ </th>
-                  <th>{{$medicine->type}}</th>
-                  <th>{{$medicine->quantity}}</th>
+                  <td>{{$medicine->id}}</td>
+                  <td>{{$medicine->name}}</td>
+                  <td>{{$medicine->price}} $</td>
+                  <td>{{$medicine->type}}</td>
+                  <td>{{$medicine->quantity}}</td>
 
                   <td> 
 
@@ -60,5 +60,11 @@
           </div>
         </div>
       </div>
- </section>   
+ </section>  
+
+ <script>
+ $(document).ready( function () {
+    $('#orderTable').DataTable( );
+  });
+</script> 
  @endsection

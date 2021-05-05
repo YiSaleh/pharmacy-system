@@ -22,7 +22,7 @@
 <!-- ############################################################################################################################################## -->
         <div class="form-group">
           <label for="Password">Password</label>
-          <input type="password" class="form-control @error('password') is-invalid @enderror" id="Password" placeholder="Password" name="password" value="{{old('password)}}">
+          <input type="password" class="form-control @error('password') is-invalid @enderror" id="Password" placeholder="Password" name="password" value="{{old('password')}}">
           @error('password')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -63,8 +63,8 @@
         <div class="form-group">
               <label>Select Gender</label>
               <select class="form-control @error('gender') is-invalid @enderror" name='gender'>
-                <option value="female" >Female</option>
-                <option value="male" >Male</option>
+                <option value="Female" >Female</option>
+                <option value="Male" >Male</option>
               </select>
               @error('gender')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -92,9 +92,9 @@
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-              
-        <div class="card-footer">
-          <button type="submit" class="btn btn-outline-success"> Create </button>
+<!-- ################################################################################################################################## -->              
+        <div class="text-center my-5">
+          <button type="submit" class="btn btn-outline-success"> Submit </button>
         </div>
       
     </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Medicine;
 use App\Order;
-use App\Order_Medicine;
 use App\Pharmacy;
 use App\User_Order;
 use Illuminate\Http\Request;
@@ -18,46 +17,15 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    //
-
-
-    public function create() {
-        $request=request();
-
-       
-        $order = new Order();
-        $order->status = $request->input('order_status');        
-        $order->prescription = $request->input('prescription');
-        $order->is_insured = $request->input('is_insured');
-        $order->user_address_id = $request->input('user_address_id');
-        $order->pharmacy_id = $request->input('pharmacy_id');
-
-
-        $order->save();
-      
-        $userOrder = new User_Order(); 
-        $userOrder->user_id = $request->input('user_id');//user_order table
-        $userOrder->order_id = $request->input('order_id');//user_order table
-
-        $userOrder->save();
-        
- 
-       //  return  o$order::all()/;
-        
-         return response()->json([
-       'msg' => 'Order saved successfully!',
-       'order' => $order,
-       
-   ]);
-           
-         }
-
-
-
+    public function create() 
+    {
+        $order = Order::create(Request()->all());
+        $order->user()->create(request()->all());
+        return response()->json(['msg' => 'Order saved successfully!', 'order' => $order ]);    
+    }
 
     //TODO:// use joins
     public function view($id)
-
     {
       $order  = Order::firstWhere('id',$id);
       // $CustomOrder = DB::table('orders')->select('id as order_id', 'created_at','status')->where('id',$id)->get();
@@ -99,9 +67,8 @@ class OrderController extends Controller
 
     public function update(Request $request,$id)
     {
-
         $order = Order::firstWhere('id',$id); 
-        
+
         if(!$order || $order->status != "new"){
             return response()->json([
                 'msg' => 'order cannot be updated',
@@ -114,10 +81,7 @@ class OrderController extends Controller
         $order->doctor_id = $request->dr_id;
         $order->save();
      
-        return response()->json([
-        'msg' => 'order is updated succssfully!',
-        'order' => $order,
-      ]);
+        return response()->json(['msg' => 'order is updated succssfully!','order' => $order ]);
 
   }
 

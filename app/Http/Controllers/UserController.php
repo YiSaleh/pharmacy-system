@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
-
 class UserController extends Controller
 {
-
     public function index()
     {
         $users=User::role('user')->orderBy('id','asc')->paginate(5);
@@ -51,18 +49,15 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request)
     {   
-        if ($request->hasFile('profile_image')) {
-            $request->file('profile_image')->isValid();
+        if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid())
+        {
             $avatar= $request->profile_image->store('uploads','public');
         }else{
             $avatar=User::where('id',$request->user)->value('avatar');
         }
         
         $request['avatar'] = $avatar ;
-        $request['password'] = Hash::make($request->password);
-
         User::where('id',$request->user)->update($request);   
-
         return redirect()->route('users.index');
     }
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -14,12 +14,12 @@ class OwnerController extends Controller
 {
 
     public function index()
-        {
+    {
         $owners=User::role('owner')->orderBy('id','asc')->paginate(5);
-            return view('owners.index',['owners'=> $owners ]);
-        }
+         return view('owners.index',['owners'=> $owners ]);
+    }
 
-     public function show()
+    public function show()
     {
         return view('owners.show',['owner'=> User::find(request()->owner) ]);
     }

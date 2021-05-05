@@ -11,16 +11,13 @@
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fas fa-times"></i></button>
                 </div>
-            </div>
-            <!-- /.card-header -->
+            </div>   <!-- /.card-header -->
             <div class="card-body table-responsive">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Doctor_id</th>
+                  <th>Doctor ID</th>
                   <th>Doctor Name</th>
                   <th>National_id</th>
                   <th>Email</th>
@@ -55,21 +52,21 @@
                   @endif
                   
                   @role('admin')
-                  <td>{{$doctor->pharmacy->name}}</td>
+                  <td>{{$doctor->pharmacy}}</td>
                   @endrole
 
                   <td class="project-actions text-center "> 
                       <div class="btn-group btn-group-sm">
-                      <a class="btn btn-primary btn-sm" href="{{route('doctors.show',['doctor'=>$doctor->id])}}">
-                          <i class="fas fa-folder"> </i>View 
+                      <a class="btn btn-outline-info mr-2 btn-sm" href="{{route('doctors.show',['doctor'=>$doctor->id])}}">
+                          <i class="fas fa-folder"> </i> View 
                       </a>
-                      <a class="btn btn-info btn-sm" href="{{route('doctors.edit',['doctor'=>$doctor->id])}}">
+                      <a class="btn btn-outline-warning mr-2 btn-sm" href="{{route('doctors.edit',['doctor'=>$doctor->id])}}">
                           <i class="fas fa-pencil-alt"> </i>Edit
                       </a>
                       <form method="POST" action="{{route('doctors.destroy',['doctor'=>$doctor->id])}}">
                           @csrf 
                           @method('DELETE')
-                          <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
+                          <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
                             <i class="fas fa-trash"></i>Delete</button>
                       </form>
 
@@ -88,28 +85,9 @@
                 </tr>
                 @endforeach
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>Doctor_id</th>
-                  <th>Doctor Name</th>
-                  <th>National_id</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>gender</th>
-                  <th>Date_of_Birth</th>
-                  <th>Profile Image</th>
-                  <th>Created_at</th>
-                  <th>Banned</th>
-                  @role('admin')
-                  <th>Pharmacy Name</th>
-                  @endrole
-                  <th>Action</th>
-                </tr>
-                </tfoot>
               </table>
               {!! $doctors->links() !!}
-            </div>
-            <!-- /.card-body -->
+            </div>  <!-- /.card-body -->
           </div>
         </div>
       </div>

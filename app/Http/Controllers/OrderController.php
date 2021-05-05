@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\User;
-use APP\User_Order;
 use App\Medicine;
-use App\Order_Medicine;
 use App\Pharmacy;
-use App\User_Address;
+use App\UserAddress;
 
 use Illuminate\Support\Facades\DB;
 
@@ -22,42 +20,37 @@ class OrderController extends Controller
         $orders= Order::orderBy('created_at','desc')->with(['user','useraddress'])->paginate(5);
         return view('orders.index',['orders'=>$orders]);
     }
-    
 
     function autocomplete(Request $request)
     {
      if($request->get('query'))
      {
-            $query = $request->get('query');
-            $data = DB::table('medicines')
-                    ->where('name', 'LIKE', "%{$query}%")
-                    ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-            foreach($data as $row)
-            {
-            $output .= '
-            <li><a href="#">'.$row->name.'</a></li>
-            ';
-            }
-            $output .= '</ul>';
-            echo $output;
-            }
+        $query = $request->get('query');
+        $data = Medicine::where('name', 'LIKE', "%{$query}%")->get();
+        dd($data);
+        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+        foreach($data as $row)
+        {
+            $output .= '<li><a href="#">'.$row->name.'</a></li>';
+        }
+        $output .= '</ul>';
+        echo $output;
+        }
     }  
     
     
     public function show()
     {
-    $order = Order::find(request()->order);
-    return view('orders.show',['order'=> $order]);
+        $order = Order::find(request()->order);
+        return view('orders.show',['order'=> $order]);
     }
 
     public function create()
     {     
         $order=Order::find(request()->order);
-        $user=$order->user[0];
         return view('orders.create',['order'=>$order,
-            'user'=>$user,
-            'addresses'=>User_Address::get(),
+            'users'=>User::role('user')->get(),
+            'addresses'=>UserAddress::get(),
             'medicines'=>Medicine::get(),
             ]);
     }

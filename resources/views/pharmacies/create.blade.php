@@ -14,9 +14,9 @@
         <div class="form-group">
             <label>Select Pertority</label>
             <select class="form-control @error('periority') is-invalid @enderror" name='periority'>
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
             </select>
         </div>
         <div class="form-group">
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-      <div class="card-footer">
+      <div class="text-center mt-5">
         <button type="submit" class="btn btn-outline-success">Submit</button>
       </div>
 </form>

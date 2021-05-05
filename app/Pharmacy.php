@@ -9,8 +9,9 @@ class Pharmacy extends Model
 {
     use SoftDeletes;
 	protected $fillable = [
-        'name', 'periority' , 'area_id', 'owner_id',
+        'name', 'periority' ,'area_id','owner_id',
     ];
+
    public function area()
     {
         return $this->belongsTo('App\Area');

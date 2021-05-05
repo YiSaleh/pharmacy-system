@@ -6,11 +6,9 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">DataTable of Pharmacies</h3>
-      </div>
-      <div>
-        <a class="btn btn-danger btn-sm ml-3" href="{{route('pharmacy.trash')}}">
-        <i class="fas fa-trash"> </i>View Trash</a>
+        <h3 class="mx-2"> Pharmacies </h3>
+        <a class="btn btn-outline-dark btn-sm ml-3 float-right" href="{{route('pharmacy.trash')}}">
+        <i class="fas fa-trash"> </i> View Trash</a>
       </div>
       <div class="card-body table-responsive">
         <table id="example2" class="table table-bordered table-hover">
@@ -18,8 +16,9 @@
           <tr>
             <th> ID</th>
             <th>Name</th>
-            <th>Created At</th>
+            <th>Priority</th>
             <th>Area</th>
+            <th>Created At</th>
             <th>Actions </th>
           </tr>
           </thead>
@@ -28,9 +27,9 @@
           <tr>
             <td>{{$pharmacy->id}}</td>
             <td>{{$pharmacy->name}}</td>
-            <td>{{$pharmacy->created_at}}</td>
-            <!-- <td>{{$pharmacy->periority}}</td> -->
+            <td>{{$pharmacy->periority}}</td>
             <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td>
+            <td>{{$pharmacy->created_at}}</td>
             <td class="project-actions text-left"> 
               <div class="btn-group btn-group-sm">
                 <a class="btn btn-outline-info mr-2 btn-sm " href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
