@@ -15,7 +15,8 @@
     <div>  
       <div class="form-group">
         <label for="drugName">Drug</label>
-        <input type="text" name="order['medicine_id'][]" id="drugName" class="form-control input-lg" placeholder="Enter Drug Name" />
+        <input class="form-control"  id="medicine_id" type="hidden" name="medicine_id" required>
+        <input type="text" id="drugName" class="form-control input-lg" placeholder="Enter Drug Name" />
         <div id="druglist"></div>
       </div>
   
@@ -48,21 +49,22 @@ $(`#drugName`).keyup(function(){
        var query = $(this).val();
        if(query != '')
        {
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-         url:"{{ route('orders.autocomplete') }}",
-         method:"POST",
-         data:{query:query, _token:_token},
-         success:function(data){
-            $('#druglist').fadeIn();  
-            $('#druglist').html(data);
-         }
-        });
+          var _token = $('input[name="_token"]').val();
+          $.ajax({
+          url:"{{ route('orders.autocomplete') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+              $('#druglist').fadeIn();  
+              $('#druglist').html(data);
+          }
+          });
        }
    });
 
    $(document).on('click', 'li', function(){  
        $('#drugName').val($(this).text());  
+       $('#medicine_id').val($(this).val());
        $('#druglist').fadeOut();  
    });  
 

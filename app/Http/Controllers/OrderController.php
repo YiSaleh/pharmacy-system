@@ -27,11 +27,10 @@ class OrderController extends Controller
      {
         $query = $request->get('query');
         $data = Medicine::where('name', 'LIKE', "%{$query}%")->get();
-        dd($data);
-        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-        foreach($data as $row)
+        $output = '<ul class="dropdown-menu col-md-12" style="display:block; position:relative">';
+        foreach($data as $medicine)
         {
-            $output .= '<li><a href="#">'.$row->name.'</a></li>';
+            $output .= '<li class="px-4" value="'.$medicine->id .'">'.$medicine->name.'</li>';
         }
         $output .= '</ul>';
         echo $output;
@@ -57,7 +56,7 @@ class OrderController extends Controller
 
     public function store()
     {    
-       Order::find(request()->order)->update([
+       Order::create([
             'status' => 'waiting',
             'user_address_id'=>request()->user_address_id,
         ]);
