@@ -57,7 +57,7 @@ class UserController extends Controller
         }
         
         $request['avatar'] = $avatar ;
-        User::where('id',$request->user)->update($request);   
+        User::where('id',$request->user)->update($request->validated());   
         return redirect()->route('users.index');
     }
 

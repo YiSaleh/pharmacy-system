@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form" method="POST" action="{{route('owners.update',['owner'=>$owner->id])}}" enctype="multipart/form-data">
+<form role="form" method="POST" action="{{route('owners.update',['user'=>$owner->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
       <div class="card-body">

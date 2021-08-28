@@ -24,10 +24,9 @@ class DoctorsController extends Controller
        if($user->hasRole('admin')) {
         $doctors=User::role('doctor')->orderBy('id','asc')->paginate(5);
        }
-       elseif ($user->hasRole('owner')) {
+        elseif ($user->hasRole('owner')) {
         $doctors=User::role('doctor')->where('pharmacy_id',$user->pharmacy_id)->orderBy('id','asc')->paginate(5);
        }
-       dd($doctors[0]->pharmacy);
        return view('doctors.index',['doctors'=> $doctors]);
     }
 
@@ -36,8 +35,7 @@ class DoctorsController extends Controller
         return view('doctors.show',['doctor'=> User::find(request()->doctor)]);
     }
 
-    public function create()
-    {
+    public function create(){
         return view('doctors.create',['pharmacies' =>  Pharmacy::all() ]);
     }
 
@@ -73,17 +71,14 @@ class DoctorsController extends Controller
     public function update(UpdateUserRequest $request)
     {   
         $avatar= User::where('id',$request->user)->value('avatar');
-
+        $user = User::where('id',$request->user)->update($request->validated());
         if ($request->hasFile('profile_image')&& $request->file('profile_image')->isValid())
         { 
             File::delete(storage_path().'/app/public/'.$avatar);
             $avatar= $request->profile_image->store('uploads','public');
-            $request['avatar']=$avatar ;
+            $user->avatar =$avatar ;
         }   
-
-        User::where('id',$request->user)->update($request->validated());
         return redirect()->route('doctors.index');
-
     }
 
     public function banned()

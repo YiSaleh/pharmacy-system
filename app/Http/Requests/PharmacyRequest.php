@@ -36,7 +36,7 @@ class PharmacyRequest extends FormRequest
         return [
                 'name.required' => 'Please enter the Name field',
                 'title.unique' => 'This title already exits',
-                'periority.required' => 'Please enter the periority',
+                'periority.required' => 'Please enter the priority',
                 'area_id.required' => 'Please the choose an area',
 
             ];

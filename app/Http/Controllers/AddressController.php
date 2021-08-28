@@ -12,12 +12,12 @@ class AddressController extends Controller
     public function index()
     {
         $addresses= UserAddress::orderBy('id','asc')->paginate(10);
-        return view('addresses.index',['useraddresses'=>$addresses ]);
+        return view('addresses.index',['userAddresses'=>$addresses ]);
     }
 
     public function show()
     {
-        return view('addresses.show',['useraddress'=> UserAddress::find(request()->useraddress)]);
+        return view('addresses.show',['userAddress'=> UserAddress::find(request()->userAddress)]);
     }
 
     public function create()
@@ -28,27 +28,27 @@ class AddressController extends Controller
     public function store()
     {    
         UserAddress::create(request()->input());
-        return redirect()->route('useraddresses.index');
+        return redirect()->route('userAddresses.index');
     }
 
     public function edit()
     {  
         return view('addresses.edit',[
-            'useraddress' => UserAddress::find(request()->useraddress),
+            'userAddress' => UserAddress::find(request()->userAddress),
             'users' => User::role('user')->get(),
             'areas' => Area::all(),
         ]);
     }
 
-    public function update()
-    {
-        UserAddress::where('id',request()->useraddress)->update(request()->all());
-        return redirect()->route('useraddresses.index');
+    public function update(Request $request)
+    { 
+        UserAddress::find(request()->userAddress)->fill(request()->all())->save();
+        return redirect()->route('userAddresses.index');
     }
 
     public function destroy()
     {  
-        UserAddress::where('id',request()->useraddress)->delete();
-        return redirect()->route('useraddresses.index');
+        UserAddress::where('id',request()->userAddress)->delete();
+        return redirect()->route('userAddresses.index');
     }
 }

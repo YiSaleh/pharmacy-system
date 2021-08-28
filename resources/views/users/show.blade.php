@@ -4,9 +4,9 @@
 <div class="row">
     <div class="col-sm-10 offset-sm-1">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header mx-3">
                 <h3 class="card-title font-weight-bolder">
-                <i class="fas fa-text-width"></i>
+                <span class="text-success"><i class="fas fa-info-circle">
                     User Details
                 </h3>
             </div>   <!-- /.card-header -->
@@ -14,7 +14,7 @@
                 <div class="row pb-3">
                     <img class="col-4 ml-5" src="{{ asset('storage/'. $user->avatar)}}" style="width:100px; height:250px; border-radius:10%; margin-bottom:3rem;" alt="userImage">
                 </div>
-                <dl class="row">
+                <dl class="row mx-5">
                 <dt class="col-sm-4">User Name :</dt>
                 <dd class="col-sm-8">{{$user->name}}</dd>
                 <dt class="col-sm-4">Email :</dt>

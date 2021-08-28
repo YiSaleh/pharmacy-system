@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form role="form"  method="POST" action="{{route('useraddresses.store')}}">
+<form role="form"  method="POST" action="{{route('userAddresses.store')}}">
     @csrf
     <!-- input field to insert street name -->
       <div class="card-body">  
@@ -10,7 +10,7 @@
           <input type="text" class="form-control" id="streetName" placeholder="Enter street name" name="street_name" value="{{old('street_name')}}">
         </div>
 <!-- ############################################################################################################################################## -->
- <!-- input field to insert flate number  -->
+ <!-- input field to insert flat number  -->
         <div class="form-group">
           <label for="FlatNum">Flat Number </label>
           <input type="number" class="form-control" id="FlatNum" placeholder="Enter Flat Number ex:39" name="flat_no" value="{{old('flat_no')}}">
@@ -41,9 +41,9 @@
           </div>        
       </div>
 <!-- ############################################################################################################################################## -->
- <!-- input field to insert user name  by chosing from drop downlist-->
+ <!-- input field to insert user name  by choosing from drop downList-->
       <div class="form-group">
-        <label>Select User </label>
+        <label>Client </label>
           <select class="form-control" name="user_id">
             @foreach($users as $user)  
               <option value="{{$user->id}}">{{$user->name}}</option>
@@ -51,9 +51,9 @@
           </select>
       </div>
 <!-- ############################################################################################################################################## -->
- <!-- input field to insert Area name  by chosing from drop downlist-->
+ <!-- input field to insert Area name  by choosing from drop downList-->
       <div class="form-group">
-        <label>Select Area </label>
+        <label>Area </label>
           <select class="form-control" name="area_id">
             @foreach($areas as $area)  
               <option value="{{$area->id}}">{{$area->name}}</option>
@@ -62,9 +62,8 @@
       </div>
                  
       <div class="text-center mt-5">
-        <button type="submit" class="btn btn-outline-success">Submit</button>
-      </div>
-             
+        <button type="submit" class="btn btn-outline-success">Save</button>
+      </div>            
     </div>
 </form>
 

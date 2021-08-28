@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bolder">
-                    <i class="fas fa-text-width"></i> Doctor Details
+                <span class="text-success"><i class="fas fa-info-circle"> Doctor Details
                 </h3>
             </div> <!-- /.card-header -->
         <div class="card-body">
@@ -21,7 +21,7 @@
                 <dt class="col-sm-4">Phone :</dt>
                 <dd class="col-sm-8">{{$doctor->phone}}</dd>
                 <dt class="col-sm-4">Pharmacy Name :</dt>
-                <dd class="col-sm-8">{{$doctor->pharmacy->name}}</dd>
+                <dd class="col-sm-8">{{$doctor->pharmacy}}</dd>
                 <dt class="col-sm-4">Gender :</dt>
                 <dd class="col-sm-8">{{$doctor->gender}}</dd>
                 <dt class="col-sm-4">Date Of Birth :</dt>

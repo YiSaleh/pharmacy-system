@@ -27,10 +27,7 @@ class StoreUserRequest extends FormRequest
     {   
         return [
             'name'=>'required|min:3|string',
-            'gender' => [
-                'required',
-                Rule::in(['Male', 'Female']),
-            ],
+            'gender' => ['required',Rule::in(['Male', 'Female'])],
             'email' => 'required|email:rfc,dns|unique:users',
             'password'=>'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
             'phone'=>'required|regex:/^(?=.*?[0-9]).{11}$/i|numeric',

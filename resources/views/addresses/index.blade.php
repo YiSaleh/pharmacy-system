@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>  
-                @foreach ($useraddresses as $address)              
+                @foreach ($userAddresses as $address)              
                 <tr>
                   <td>{{$address->id}}</td>
                   <td>{{$address->User->name}}</td>
@@ -45,13 +45,13 @@
                   <td class="project-actions text-center"> 
                     <div class="btn-group btn-group-sm">
                       <div class="row">
-                      <a class="btn btn-outline-info mr-2 btn-sm" href="{{route('useraddresses.show',['useraddress'=>$address->id])}}">
+                      <a class="btn btn-outline-info mr-2 btn-sm" href="{{route('userAddresses.show',['userAddress'=>$address->id])}}">
                           <i class="fas fa-folder"> </i> View 
                       </a>
-                      <a class="btn btn-outline-warning mr-2 btn-sm" href="{{route('useraddresses.edit',['useraddress'=>$address->id])}}">
+                      <a class="btn btn-outline-warning mr-2 btn-sm" href="{{route('userAddresses.edit',['userAddress'=>$address->id])}}">
                           <i class="fas fa-pencil-alt"> </i> Edit
                       </a>
-                      <form method="POST" action="{{route('useraddresses.destroy',['useraddress'=>$address->id])}}">
+                      <form method="POST" action="{{route('userAddresses.destroy',['userAddress'=>$address->id])}}">
                         @csrf 
                         @method('DELETE')
                         <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this address?');">
@@ -72,12 +72,12 @@
                   <th>building Number</th>
                   <th>floor Number</th>
                   <th>Flat Number</th>
-                  <th>Mainstreet </th>
+                  <th>Main Street </th>
                   <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>
-              {!! $useraddresses->links() !!}
+              {!! $userAddresses->links() !!}
             </div>
             <!-- /.card-body -->
     </div>

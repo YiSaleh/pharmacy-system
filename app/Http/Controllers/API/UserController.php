@@ -21,8 +21,8 @@ class UserController extends Controller
     {
         $request['password'] = Hash::make($request->password);
         $user = User::create($request->validated());
-        if ($request->file('profile_image')->isValid()) {
-            $user->avatar= $request->profile_image->store('uploads','public');
+        if ($request->file('avatar')->isValid()) {
+            $user->avatar= $request->avatar->store('uploads','public');
             $user->save();
         }         
         
@@ -51,8 +51,8 @@ class UserController extends Controller
     
     public function update(UpdateUserRequest $request )
     {
-        if ($request->file('profile_image')->isValid()) {
-            $request['avatar']= $request->profile_image->store('uploads','public');
+        if ($request->file('avatar')->isValid()) {
+            $request['avatar']= $request->avatar->store('uploads','public');
         }  
         User::find($request->user)->update($request->validated());
         return response()->json(['status'=>'your data has been updated']);

@@ -55,18 +55,13 @@ class OrderController extends Controller
     }
 
     public function store()
-    {    
-       Order::create([
+    {  
+       $order = Order::create([
             'status' => 'waiting',
             'user_address_id'=>request()->user_address_id,
         ]);
 
-        Order_Medicine::create([
-            'order_id'=>request()->order,
-            'medicine_id' =>request()->medicine_id,
-            'quantity'=>request()->quantity
-        ]);
-       
+        $order->medicine()->createMany(request()->medicine);
         return redirect()->route('orders.index');
     }
     
@@ -74,9 +69,9 @@ class OrderController extends Controller
     {  
        return view('orders.edit',[
             'orders'=>Order::find(request()->order),
-            'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
+            // 'order_medicines' => Order_Medicine::where('order_id',request()->order->get()),
             'users' => User::get(),
-            'useraddresses'=>User_Address::get(),
+            'useraddresses'=>UserAddress::get(),
             'pharmacies'=>Pharmacy::get(),
         ]);
     }

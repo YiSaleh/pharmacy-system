@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bolder">
-                    <i class="fas fa-text-width"></i> Order Details
+                <span class="text-success"><i class="fas fa-info-circle">Order Details
                 </h3>
             </div>    <!-- /.card-header -->
             <div class="card-body">

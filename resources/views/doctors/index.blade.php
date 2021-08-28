@@ -66,16 +66,16 @@
                       <form method="POST" action="{{route('doctors.destroy',['doctor'=>$doctor->id])}}">
                           @csrf 
                           @method('DELETE')
-                          <button class="btn btn-outline-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
+                          <button class="btn btn-outline-danger btn-sm mr-2" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
                             <i class="fas fa-trash"></i>Delete</button>
                       </form>
 
                       @if($doctor->isNotBanned())
-                      <a class="btn btn-success btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
+                      <a class="btn btn-outline-success btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
                            <i class="fas fa-ban"></i> Ban
                       </a>
                       @else
-                      <a class="btn btn-warning btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
+                      <a class="btn btn-outline-warning btn-sm" href="{{route('doctors.banned',['doctor'=>$doctor->id])}}">
                            <i class="fas fa-ban"></i> Unban
                       </a>
                       @endif

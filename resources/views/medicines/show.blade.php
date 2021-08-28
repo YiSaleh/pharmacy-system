@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title font-weight-bolder">
-                    <i class="fas fa-text-width"></i>  Medicine description
+                    <span class="text-success"><i class="fas fa-info-circle">  Medicine description
                     </h3>
                 </div> <!-- /.card-header -->
                 <div class="card-body">

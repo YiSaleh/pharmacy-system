@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-                <a class="btn btn-outline-success btn-md ml-5" href="{{route('areas.create')}}"><i class="fas fa-plus"></i> New Area</a>
+                <a class="btn btn-outline-success btn-md ml-3" href="{{route('areas.create')}}"><i class="fas fa-plus"></i> New Area</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive">
@@ -26,7 +26,7 @@
                   <td>{{$area->id}}</td>
                   <td>{{$area->name}}</td>
                   <td>{{$area->created_at}}</td>
-                  <td class="project-actions text-left"> 
+                  <td class="project-actions text-center"> 
                     <div class="btn-group btn-group-sm">
                       <a class="btn btn-outline-info btn-sm mr-2 " href="{{route('areas.show',['area'=>$area->id])}}">
                           <i class="fas fa-folder"> </i> View</a>
@@ -45,7 +45,6 @@
               </table>
               {{ $areas->links() }}
             </div>
-            <!-- /.card-body -->
           </div>
         </div>
       </div>

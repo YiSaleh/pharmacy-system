@@ -26,6 +26,7 @@ class AreaController extends Controller
          Area::where('id',request()->area)->delete();
         return redirect()->route('areas.index');
     }
+
     public function show()
     {
     	$area=Area::find(Request()->area);
@@ -33,11 +34,9 @@ class AreaController extends Controller
     }
    
      public function edit(){
-    	$area=Area::find(request()->area);
-    	return view('areas.edit',['area'=>$area]);
+    	return view('areas.edit',['area'=>Area::findOrFail(request()->area)]);
     }
-    public function update()
-    {
+    public function update(){
     	Area::find(request()->area)->update(request()->all());
     	return redirect()->route('areas.index');
     }

@@ -26,17 +26,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
          return [
-        
                 'name'=>'min:3|string',
                 'email'=>'unique:users',
-                'gender' => [
-                     
-                    Rule::in(['Male', 'Female']),
-                ],
+                'gender' => [Rule::in(['Male', 'Female'])],
                 'password'=>'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i',
                 'phone'=>'regex:/^(?=.*?[0-9]).{11}$/i|numeric',
-                'national_id'=>['regex:/^(?=.*?[0-9]).{14}$/i','numeric',
-                                Rule::unique('users')->ignore($this->user)],
+                'national_id'=>['regex:/^(?=.*?[0-9]).{14}$/i','numeric',Rule::unique('users')->ignore(request()->user)],
                 'password_confirmation'=>'same:password',
                 'date_of_birth'=>'date',
                 'profile_image'=>'image|mimes:jpeg,bmp,png,jpg|sometimes',

@@ -30,7 +30,7 @@
             <td>{{$pharmacy->periority}}</td>
             <td>{{$pharmacy->area ? $pharmacy->area->name : 'not exist'}}</td>
             <td>{{$pharmacy->created_at}}</td>
-            <td class="project-actions text-left"> 
+            <td class="project-actions text-center"> 
               <div class="btn-group btn-group-sm">
                 <a class="btn btn-outline-info mr-2 btn-sm " href="{{route('pharmacy.show',['pharmacy'=>$pharmacy->id])}}">
                     <i class="fas fa-folder"> </i>View</a>

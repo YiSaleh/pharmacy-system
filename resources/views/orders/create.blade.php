@@ -15,17 +15,14 @@
     <div>  
       <div class="form-group">
         <label for="drugName">Drug</label>
-        <input class="form-control"  id="medicine_id" type="hidden" name="medicine_id" required>
-        <input type="text" id="drugName" class="form-control input-lg" placeholder="Enter Drug Name" />
-        <div id="druglist"></div>
+        <input class="form-control"  id="medicine_id" type="hidden" name="order['medicine_id'][0]" required>
+        <input type="text" id="drug[0]" class="form-control input-lg drugName" placeholder="Enter Drug Name">
+        <div id="drugList"></div>
       </div>
-  
-
-    <div class="form-group">
-      <label for="quantity">Quantity </label>
-      <input type="number" class="form-control input-lg" id="quantity" placeholder="Drug Quantity " name="order['quantity'][]">
-    </div>
-
+      <div class="form-group">
+        <label for="quantity">Quantity </label>
+        <input type="number" class="form-control input-lg" id="quantity" placeholder="Drug Quantity" name="order['quantity'][0]">
+      </div>
     <div>
     <div class="form-group">
       <label for="address">Address </label>
@@ -45,7 +42,7 @@
 
 $(document).ready(function(){
 
-$(`#drugName`).keyup(function(){ 
+$(`.drugName`).keyup(function(){ 
        var query = $(this).val();
        if(query != '')
        {
@@ -55,17 +52,17 @@ $(`#drugName`).keyup(function(){
           method:"POST",
           data:{query:query, _token:_token},
           success:function(data){
-              $('#druglist').fadeIn();  
-              $('#druglist').html(data);
+              $('#drugList').fadeIn();  
+              $('#drugList').html(data);
           }
           });
        }
    });
 
    $(document).on('click', 'li', function(){  
-       $('#drugName').val($(this).text());  
+       $('.drugName').val($(this).text());  
        $('#medicine_id').val($(this).val());
-       $('#druglist').fadeOut();  
+       $('#drugList').fadeOut();  
    });  
 
 });

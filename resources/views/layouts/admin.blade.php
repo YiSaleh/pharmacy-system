@@ -116,7 +116,7 @@ use Illuminate\Support\Facades\Auth;
             <ul class="nav nav-treeview">
               @role('admin')
               <li class="nav-item">
-                <a href="{{route('useraddresses.create')}}" class="nav-link">
+                <a href="{{route('userAddresses.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Address</p>
                 </a>
@@ -190,7 +190,7 @@ use Illuminate\Support\Facades\Auth;
             <ul class="nav nav-treeview">
               @role('admin')
               <li class="nav-item">
-                <a href="{{route('useraddresses.index')}}" class="nav-link">
+                <a href="{{route('userAddresses.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Addresses</p>
                 </a>

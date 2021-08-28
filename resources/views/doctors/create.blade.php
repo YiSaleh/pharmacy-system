@@ -71,10 +71,10 @@
               @enderror
         </div>
 <!-- ################################################################################################################################## -->
-         <!--select pharmacy name to add harmcy id  -->
+         <!--select pharmacy name to add pharmacy id  -->
         @role('admin')
           <div class="form-group">
-              <label>Select Pharmacy </label>
+              <label> Pharmacy </label>
                 <select class="form-control" name="pharmacy_id">
                   @foreach($pharmacies as $pharmacy)  
                     <option value="{{$pharmacy->id}}">{{$pharmacy->name}}</option>
@@ -94,7 +94,7 @@
         </div>
 <!-- ################################################################################################################################## -->              
         <div class="text-center my-5">
-          <button type="submit" class="btn btn-outline-success"> Submit </button>
+          <button type="submit" class="btn btn-outline-success"> Save </button>
         </div>
       
     </div>

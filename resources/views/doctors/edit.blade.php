@@ -38,7 +38,7 @@
       </div>
 <!-- ################################################################################################################################## -->
       <div class="form-group">
-            <label>Select Gender</label>
+            <label>Gender</label>
             <select class="form-control @error('gender') is-invalid @enderror" name='gender'>
               <option {{ ($doctor->gender=="Female")? "selected" : "" }}>Female</option>
               <option {{ ($doctor->gender=="Male")? "selected" : "" }}>Male</option>
@@ -64,7 +64,7 @@
       </div>
 
         <div class="text-center my-5">
-          <button type="submit" class="btn btn-outline_primary"> Update </button>
+          <button type="submit" class="btn btn-outline-primary"> Update </button>
         </div>
       
     </div>

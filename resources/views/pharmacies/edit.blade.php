@@ -11,11 +11,11 @@
 <!-- ##################################################################################################### -->
       @role('admin')
       <div class="form-group">
-          <label>Select Pertority</label>
-          <select class="form-control @error('gender') is-invalid @enderror" name='periority'>
-            <option $pharmacy->periority==High ? "selected" :" ">High</option>
-            <option $pharmacy->periority==Medium ? "selected" :" ">Medium</option>
-            <option $pharmacy->periority==Low ? "selected" :" ">Low</option>
+          <label>Pharmacy Priority</label>
+          <select class="form-control @error('periority') is-invalid @enderror" name='periority'>
+            <option {{$pharmacy->periority=="High" ? "selected" :" "}}>High</option>
+            <option {{$pharmacy->periority=="Medium" ? "selected" :" "}}>Medium</option>
+            <option {{$pharmacy->periority=="Low" ? "selected" :" "}}>Low</option>
           </select>
       </div>
       @endrole
@@ -36,7 +36,7 @@
         </div>
 <!-- ######################################################################################################################### -->
       <div class="form-group">
-        <label>Select Owner </label>
+        <label class="mx-2">Owner </label>
           <select class="form-control" name="owner_id">
             @foreach($owners as $owner)  
               <option value="{{$owner->id}}" {{ ($pharmacy->owner_id === $owner->id)? "selected" : "" }}>{{$owner->name}}</option>

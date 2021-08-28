@@ -58,20 +58,6 @@
             </tr>
             @endforeach
             </tbody>
-            <tfoot>
-            <tr>
-              <th>User_id</th>
-              <th>Name</th>
-              <th>National_id</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>gender</th>
-              <th>Date_of_Birth</th>
-              <th>Profile Image</th>
-              <th>Created_at</th>
-              <th>Action</th>
-            </tr>
-            </tfoot>
           </table>
           {!! $users->links() !!}
         </div>  <!-- /.card-body -->

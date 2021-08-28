@@ -12,7 +12,7 @@
           @enderror
         </div>
         <div class="form-group">
-            <label>Select Pertority</label>
+            <label>Pharmacy Priority</label>
             <select class="form-control @error('periority') is-invalid @enderror" name='periority'>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
@@ -38,7 +38,7 @@
     </div>
 
       <div class="text-center mt-5">
-        <button type="submit" class="btn btn-outline-success">Submit</button>
+        <button type="submit" class="btn btn-outline-success">Save</button>
       </div>
 </form>
 

@@ -34,13 +34,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-        Route::get('/useraddresses','AddressController@index')->name('useraddresses.index');
-        Route::get('/useraddresses/create','AddressController@create')->name('useraddresses.create');
-        Route::post('/useraddresses','AddressController@store')->name('useraddresses.store');
-        Route::put('/useraddresses/{useraddress}','AddressController@update')->name('useraddresses.update');
-        Route::delete('useraddresses/{useraddress}','AddressController@destroy')->name('useraddresses.destroy');
-        Route::get('/useraddresses/{useraddress}/edit','AddressController@edit')->name('useraddresses.edit');
-        Route::get('/useraddresses/{useraddress}','AddressController@show')->name('useraddresses.show');
+        Route::get('/userAddresses','AddressController@index')->name('userAddresses.index');
+        Route::get('/userAddresses/create','AddressController@create')->name('userAddresses.create');
+        Route::post('/userAddresses','AddressController@store')->name('userAddresses.store');
+        Route::put('/userAddresses/{userAddress}','AddressController@update')->name('userAddresses.update');
+        Route::delete('userAddresses/{userAddress}','AddressController@destroy')->name('userAddresses.destroy');
+        Route::get('/userAddresses/{userAddress}/edit','AddressController@edit')->name('userAddresses.edit');
+        Route::get('/userAddresses/{userAddress}','AddressController@show')->name('userAddresses.show');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -109,7 +109,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::get('/owners','OwnerController@index')->name('owners.index');
   Route::get('/owners/create','OwnerController@create')->name('owners.create');
   Route::post('/owners','OwnerController@store')->name('owners.store');
-  Route::put('owners/{owner}','OwnerController@update')->name('owners.update');
+  Route::put('owners/{user}','OwnerController@update')->name('owners.update');
   Route::delete('owners/{owner}','OwnerController@destroy')->name('owners.destroy');
   Route::get('/owners/{owner}/edit','OwnerController@edit')->name('owners.edit');
   Route::get('/owners/{owner}','OwnerController@show')->name('owners.show');

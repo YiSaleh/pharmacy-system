@@ -6,16 +6,16 @@
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header mx-3">
                     <h3 class="card-title font-weight-bolder">
-                       <i class="fas fa-text-width"></i> Owner Details
+                    <span class="text-success"><i class="fas fa-info-circle"> Owner Details
                     </h3>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="row pb-3">
+                    <div class="row mx-5">
                         <img class="col-4 ml-5" src="{{ asset('storage/'. $owner->avatar)}}" alt="user Profile photo" style="width:100px; height:250px; border-radius:10%; margin-bottom:3rem;" >
                     </div>
-                    <dl class="row">
+                    <dl class="row mx-5">
                     <dt class="col-sm-4">Owner Name :</dt>
                     <dd class="col-sm-8">{{$owner->name}}</dd>
                     <dt class="col-sm-4">Email :</dt>
